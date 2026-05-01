@@ -1,0 +1,60 @@
+# Semantic Roles
+
+Maps palette colors to functional roles in the color system.
+
+## Background Hierarchy
+
+| Role | Description |
+|------|-------------|
+| `base` | Primary background for main content areas |
+| `mantle` | Slightly darker background for panels, sidebars |
+| `crust` | Darkest background, used for extreme depth |
+
+## Surface Hierarchy
+
+| Role | Description |
+|------|-------------|
+| `surface0` | Lowest elevation, cards, inputs |
+| `surface1` | Mid elevation, popovers, menus |
+| `surface2` | Highest elevation, modals, dropdowns |
+
+## Overlay Hierarchy
+
+| Role | Description |
+|------|-------------|
+| `overlay0` | Tooltips, hints |
+| `overlay1` | Multi-selection, secondary highlights |
+| `overlay2` | Primary selection, focus rings |
+
+## Text Hierarchy
+
+| Role | Description |
+|------|-------------|
+| `text` | Primary body text |
+| `subtext1` | Secondary text, labels |
+| `subtext0` | Tertiary text, placeholders |
+
+## Accent Colors
+
+| Role | Description |
+|------|-------------|
+| `accent` | Primary interactive elements, links |
+| `accent.hover` | Hover state for accent elements |
+
+## Status Colors
+
+| Role | Description |
+|------|-------------|
+| `success` | Positive actions, completed states |
+| `warning` | Caution, potential issues |
+| `error` | Destructive actions, failures |
+| `info` | Neutral information |
+
+## Border Roles
+
+| Role | Description |
+|------|-------------|
+| `border` | Default borders |
+| `border.focused` | Focus rings |
+| `border.selected` | Selected state borders |
+| `border.disabled` | Disabled element borders |

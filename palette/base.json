@@ -1,0 +1,21 @@
+# Color Palette
+
+## TODO
+
+- Define color naming convention (inspired by catppuccin's rosewater, mauve, etc. OR custom naming)
+- Create base.json with raw color definitions
+- Map colors to semantic roles in semantic.json
+- Define syntax highlighting colors in syntax.json
+
+## Naming Considerations
+
+Catppuccin uses evocative names (rosewater, flamingo, mauve) which work well across diverse applications. Other approaches include:
+
+- Descriptive (blue-500, surface-light)
+- Functional (accent-primary, text-body)
+- Hybrid (sapphire-accent, crust-background)
+
+Choose naming scheme that:
+- Works across all target applications
+- Is memorable and consistent
+- Doesn't conflict with existing color terminology in target apps
