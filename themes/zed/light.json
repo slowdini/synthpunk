@@ -1,0 +1,11 @@
+{
+  "name": "Synthpunk",
+  "author": "Synthpunk",
+  "themes": [
+    {
+      "name": "Synthpunk Light",
+      "appearance": "light",
+      "style": {}
+    }
+  ]
+}

@@ -1,21 +1,36 @@
-# Color Palette
-
-## TODO
-
-- Define color naming convention (inspired by catppuccin's rosewater, mauve, etc. OR custom naming)
-- Create base.json with raw color definitions
-- Map colors to semantic roles in semantic.json
-- Define syntax highlighting colors in syntax.json
-
-## Naming Considerations
-
-Catppuccin uses evocative names (rosewater, flamingo, mauve) which work well across diverse applications. Other approaches include:
-
-- Descriptive (blue-500, surface-light)
-- Functional (accent-primary, text-body)
-- Hybrid (sapphire-accent, crust-background)
-
-Choose naming scheme that:
-- Works across all target applications
-- Is memorable and consistent
-- Doesn't conflict with existing color terminology in target apps
+{
+  "$schema": "../schemas/base.json",
+  "info": {
+    "name": "synthpunk-palette",
+    "description": "Synthpunk color palette - placeholder values to be filled based on inspiration images",
+    "version": "0.1.0"
+  },
+  "colors": {
+    "rosewater": { "hex": "待定", "rgb": [0, 0, 0], "description": "Warm rose tone for delicate accents" },
+    "flamingo": { "hex": "待定", "rgb": [0, 0, 0], "description": "Bright pink for lively highlights" },
+    "pink": { "hex": "待定", "rgb": [0, 0, 0], "description": "Vivid pink accent" },
+    "maroon": { "hex": "待定", "rgb": [0, 0, 0], "description": "Deep burgundy-mauve" },
+    "red": { "hex": "待定", "rgb": [0, 0, 0], "description": "Classic red for errors/critical" },
+    "peach": { "hex": "待定", "rgb": [0, 0, 0], "description": "Soft orange for warmth" },
+    "yellow": { "hex": "待定", "rgb": [0, 0, 0], "description": "Sunny yellow for warnings" },
+    "green": { "hex": "待定", "rgb": [0, 0, 0], "description": "Fresh green for success" },
+    "teal": { "hex": "待定", "rgb": [0, 0, 0], "description": "Retro teal for tech accents" },
+    "sky": { "hex": "待定", "rgb": [0, 0, 0], "description": "Bright sky blue" },
+    "sapphire": { "hex": "待定", "rgb": [0, 0, 0], "description": "Deep sapphire blue" },
+    "blue": { "hex": "待定", "rgb": [0, 0, 0], "description": "Primary blue for links/actions" },
+    "lavender": { "hex": "待定", "rgb": [0, 0, 0], "description": "Soft purple for syntax" },
+    "subtext": { "hex": "待定", "rgb": [0, 0, 0], "description": "Secondary text color" },
+    "overlay": { "hex": "待定", "rgb": [0, 0, 0], "description": "Overlay elements" },
+    "surface2": { "hex": "待定", "rgb": [0, 0, 0], "description": "Highest surface elevation" },
+    "surface1": { "hex": "待定", "rgb": [0, 0, 0], "description": "Mid surface elevation" },
+    "surface0": { "hex": "待定", "rgb": [0, 0, 0], "description": "Lowest surface elevation" },
+    "base": { "hex": "待定", "rgb": [0, 0, 0], "description": "Primary background" },
+    "mantle": { "hex": "待定", "rgb": [0, 0, 0], "description": "Slightly darker than base" },
+    "crust": { "hex": "待定", "rgb": [0, 0, 0], "description": "Darkest background for extreme depth" },
+    "accent": { "hex": "待定", "rgb": [0, 0, 0], "description": "Primary accent color" },
+    "accent.hover": { "hex": "待定", "rgb": [0, 0, 0], "description": "Accent hover state" },
+    "text": { "hex": "待定", "rgb": [0, 0, 0], "description": "Primary text color" },
+    "subtext1": { "hex": "待定", "rgb": [0, 0, 0], "description": "Secondary text" },
+    "subtext0": { "hex": "待定", "rgb": [0, 0, 0], "description": "Tertiary text/placeholders" }
+  }
+}

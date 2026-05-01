@@ -1,0 +1,52 @@
+{
+  "$schema": "../schemas/syntax.json",
+  "info": {
+    "name": "synthpunk-syntax",
+    "description": "Language-agnostic syntax highlighting mappings",
+    "version": "0.1.0"
+  },
+  "keywords": {
+    "keyword": "pink",
+    "control": "pink",
+    "operator": "maroon"
+  },
+  "storage": {
+    "type": "blue",
+    "modifier": "lavender",
+    "class": "yellow"
+  },
+  "literals": {
+    "string": "green",
+    "number": "peach",
+    "boolean": "peach",
+    "constant": "peach"
+  },
+  "comments": {
+    "line": "overlay",
+    "block": "overlay"
+  },
+  "functions": {
+    "function": "blue",
+    "method": "sky",
+    "parameter": "text"
+  },
+  "variables": {
+    "variable": "text",
+    "property": "teal",
+    "attribute": "sapphire"
+  },
+  "entities": {
+    "namespace": "flamingo",
+    "tag": "green",
+    "attribute": "yellow"
+  },
+  "support": {
+    "type": "sky",
+    "class": "blue",
+    "function": "sapphire"
+  },
+  "invalid": {
+    "illegal": "red",
+    "deprecated": "red"
+  }
+}

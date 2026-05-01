@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Synthpunk Semantic Schema",
+  "required": ["info", "background", "surface", "text", "accent", "status"],
+  "properties": {
+    "info": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    },
+    "background": {
+      "type": "object",
+      "properties": {
+        "base": { "type": "string" },
+        "mantle": { "type": "string" },
+        "crust": { "type": "string" }
+      }
+    },
+    "surface": {
+      "type": "object",
+      "properties": {
+        "surface0": { "type": "string" },
+        "surface1": { "type": "string" },
+        "surface2": { "type": "string" }
+      }
+    },
+    "overlay": {
+      "type": "object",
+      "properties": {
+        "overlay0": { "type": "string" },
+        "overlay1": { "type": "string" },
+        "overlay2": { "type": "string" }
+      }
+    },
+    "text": {
+      "type": "object",
+      "properties": {
+        "primary": { "type": "string" },
+        "subtext1": { "type": "string" },
+        "subtext0": { "type": "string" }
+      }
+    },
+    "accent": {
+      "type": "object",
+      "properties": {
+        "default": { "type": "string" },
+        "hover": { "type": "string" }
+      }
+    },
+    "status": {
+      "type": "object",
+      "properties": {
+        "success": { "type": "string" },
+        "warning": { "type": "string" },
+        "error": { "type": "string" },
+        "info": { "type": "string" }
+      }
+    },
+    "border": {
+      "type": "object",
+      "properties": {
+        "default": { "type": "string" },
+        "focused": { "type": "string" },
+        "selected": { "type": "string" },
+        "disabled": { "type": "string" }
+      }
+    }
+  }
+}
