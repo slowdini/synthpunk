@@ -26,8 +26,8 @@
     "subtext0": "subtext0"
   },
   "accent": {
-    "default": "accent",
-    "hover": "accent.hover"
+    "default": "pink",
+    "hover": "flamingo"
   },
   "status": {
     "success": "green",
@@ -37,8 +37,8 @@
   },
   "border": {
     "default": "surface0",
-    "focused": "accent",
-    "selected": "accent",
+    "focused": "lavender",
+    "selected": "pink",
     "disabled": "overlay"
   }
 }
