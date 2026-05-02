@@ -80,8 +80,7 @@ def main():
     results = []
     results.append(validate_palette(os.path.join(project_dir, "palette", "base.json"), "base.json (light)"))
     results.append(validate_palette(os.path.join(project_dir, "palette", "dark.json"), "dark.json"))
-    results.append(validate_zed_theme(os.path.join(project_dir, "themes", "zed", "light.json"), "Zed light theme"))
-    results.append(validate_zed_theme(os.path.join(project_dir, "themes", "zed", "dark.json"), "Zed dark theme"))
+    results.append(validate_zed_theme(os.path.join(project_dir, "themes", "zed", "themes", "synthpunk-pastel.json"), "Zed synthpunk-pastel theme"))
     
     print("\n" + "="*50)
     if all(results):
