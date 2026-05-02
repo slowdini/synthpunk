@@ -2,16 +2,16 @@
   "$schema": "../schemas/syntax.json",
   "info": {
     "name": "synthpunk-syntax",
-    "description": "Language-agnostic syntax highlighting mappings",
+    "description": "Language-agnostic syntax highlighting mappings for synthpunk-pastel",
     "version": "0.1.0"
   },
   "keywords": {
-    "keyword": "pink",
-    "control": "pink",
+    "keyword": "flamingo",
+    "control": "flamingo",
     "operator": "maroon"
   },
   "storage": {
-    "type": "blue",
+    "type": "peach",
     "modifier": "lavender",
     "class": "yellow"
   },
@@ -28,7 +28,7 @@
   "functions": {
     "function": "blue",
     "method": "sky",
-    "parameter": "text"
+    "parameter": "maroon"
   },
   "variables": {
     "variable": "text",
