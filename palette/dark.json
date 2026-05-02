@@ -12,7 +12,7 @@
     "maroon": { "hex": "D48BA0", "rgb": [212, 139, 160], "description": "Muted mauve for parameters, operators" },
     "red": { "hex": "FF5470", "rgb": [255, 84, 112], "description": "Vibrant coral-red for errors, critical" },
     "peach": { "hex": "FFA07A", "rgb": [255, 160, 122], "description": "Soft orange for types, constants" },
-    "yellow": { "hex": "E8A840", "rgb": [232, 168, 64], "description": "Golden amber for attributes, classes" },
+    "yellow": { "hex": "FFE4B5", "rgb": [255, 228, 181], "description": "Pale cream gold for attributes, classes" },
     "green": { "hex": "7FD7B5", "rgb": [127, 215, 181], "description": "Soft mint for success, strings" },
     "teal": { "hex": "5ED4E0", "rgb": [94, 212, 224], "description": "Retro cyan for keywords, info" },
     "sky": { "hex": "7AC8FF", "rgb": [122, 200, 255], "description": "Bright sky blue for methods, variables" },
