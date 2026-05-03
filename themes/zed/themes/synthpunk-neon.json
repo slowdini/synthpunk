@@ -278,7 +278,7 @@
             "font_weight": null
           },
           "operator": {
-            "color": "#D48BA0ff",
+            "color": "#C04078ff",
             "font_style": null,
             "font_weight": null
           },
@@ -476,7 +476,7 @@
         "terminal.dim_foreground": "#A898B0ff",
         "terminal.ansi.black": "#2A1A30ff",
         "terminal.ansi.bright_black": "#6B5A78ff",
-        "terminal.ansi.dim_black": "#4A3540ff",
+        "terminal.ansi.dim_black": "#403848ff",
         "terminal.ansi.red": "#E04058ff",
         "terminal.ansi.bright_red": "#E85870ff",
         "terminal.ansi.dim_red": "#A03048ff",
@@ -680,7 +680,7 @@
             "font_weight": null
           },
           "operator": {
-            "color": "#D48BA0ff",
+            "color": "#B04068ff",
             "font_style": null,
             "font_weight": null
           },

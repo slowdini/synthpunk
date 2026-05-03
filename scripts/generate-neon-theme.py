@@ -41,6 +41,7 @@ DARK_MAP = {
     "7AC8FF": "40B0FF",  # sky
     "7AA8C0": "6080FF",  # sapphire
     "FFA07A": "FF8040",  # peach
+    "D48BA0": "C04078",  # maroon (operators)
 }
 
 # Map pastel light hex (6 chars, no #) → neon light hex (6 chars, no #)
@@ -79,6 +80,8 @@ LIGHT_MAP = {
     "7AC8FF": "4098D8",  # sky
     "7AA8C0": "6070C8",  # sapphire
     "FFA07A": "E88050",  # peach
+    "D48BA0": "B04068",  # maroon (operators)
+    "4A3540": "403848",  # dim_black (terminal)
 }
 
 
@@ -92,6 +95,16 @@ def substitute_colors(theme_str, color_map):
     return re.sub(r'#([0-9A-Fa-f]{6})([0-9A-Fa-f]{2})', replacer, theme_str)
 
 
+def find_unmapped_colors(theme_str, color_map):
+    """Find any 6-char hex colors that weren't in the given map."""
+    unmapped = set()
+    for match in re.finditer(r'#([0-9A-Fa-f]{6})([0-9A-Fa-f]{2})', theme_str):
+        hex6 = match.group(1)
+        if hex6 not in color_map:
+            unmapped.add(hex6)
+    return unmapped
+
+
 def main():
     project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     pastel_path = os.path.join(project_dir, "themes", "zed", "themes", "synthpunk-pastel.json")
@@ -100,28 +113,34 @@ def main():
     with open(pastel_path) as f:
         theme_data = json.load(f)
 
-    # Update metadata
-    theme_data["name"] = "Synthpunk Neon"
-    theme_data["author"] = "Synthpunk"
-
-    # Update variant names
-    theme_data["themes"][0]["name"] = "Synthpunk Neon Dark"
-    theme_data["themes"][1]["name"] = "Synthpunk Neon Light"
-
-    # Convert to string for substitution
+    # Convert to string for substitution (BEFORE updating names)
     theme_str = json.dumps(theme_data, indent=2)
 
-    # Split into dark and light sections for targeted substitution
-    dark_end_marker = '"name": "Synthpunk Neon Light"'
+    # Split into dark and light sections using ORIGINAL pastel names
+    dark_end_marker = '"name": "Synthpunk Pastel Light"'
     parts = theme_str.split(dark_end_marker)
 
     if len(parts) != 2:
         raise RuntimeError("Could not split theme into dark/light variants")
 
+    # Check for unmapped colors in each section BEFORE substitution
+    dark_unmapped = find_unmapped_colors(parts[0], DARK_MAP)
+    light_unmapped = find_unmapped_colors(dark_end_marker + parts[1], LIGHT_MAP)
+
+    if dark_unmapped:
+        print(f"WARNING: Unmapped dark colors: {sorted(dark_unmapped)}")
+    if light_unmapped:
+        print(f"WARNING: Unmapped light colors: {sorted(light_unmapped)}")
+
     dark_part = substitute_colors(parts[0], DARK_MAP)
     light_part = substitute_colors(dark_end_marker + parts[1], LIGHT_MAP)
 
     result = dark_part + light_part
+
+    # Update metadata and variant names AFTER substitution
+    result = result.replace('"name": "Synthpunk Pastel"', '"name": "Synthpunk Neon"')
+    result = result.replace('"name": "Synthpunk Pastel Dark"', '"name": "Synthpunk Neon Dark"')
+    result = result.replace('"name": "Synthpunk Pastel Light"', '"name": "Synthpunk Neon Light"')
 
     with open(output_path, "w") as f:
         f.write(result)
