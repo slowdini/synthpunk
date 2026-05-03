@@ -76,12 +76,18 @@ def validate_zed_theme(path, name):
 
 def main():
     project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    
+
     results = []
-    results.append(validate_palette(os.path.join(project_dir, "palette", "base.json"), "base.json (light)"))
-    results.append(validate_palette(os.path.join(project_dir, "palette", "dark.json"), "dark.json"))
+    # Pastel palettes
+    results.append(validate_palette(os.path.join(project_dir, "palette", "base.json"), "base.json (pastel light)"))
+    results.append(validate_palette(os.path.join(project_dir, "palette", "dark.json"), "dark.json (pastel dark)"))
+    # Neon palettes
+    results.append(validate_palette(os.path.join(project_dir, "palette", "neon-light.json"), "neon-light.json"))
+    results.append(validate_palette(os.path.join(project_dir, "palette", "neon-dark.json"), "neon-dark.json"))
+    # Zed themes
     results.append(validate_zed_theme(os.path.join(project_dir, "themes", "zed", "themes", "synthpunk-pastel.json"), "Zed synthpunk-pastel theme"))
-    
+    results.append(validate_zed_theme(os.path.join(project_dir, "themes", "zed", "themes", "synthpunk-neon.json"), "Zed synthpunk-neon theme"))
+
     print("\n" + "="*50)
     if all(results):
         print("All validations passed!")
