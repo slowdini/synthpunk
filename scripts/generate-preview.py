@@ -105,16 +105,40 @@ def generate_preview(palette, output_path, title):
     print(f"Saved {output_path}")
 
 
+def generate_variant_preview(palette_path, output_path, title):
+    """Generate a preview for a single palette variant."""
+    palette = load_palette(palette_path)
+    generate_preview(palette, output_path, title)
+
+
 def main():
     project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     assets_dir = os.path.join(project_dir, "assets")
     os.makedirs(assets_dir, exist_ok=True)
-    
-    light_palette = load_palette(os.path.join(project_dir, "palette", "base.json"))
-    dark_palette = load_palette(os.path.join(project_dir, "palette", "dark.json"))
-    
-    generate_preview(light_palette, os.path.join(assets_dir, "palette-preview-light.png"), "Synthpunk Pastel — Light Mode")
-    generate_preview(dark_palette, os.path.join(assets_dir, "palette-preview-dark.png"), "Synthpunk Pastel — Dark Mode")
+
+    # Pastel previews
+    generate_variant_preview(
+        os.path.join(project_dir, "palette", "base.json"),
+        os.path.join(assets_dir, "palette-preview-light.png"),
+        "Synthpunk Pastel — Light Mode"
+    )
+    generate_variant_preview(
+        os.path.join(project_dir, "palette", "dark.json"),
+        os.path.join(assets_dir, "palette-preview-dark.png"),
+        "Synthpunk Pastel — Dark Mode"
+    )
+
+    # Neon previews
+    generate_variant_preview(
+        os.path.join(project_dir, "palette", "neon-light.json"),
+        os.path.join(assets_dir, "palette-preview-neon-light.png"),
+        "Synthpunk Neon — Light Mode"
+    )
+    generate_variant_preview(
+        os.path.join(project_dir, "palette", "neon-dark.json"),
+        os.path.join(assets_dir, "palette-preview-neon-dark.png"),
+        "Synthpunk Neon — Dark Mode"
+    )
 
 
 if __name__ == "__main__":
