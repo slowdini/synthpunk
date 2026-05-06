@@ -137,7 +137,7 @@
   {
     "name": "Heading",
     "scope": ["markup.heading", "entity.name.section", "heading"],
-    "syntaxRole": "status.error"
+    "syntaxRole": "emphasis.emphasis_strong"
   },
   {
     "name": "Bold",
