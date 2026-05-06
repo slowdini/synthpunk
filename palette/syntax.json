@@ -48,5 +48,14 @@
   "invalid": {
     "illegal": "red",
     "deprecated": "red"
+  },
+  "emphasis": {
+    "emphasis": "lavender",
+    "emphasis_strong": "yellow"
+  },
+  "fontStyles": {
+    "emphasis": { "fontStyle": "normal" },
+    "emphasis_strong": { "fontWeight": "bold" },
+    "comments.line": { "fontStyle": "italic" }
   }
 }

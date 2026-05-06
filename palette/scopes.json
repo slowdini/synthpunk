@@ -1,0 +1,162 @@
+[
+  {
+    "name": "Comment",
+    "scope": ["comment", "comment.block", "comment.line", "comment.line.double-slash", "comment.line.number-sign", "comment.triple-slash"],
+    "syntaxRole": "comments.line"
+  },
+  {
+    "name": "String",
+    "scope": ["string", "string.quoted.double", "string.quoted.single", "string.quoted.triple", "string.unquoted", "string.regexp"],
+    "syntaxRole": "literals.string"
+  },
+  {
+    "name": "String Escape",
+    "scope": ["constant.character.escape", "constant.character.escape.backslash"],
+    "syntaxRole": "literals.string"
+  },
+  {
+    "name": "Number",
+    "scope": ["constant.numeric", "constant.numeric.float", "constant.numeric.integer", "constant.numeric.hex", "constant.numeric.octal", "constant.numeric.binary"],
+    "syntaxRole": "literals.number"
+  },
+  {
+    "name": "Boolean",
+    "scope": ["constant.language.boolean", "constant.language.true", "constant.language.false"],
+    "syntaxRole": "literals.boolean"
+  },
+  {
+    "name": "Constant",
+    "scope": ["constant", "constant.language", "constant.language.null", "constant.language.undefined", "constant.language.nan"],
+    "syntaxRole": "literals.constant"
+  },
+  {
+    "name": "Keyword",
+    "scope": ["keyword", "keyword.control", "keyword.control.import", "keyword.control.from", "keyword.control.export", "keyword.control.return", "keyword.control.flow", "keyword.control.conditional", "keyword.control.loop"],
+    "syntaxRole": "keywords.keyword"
+  },
+  {
+    "name": "Keyword Operator",
+    "scope": ["keyword.operator", "keyword.operator.arithmetic", "keyword.operator.assignment", "keyword.operator.comparison", "keyword.operator.logical", "keyword.operator.new", "keyword.operator.expression"],
+    "syntaxRole": "keywords.operator"
+  },
+  {
+    "name": "Storage Type",
+    "scope": ["storage.type", "storage.type.class", "storage.type.enum", "storage.type.interface", "storage.type.struct", "storage.type.function", "storage.type.method"],
+    "syntaxRole": "storage.type"
+  },
+  {
+    "name": "Storage Modifier",
+    "scope": ["storage.modifier", "storage.modifier.async", "storage.modifier.const", "storage.modifier.static", "storage.modifier.abstract", "storage.modifier.readonly", "storage.modifier.mutable", "storage.modifier.private", "storage.modifier.public", "storage.modifier.protected"],
+    "syntaxRole": "storage.modifier"
+  },
+  {
+    "name": "Function",
+    "scope": ["entity.name.function", "support.function", "meta.function-call", "meta.method-call"],
+    "syntaxRole": "functions.function"
+  },
+  {
+    "name": "Method",
+    "scope": ["entity.name.function.member", "meta.method"],
+    "syntaxRole": "functions.method"
+  },
+  {
+    "name": "Constructor",
+    "scope": ["entity.name.function.constructor", "entity.name.type.class"],
+    "syntaxRole": "functions.function"
+  },
+  {
+    "name": "Variable",
+    "scope": ["variable", "variable.other", "variable.other.member", "variable.other.object", "variable.other.constant", "meta.var"],
+    "syntaxRole": "variables.variable"
+  },
+  {
+    "name": "Parameter",
+    "scope": ["variable.parameter", "entity.name.variable.parameter"],
+    "syntaxRole": "functions.parameter"
+  },
+  {
+    "name": "Property",
+    "scope": ["variable.other.property", "entity.name.variable.member", "meta.property"],
+    "syntaxRole": "variables.property"
+  },
+  {
+    "name": "Attribute",
+    "scope": ["entity.other.attribute", "meta.attribute", "decorator", "meta.decorator"],
+    "syntaxRole": "variables.attribute"
+  },
+  {
+    "name": "Type",
+    "scope": ["entity.name.type", "entity.name.type.class", "entity.name.type.enum", "entity.name.type.interface", "entity.name.type.struct", "support.type", "support.class", "entity.name.type.alias"],
+    "syntaxRole": "storage.type"
+  },
+  {
+    "name": "Namespace",
+    "scope": ["entity.name.namespace", "entity.name.module", "entity.name.package"],
+    "syntaxRole": "entities.namespace"
+  },
+  {
+    "name": "Tag",
+    "scope": ["entity.name.tag", "entity.name.tag.html", "entity.name.tag.xml", "entity.name.tag.jsx"],
+    "syntaxRole": "entities.tag"
+  },
+  {
+    "name": "Attribute Name (HTML/JSX)",
+    "scope": ["entity.other.attribute-name", "entity.other.attribute-name.html", "entity.other.attribute-name.xml", "entity.other.attribute-name.jsx", "entity.other.attribute-name.css"],
+    "syntaxRole": "entities.attribute"
+  },
+  {
+    "name": "Selector",
+    "scope": ["entity.name.selector", "meta.selector"],
+    "syntaxRole": "storage.class"
+  },
+  {
+    "name": "Punctuation",
+    "scope": ["punctuation", "punctuation.terminator", "punctuation.separator", "punctuation.separator.colon", "punctuation.separator.comma", "punctuation.separator.dot", "punctuation.separator.arrow", "punctuation.separator.key-value", "punctuation.section"],
+    "syntaxRole": "variables.variable"
+  },
+  {
+    "name": "Bracket",
+    "scope": ["punctuation.section.brackets", "punctuation.section.parens", "punctuation.section.braces", "meta.brace", "punctuation.definition.brackets", "punctuation.definition.parens", "punctuation.definition.braces"],
+    "syntaxRole": "variables.variable"
+  },
+  {
+    "name": "Operator",
+    "scope": ["keyword.operator", "keyword.operator.arithmetic", "keyword.operator.assignment", "keyword.operator.comparison", "keyword.operator.logical"],
+    "syntaxRole": "keywords.operator"
+  },
+  {
+    "name": "Preprocessor",
+    "scope": ["keyword.control.directive", "meta.preprocessor", "meta.preprocessor.directive", "keyword.control.preprocessor"],
+    "syntaxRole": "keywords.keyword"
+  },
+  {
+    "name": "URL/Link",
+    "scope": ["string.other.link", "markup.underline.link", "constant.other.reference.link"],
+    "syntaxRole": "functions.function"
+  },
+  {
+    "name": "Heading",
+    "scope": ["markup.heading", "entity.name.section", "heading"],
+    "syntaxRole": "status.error"
+  },
+  {
+    "name": "Bold",
+    "scope": ["markup.bold"],
+    "syntaxRole": "storage.class"
+  },
+  {
+    "name": "Italic",
+    "scope": ["markup.italic"],
+    "syntaxRole": "functions.function"
+  },
+  {
+    "name": "Deprecated",
+    "scope": ["markup.deleted", "markup.strikethrough", "meta.deprecated"],
+    "syntaxRole": "invalid.deprecated"
+  },
+  {
+    "name": "Invalid",
+    "scope": ["invalid", "invalid.illegal", "invalid.deprecated"],
+    "syntaxRole": "invalid.illegal"
+  }
+]

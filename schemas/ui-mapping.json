@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Synthpunk UI Mapping Schema",
+  "required": ["info", "background", "surface", "text", "border", "editor", "terminal", "status", "vcs"],
+  "properties": {
+    "info": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    },
+    "background": { "type": "object", "additionalProperties": { "type": "string" } },
+    "surface": { "type": "object", "additionalProperties": { "type": "string" } },
+    "text": { "type": "object", "additionalProperties": { "type": "string" } },
+    "border": { "type": "object", "additionalProperties": { "type": "string" } },
+    "editor": { "type": "object", "additionalProperties": { "type": "string" } },
+    "terminal": { "type": "object", "additionalProperties": { "type": "string" } },
+    "status": { "type": "object", "additionalProperties": { "type": "string" } },
+    "vcs": { "type": "object", "additionalProperties": { "type": "string" } }
+  }
+}
