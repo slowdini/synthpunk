@@ -7,15 +7,13 @@ import { generateVSCodeTheme } from "./targets/vscode";
 import { generateZedTheme } from "./targets/zed";
 import { generateWeztermTheme, tomlStringify } from "./targets/wezterm";
 import { loadTerminalMapping } from "./terminalMapping";
-import { VariantName, VARIANT_DISPLAY_NAMES } from "./types";
+import { VariantName, VARIANT_DISPLAY_NAMES, VARIANTS } from "./types";
 
 const PROJECT_DIR = path.resolve(import.meta.dir, "../..");
 const PALETTE_DIR = path.join(PROJECT_DIR, "palette");
 const ZED_DIR = path.join(PROJECT_DIR, "themes", "zed", "themes");
 const VSCODE_DIR = path.join(PROJECT_DIR, "themes", "vscode", "themes");
 const WEZTERM_DIR = path.join(PROJECT_DIR, "themes", "wezterm");
-
-const VARIANTS: VariantName[] = ["pastel-dark", "pastel-light", "neon-dark", "neon-light"];
 
 const VARIANT_VSCODE_FILE: Record<VariantName, string> = {
   "pastel-dark": "synthpunk-pastel-dark-color-theme.json",

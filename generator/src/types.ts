@@ -18,6 +18,8 @@ export interface Palette {
 
 export type VariantName = "pastel-dark" | "pastel-light" | "neon-dark" | "neon-light";
 
+export const VARIANTS: VariantName[] = ["pastel-dark", "pastel-light", "neon-dark", "neon-light"];
+
 export const VARIANT_DISPLAY_NAMES: Record<VariantName, string> = {
   "pastel-dark": "Synthpunk Pastel Dark",
   "pastel-light": "Synthpunk Pastel Light",

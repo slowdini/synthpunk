@@ -1,4 +1,5 @@
 import type { VariantName, Palette } from "../types";
+import { VARIANTS } from "../types";
 
 const LANGUAGE_SYMBOLS: Record<string, string> = {
   c: " ",
@@ -13,7 +14,7 @@ const LANGUAGE_SYMBOLS: Record<string, string> = {
   python: "",
 };
 
-const LANGUAGE_MODULES = ["c", "rust", "golang", "nodejs", "bun", "php", "java", "kotlin", "haskell", "python"];
+const LANGUAGE_MODULES = Object.keys(LANGUAGE_SYMBOLS);
 
 const OS_SYMBOLS: Record<string, string> = {
   Alpaquita: " ",
@@ -77,7 +78,7 @@ function paletteSection(variant: VariantName, palette: Palette): string {
 export function generateStarshipToml(palettes: Record<VariantName, Palette>): string {
   const lines: string[] = [];
 
-  lines.push(`'$schema' = 'https://starship.rs/config-schema.json'`);
+  lines.push(`"$schema" = 'https://starship.rs/config-schema.json'`);
   lines.push("");
 
   const LEFT_CURVE = "\uE0B6";
@@ -218,8 +219,7 @@ export function generateStarshipToml(palettes: Record<VariantName, Palette>): st
   lines.push("min_time_to_notify = 45000");
   lines.push("");
 
-  const variants: VariantName[] = ["pastel-dark", "pastel-light", "neon-dark", "neon-light"];
-  for (const variant of variants) {
+  for (const variant of VARIANTS) {
     lines.push(paletteSection(variant, palettes[variant]));
     lines.push("");
   }

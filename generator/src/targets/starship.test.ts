@@ -2,15 +2,15 @@ import { describe, expect, test } from "bun:test";
 import { generateStarshipToml } from "./starship";
 import { loadPalette } from "../palette";
 import type { VariantName, Palette } from "../types";
+import { VARIANTS } from "../types";
 import path from "node:path";
 
 const PROJECT_DIR = path.resolve(import.meta.dir, "../../..");
 const PALETTE_DIR = path.join(PROJECT_DIR, "palette");
 
 function loadAllPalettes(): Record<VariantName, Palette> {
-  const variants: VariantName[] = ["pastel-dark", "pastel-light", "neon-dark", "neon-light"];
   const palettes: Record<string, Palette> = {};
-  for (const v of variants) {
+  for (const v of VARIANTS) {
     palettes[v] = loadPalette(PALETTE_DIR, v);
   }
   return palettes as Record<VariantName, Palette>;
@@ -21,7 +21,7 @@ describe("generateStarshipToml", () => {
   const toml = generateStarshipToml(palettes);
 
   test("contains schema header", () => {
-    expect(toml).toContain("'$schema' = 'https://starship.rs/config-schema.json'");
+    expect(toml).toContain('"$schema" = \'https://starship.rs/config-schema.json\'');
   });
 
   test("contains default palette line", () => {
