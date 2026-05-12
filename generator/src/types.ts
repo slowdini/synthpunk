@@ -48,6 +48,28 @@ export interface UIMapping {
   vcs: Record<string, string>;
 }
 
+export interface TerminalTabBarTab {
+  bg: string;
+  fg: string;
+}
+
+export interface TerminalMapping {
+  info: PaletteInfo;
+  cursor: { bg: string; fg: string; border: string };
+  selection: { fg: string; bg: string; bg_alpha: number };
+  tab_bar: {
+    background: string;
+    active_tab: TerminalTabBarTab;
+    inactive_tab: TerminalTabBarTab;
+    new_tab: TerminalTabBarTab;
+  };
+  scrollbar: { thumb: string; thumb_hover: string };
+  split: string;
+  compose_cursor: string;
+  quick_select: { label_bg: string; label_fg: string; match_bg: string; match_fg: string };
+  copy_mode: { active_highlight_bg: string; active_highlight_fg: string; inactive_highlight_bg: string; inactive_highlight_fg: string };
+}
+
 export interface SyntaxMapping {
   info: PaletteInfo;
   keywords: Record<string, string>;
