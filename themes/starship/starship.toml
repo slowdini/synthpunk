@@ -1,0 +1,284 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = '''
+[](red)\
+$os\
+$username\
+[](bg:peach fg:red)\
+$directory\
+[](bg:yellow fg:peach)\
+$git_branch\
+$git_status\
+[](fg:yellow bg:green)\
+$c\
+$rust\
+$golang\
+$nodejs\
+$bun\
+$php\
+$java\
+$kotlin\
+$haskell\
+$python\
+[](fg:green bg:sapphire)\
+$conda\
+$docker_context\
+[](fg:sapphire bg:lavender)\
+$time\
+[ ](fg:lavender)\
+$cmd_duration\
+$line_break\
+$character'''
+
+palette = 'synthpunk_pastel_dark'
+
+[os]
+disabled = false
+style = "bg:red fg:crust"
+
+[os.symbols]
+Alpaquita = " "
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+CentOS = " "
+Debian = " "
+Dragonfly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Gentoo = " "
+HardenedBSD = " "
+Illumos = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = " "
+OpenCloudOS = " "
+openEuler = " "
+openSUSE = " "
+OracleLinux = " "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+Redox = " "
+Solus = " "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Windows = " "
+
+[username]
+show_always = true
+style_user = "bg:red fg:crust"
+style_root = "bg:red fg:crust"
+format = "[ $user]($style)"
+
+[directory]
+style = "bg:peach fg:crust"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = ".../"
+
+[directory.substitutions]
+Documents = "󰈙 "
+Downloads = " "
+Music = "󰝚 "
+Pictures = " "
+Developer = "󰲋 "
+
+[git_branch]
+symbol = ""
+style = "bg:yellow"
+format = "[[ $symbol $branch ](fg:crust bg:yellow)]($style)"
+
+[git_status]
+style = "bg:yellow"
+format = "[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)"
+
+[c]
+style = "bg:green"
+format = "[[  ( $version) ](fg:crust bg:green)]($style)"
+
+[rust]
+style = "bg:green"
+format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+
+[golang]
+style = "bg:green"
+format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+
+[nodejs]
+style = "bg:green"
+format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+
+[bun]
+style = "bg:green"
+format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+
+[php]
+style = "bg:green"
+format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+
+[java]
+style = "bg:green"
+format = "[[  ( $version) ](fg:crust bg:green)]($style)"
+
+[kotlin]
+style = "bg:green"
+format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+
+[haskell]
+style = "bg:green"
+format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+
+[python]
+style = "bg:green"
+format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+
+[docker_context]
+symbol = ""
+style = "bg:sapphire"
+format = "[[ $symbol( $context) ](fg:crust bg:sapphire)]($style)"
+
+[conda]
+symbol = "  "
+style = "fg:crust bg:sapphire"
+format = "[$symbol$environment ]($style)"
+ignore_base = false
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:lavender"
+format = "[[  $time ](fg:crust bg:lavender)]($style)"
+
+[line_break]
+disabled = true
+
+[character]
+disabled = false
+success_symbol = "[❯](bold fg:green)"
+error_symbol = "[❯](bold fg:red)"
+vimcmd_symbol = "[❮](bold fg:green)"
+vimcmd_replace_one_symbol = "[❮](bold fg:lavender)"
+vimcmd_replace_symbol = "[❮](bold fg:lavender)"
+vimcmd_visual_symbol = "[❮](bold fg:yellow)"
+
+[cmd_duration]
+show_milliseconds = true
+format = "  in $duration "
+style = "bg:lavender"
+disabled = false
+show_notifications = true
+min_time_to_notify = 45000
+
+[palettes.synthpunk_pastel_dark]
+rosewater = "#FFE8F0"
+flamingo = "#FF9BB6"
+pink = "#FF7DB0"
+maroon = "#D48BA0"
+red = "#FF5470"
+peach = "#FFA07A"
+yellow = "#FFE4B5"
+green = "#7FD7B5"
+teal = "#5ED4E0"
+sky = "#7AC8FF"
+sapphire = "#7AA8C0"
+blue = "#8BA4FF"
+lavender = "#C49BFF"
+text = "#F0E0F0"
+subtext1 = "#C8B0D8"
+subtext0 = "#A090B8"
+overlay = "#705880"
+surface2 = "#4A3860"
+surface1 = "#3A2850"
+surface0 = "#2E1E40"
+base = "#1E1028"
+mantle = "#160A20"
+crust = "#0D0612"
+
+[palettes.synthpunk_pastel_light]
+rosewater = "#F8B0C8"
+flamingo = "#FF9BB6"
+pink = "#FF7DB0"
+maroon = "#D48BA0"
+red = "#FF5470"
+peach = "#FFA07A"
+yellow = "#E8C468"
+green = "#5AC09A"
+teal = "#5ED4E0"
+sky = "#7AC8FF"
+sapphire = "#7AA8C0"
+blue = "#8BA4FF"
+lavender = "#C49BFF"
+text = "#2E1A24"
+subtext1 = "#6B4F5E"
+subtext0 = "#997A8A"
+overlay = "#C4A8B8"
+surface2 = "#D4B8C8"
+surface1 = "#E4CCD8"
+surface0 = "#F0DEE8"
+base = "#FFF8F5"
+mantle = "#FFF0EB"
+crust = "#FFE8E0"
+
+[palettes.synthpunk_neon_dark]
+rosewater = "#FFB8E0"
+flamingo = "#FF5CA8"
+pink = "#FF2A8A"
+maroon = "#C04078"
+red = "#FF3A50"
+peach = "#FF8040"
+yellow = "#FFE040"
+green = "#40FF80"
+teal = "#00E8F0"
+sky = "#40B0FF"
+sapphire = "#6080FF"
+blue = "#A060FF"
+lavender = "#D040FF"
+text = "#E8E0F0"
+subtext1 = "#B8A8D0"
+subtext0 = "#8878A0"
+overlay = "#503870"
+surface2 = "#301E50"
+surface1 = "#251540"
+surface0 = "#1A0D2E"
+base = "#0F0620"
+mantle = "#0A0418"
+crust = "#060210"
+
+[palettes.synthpunk_neon_light]
+rosewater = "#E8A0C0"
+flamingo = "#E06098"
+pink = "#D04080"
+maroon = "#B04068"
+red = "#E04058"
+peach = "#E88050"
+yellow = "#D8B030"
+green = "#40C080"
+teal = "#30C0C8"
+sky = "#4098D8"
+sapphire = "#6070C8"
+blue = "#8050C8"
+lavender = "#B050D0"
+text = "#2A1A30"
+subtext1 = "#6B5A78"
+subtext0 = "#A898B0"
+overlay = "#C0A8C8"
+surface2 = "#E0C8E8"
+surface1 = "#E8D8F0"
+surface0 = "#F0E8F5"
+base = "#FAF6FA"
+mantle = "#F5F0F5"
+crust = "#F0E8F0"

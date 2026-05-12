@@ -6,6 +6,7 @@ import { loadSyntaxMapping, loadScopes, loadFontStyles } from "./syntaxMapping";
 import { generateVSCodeTheme } from "./targets/vscode";
 import { generateZedTheme } from "./targets/zed";
 import { generateWeztermTheme, tomlStringify } from "./targets/wezterm";
+import { generateStarshipToml } from "./targets/starship";
 import { loadTerminalMapping } from "./terminalMapping";
 import { VariantName, VARIANT_DISPLAY_NAMES, VARIANTS } from "./types";
 
@@ -14,6 +15,7 @@ const PALETTE_DIR = path.join(PROJECT_DIR, "palette");
 const ZED_DIR = path.join(PROJECT_DIR, "themes", "zed", "themes");
 const VSCODE_DIR = path.join(PROJECT_DIR, "themes", "vscode", "themes");
 const WEZTERM_DIR = path.join(PROJECT_DIR, "themes", "wezterm");
+const STARSHIP_DIR = path.join(PROJECT_DIR, "themes", "starship");
 
 const VARIANT_VSCODE_FILE: Record<VariantName, string> = {
   "pastel-dark": "synthpunk-pastel-dark-color-theme.json",
@@ -101,6 +103,17 @@ function generateAll() {
     fs.writeFileSync(filePath, toml);
     console.log(`Generated ${filePath}`);
   }
+
+  // Generate Starship theme
+  const starshipPalettes: Record<VariantName, ReturnType<typeof loadPalette>> = {} as Record<VariantName, ReturnType<typeof loadPalette>>;
+  for (const variant of VARIANTS) {
+    starshipPalettes[variant] = loadPalette(PALETTE_DIR, variant);
+  }
+  const starshipToml = generateStarshipToml(starshipPalettes);
+  ensureDir(STARSHIP_DIR);
+  const starshipPath = path.join(STARSHIP_DIR, "starship.toml");
+  fs.writeFileSync(starshipPath, starshipToml);
+  console.log(`Generated ${starshipPath}`);
 }
 
 generateAll();
