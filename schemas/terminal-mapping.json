@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Terminal Mapping",
+  "description": "Schema for terminal-agnostic UI role to palette color mappings",
+  "type": "object",
+  "required": ["info", "cursor", "selection", "tab_bar", "scrollbar", "split", "compose_cursor", "quick_select", "copy_mode"],
+  "properties": {
+    "info": {
+      "type": "object",
+      "required": ["name", "description", "version"],
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    },
+    "cursor": {
+      "type": "object",
+      "required": ["bg", "fg", "border"],
+      "properties": {
+        "bg": { "type": "string" },
+        "fg": { "type": "string" },
+        "border": { "type": "string" }
+      }
+    },
+    "selection": {
+      "type": "object",
+      "required": ["fg", "bg", "bg_alpha"],
+      "properties": {
+        "fg": { "type": "string" },
+        "bg": { "type": "string" },
+        "bg_alpha": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "tab_bar": {
+      "type": "object",
+      "required": ["background", "active_tab", "inactive_tab", "new_tab"],
+      "properties": {
+        "background": { "type": "string" },
+        "active_tab": {
+          "type": "object",
+          "required": ["bg", "fg"],
+          "properties": { "bg": { "type": "string" }, "fg": { "type": "string" } }
+        },
+        "inactive_tab": {
+          "type": "object",
+          "required": ["bg", "fg"],
+          "properties": { "bg": { "type": "string" }, "fg": { "type": "string" } }
+        },
+        "new_tab": {
+          "type": "object",
+          "required": ["bg", "fg"],
+          "properties": { "bg": { "type": "string" }, "fg": { "type": "string" } }
+        }
+      }
+    },
+    "scrollbar": {
+      "type": "object",
+      "required": ["thumb", "thumb_hover"],
+      "properties": {
+        "thumb": { "type": "string" },
+        "thumb_hover": { "type": "string" }
+      }
+    },
+    "split": { "type": "string" },
+    "compose_cursor": { "type": "string" },
+    "quick_select": {
+      "type": "object",
+      "required": ["label_bg", "label_fg", "match_bg", "match_fg"],
+      "properties": {
+        "label_bg": { "type": "string" },
+        "label_fg": { "type": "string" },
+        "match_bg": { "type": "string" },
+        "match_fg": { "type": "string" }
+      }
+    },
+    "copy_mode": {
+      "type": "object",
+      "required": ["active_highlight_bg", "active_highlight_fg", "inactive_highlight_bg", "inactive_highlight_fg"],
+      "properties": {
+        "active_highlight_bg": { "type": "string" },
+        "active_highlight_fg": { "type": "string" },
+        "inactive_highlight_bg": { "type": "string" },
+        "inactive_highlight_fg": { "type": "string" }
+      }
+    }
+  }
+}
