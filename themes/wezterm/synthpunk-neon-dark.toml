@@ -1,0 +1,32 @@
+# Synthpunk Neon Dark
+
+[colors]
+foreground = "#E8E0F0"
+background = "#0F0620"
+cursor_bg = "#D040FF"
+cursor_fg = "#0F0620"
+cursor_border = "#D040FF"
+selection_fg = "#E8E0F0"
+selection_bg = "rgba(0, 232, 240, 0.3)"
+scrollbar_thumb = "#B8A8D0"
+split = "#251540"
+compose_cursor = "#FF5CA8"
+
+[colors.tab_bar]
+background = "#0A0418"
+
+[colors.tab_bar.active_tab]
+bg_color = "#0F0620"
+fg_color = "#E8E0F0"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#0A0418"
+fg_color = "#B8A8D0"
+
+[colors.tab_bar.new_tab]
+bg_color = "#0A0418"
+fg_color = "#B8A8D0"
+
+ansi = ["#060210", "#FF3A50", "#40FF80", "#FFE040", "#A060FF", "#FF2A8A", "#00E8F0", "#B8A8D0"]
+
+brights = ["#8878A0", "#FF6173", "#66FF99", "#FFE666", "#B380FF", "#FF55A1", "#27F8FF", "#E8E0F0"]

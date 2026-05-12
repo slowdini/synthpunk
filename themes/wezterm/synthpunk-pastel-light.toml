@@ -1,0 +1,32 @@
+# Synthpunk Pastel Light
+
+[colors]
+foreground = "#2E1A24"
+background = "#FFF8F5"
+cursor_bg = "#C49BFF"
+cursor_fg = "#FFF8F5"
+cursor_border = "#C49BFF"
+selection_fg = "#2E1A24"
+selection_bg = "rgba(94, 212, 224, 0.3)"
+scrollbar_thumb = "#6B4F5E"
+split = "#E4CCD8"
+compose_cursor = "#FF9BB6"
+
+[colors.tab_bar]
+background = "#FFF0EB"
+
+[colors.tab_bar.active_tab]
+bg_color = "#FFF8F5"
+fg_color = "#2E1A24"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#FFF0EB"
+fg_color = "#6B4F5E"
+
+[colors.tab_bar.new_tab]
+bg_color = "#FFF0EB"
+fg_color = "#6B4F5E"
+
+ansi = ["#2E1A24", "#FF5470", "#5AC09A", "#E8C468", "#8BA4FF", "#FF7DB0", "#5ED4E0", "#6B4F5E"]
+
+brights = ["#6B4F5E", "#FF768D", "#7BCDAE", "#EDD086", "#A2B6FF", "#FF97C0", "#7EDDE6", "#2E1A24"]

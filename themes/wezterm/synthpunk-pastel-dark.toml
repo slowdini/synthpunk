@@ -1,0 +1,32 @@
+# Synthpunk Pastel Dark
+
+[colors]
+foreground = "#F0E0F0"
+background = "#1E1028"
+cursor_bg = "#C49BFF"
+cursor_fg = "#1E1028"
+cursor_border = "#C49BFF"
+selection_fg = "#F0E0F0"
+selection_bg = "rgba(94, 212, 224, 0.3)"
+scrollbar_thumb = "#C8B0D8"
+split = "#3A2850"
+compose_cursor = "#FF9BB6"
+
+[colors.tab_bar]
+background = "#160A20"
+
+[colors.tab_bar.active_tab]
+bg_color = "#1E1028"
+fg_color = "#F0E0F0"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#160A20"
+fg_color = "#C8B0D8"
+
+[colors.tab_bar.new_tab]
+bg_color = "#160A20"
+fg_color = "#C8B0D8"
+
+ansi = ["#0D0612", "#FF5470", "#7FD7B5", "#FFE4B5", "#8BA4FF", "#FF7DB0", "#5ED4E0", "#C8B0D8"]
+
+brights = ["#A090B8", "#FF768D", "#99DFC4", "#FFE9C4", "#A2B6FF", "#FF97C0", "#7EDDE6", "#F0E0F0"]

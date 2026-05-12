@@ -5,12 +5,15 @@ import { loadUIMapping } from "./uiMapping";
 import { loadSyntaxMapping, loadScopes, loadFontStyles } from "./syntaxMapping";
 import { generateVSCodeTheme } from "./targets/vscode";
 import { generateZedTheme } from "./targets/zed";
-import type { VariantName } from "./types";
+import { generateWeztermTheme, tomlStringify } from "./targets/wezterm";
+import { loadTerminalMapping } from "./terminalMapping";
+import { VariantName, VARIANT_DISPLAY_NAMES } from "./types";
 
 const PROJECT_DIR = path.resolve(import.meta.dir, "../..");
 const PALETTE_DIR = path.join(PROJECT_DIR, "palette");
 const ZED_DIR = path.join(PROJECT_DIR, "themes", "zed", "themes");
 const VSCODE_DIR = path.join(PROJECT_DIR, "themes", "vscode", "themes");
+const WEZTERM_DIR = path.join(PROJECT_DIR, "themes", "wezterm");
 
 const VARIANTS: VariantName[] = ["pastel-dark", "pastel-light", "neon-dark", "neon-light"];
 
@@ -21,6 +24,13 @@ const VARIANT_VSCODE_FILE: Record<VariantName, string> = {
   "neon-light": "synthpunk-neon-light-color-theme.json",
 };
 
+const VARIANT_WEZTERM_FILE: Record<VariantName, string> = {
+  "pastel-dark": "synthpunk-pastel-dark.toml",
+  "pastel-light": "synthpunk-pastel-light.toml",
+  "neon-dark": "synthpunk-neon-dark.toml",
+  "neon-light": "synthpunk-neon-light.toml",
+};
+
 function ensureDir(dir: string) {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
@@ -29,6 +39,7 @@ function ensureDir(dir: string) {
 
 function generateAll() {
   const uiMapping = loadUIMapping(PALETTE_DIR);
+  const terminalMapping = loadTerminalMapping(PALETTE_DIR);
   const syntaxMapping = loadSyntaxMapping(PALETTE_DIR);
   const scopes = loadScopes(PALETTE_DIR);
   const fontStyles = loadFontStyles(PALETTE_DIR);
@@ -80,6 +91,18 @@ function generateAll() {
   const neonZedPath = path.join(ZED_DIR, "synthpunk-neon.json");
   fs.writeFileSync(neonZedPath, JSON.stringify(neonZedTheme, null, 2) + "\n");
   console.log(`Generated ${neonZedPath}`);
+
+  // Generate WezTerm themes
+  ensureDir(WEZTERM_DIR);
+  for (const variant of VARIANTS) {
+    const palette = loadPalette(PALETTE_DIR, variant);
+    const weztermTheme = generateWeztermTheme(variant, palette, uiMapping, terminalMapping);
+    const toml = tomlStringify(VARIANT_DISPLAY_NAMES[variant], weztermTheme);
+    const fileName = VARIANT_WEZTERM_FILE[variant];
+    const filePath = path.join(WEZTERM_DIR, fileName);
+    fs.writeFileSync(filePath, toml);
+    console.log(`Generated ${filePath}`);
+  }
 }
 
 generateAll();

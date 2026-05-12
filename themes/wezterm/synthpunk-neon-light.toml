@@ -1,0 +1,32 @@
+# Synthpunk Neon Light
+
+[colors]
+foreground = "#2A1A30"
+background = "#FAF6FA"
+cursor_bg = "#B050D0"
+cursor_fg = "#FAF6FA"
+cursor_border = "#B050D0"
+selection_fg = "#2A1A30"
+selection_bg = "rgba(48, 192, 200, 0.3)"
+scrollbar_thumb = "#6B5A78"
+split = "#E8D8F0"
+compose_cursor = "#E06098"
+
+[colors.tab_bar]
+background = "#F5F0F5"
+
+[colors.tab_bar.active_tab]
+bg_color = "#FAF6FA"
+fg_color = "#2A1A30"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#F5F0F5"
+fg_color = "#6B5A78"
+
+[colors.tab_bar.new_tab]
+bg_color = "#F5F0F5"
+fg_color = "#6B5A78"
+
+ansi = ["#2A1A30", "#E04058", "#40C080", "#D8B030", "#8050C8", "#D04080", "#30C0C8", "#6B5A78"]
+
+brights = ["#6B5A78", "#E66679", "#66CD99", "#E0C059", "#9973D3", "#D96699", "#56D0D6", "#2A1A30"]
