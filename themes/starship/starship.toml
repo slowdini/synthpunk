@@ -1,6 +1,6 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-format = '''
+format = """
 [](red)\
 $os\
 $username\
@@ -28,7 +28,7 @@ $time\
 [ ](fg:lavender)\
 $cmd_duration\
 $line_break\
-$character'''
+$character"""
 
 palette = 'synthpunk_pastel_dark'
 
@@ -37,46 +37,46 @@ disabled = false
 style = "bg:red fg:crust"
 
 [os.symbols]
-Alpaquita = " "
-Alpine = " "
-Amazon = " "
-Android = " "
-Arch = " "
-Artix = " "
-CentOS = " "
-Debian = " "
-Dragonfly = " "
-Emscripten = " "
-EndeavourOS = " "
-Fedora = " "
-FreeBSD = " "
-Gentoo = " "
-HardenedBSD = " "
-Illumos = " "
-Linux = " "
-Mabox = " "
-Macos = " "
-Manjaro = " "
-Mariner = " "
-MidnightBSD = " "
-Mint = " "
-NetBSD = " "
-NixOS = " "
-OpenBSD = " "
-OpenCloudOS = " "
-openEuler = " "
-openSUSE = " "
-OracleLinux = " "
-Pop = " "
-Raspbian = " "
-Redhat = " "
-RedHatEnterprise = " "
-Redox = " "
-Solus = " "
-SUSE = " "
-Ubuntu = " "
-Unknown = " "
-Windows = " "
+Alpaquita = ""
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+CentOS = ""
+Debian = "󰣚"
+DragonFly = ""
+Emscripten = "󰖟"
+EndeavourOS = ""
+Fedora = "󰣛"
+FreeBSD = ""
+Gentoo = "󰣨"
+HardenedBSD = ""
+Illumos = ""
+Linux = "󰌽"
+Mabox = ""
+Macos = "󰀵"
+Manjaro = ""
+Mariner = "󰍲"
+MidnightBSD = ""
+Mint = "󰣭"
+NetBSD = ""
+NixOS = ""
+OpenBSD = ""
+OpenCloudOS = "󰅟"
+openEuler = "󰏒"
+openSUSE = ""
+OracleLinux = "󱄛"
+Pop = ""
+Raspbian = "󰐿"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+Redox = "󰌽"
+Solus = ""
+SUSE = ""
+Ubuntu = "󰕈"
+Unknown = "󰋗"
+Windows = ""
 
 [username]
 show_always = true
@@ -92,13 +92,13 @@ truncation_symbol = ".../"
 
 [directory.substitutions]
 Documents = "󰈙 "
-Downloads = " "
+Downloads = " "
 Music = "󰝚 "
-Pictures = " "
+Pictures = " "
 Developer = "󰲋 "
 
 [git_branch]
-symbol = ""
+symbol = ""
 style = "bg:yellow"
 format = "[[ $symbol $branch ](fg:crust bg:yellow)]($style)"
 
@@ -108,51 +108,51 @@ format = "[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)"
 
 [c]
 style = "bg:green"
-format = "[[  ( $version) ](fg:crust bg:green)]($style)"
+format = "[[  ( $version) ](fg:crust bg:green)]($style)"
 
 [rust]
 style = "bg:green"
-format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+format = "[[ ( $version) ](fg:crust bg:green)]($style)"
 
 [golang]
 style = "bg:green"
-format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+format = "[[ ( $version) ](fg:crust bg:green)]($style)"
 
 [nodejs]
 style = "bg:green"
-format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+format = "[[ ( $version) ](fg:crust bg:green)]($style)"
 
 [bun]
 style = "bg:green"
-format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+format = "[[ ( $version) ](fg:crust bg:green)]($style)"
 
 [php]
 style = "bg:green"
-format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+format = "[[ ( $version) ](fg:crust bg:green)]($style)"
 
 [java]
 style = "bg:green"
-format = "[[  ( $version) ](fg:crust bg:green)]($style)"
+format = "[[  ( $version) ](fg:crust bg:green)]($style)"
 
 [kotlin]
 style = "bg:green"
-format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+format = "[[ ( $version) ](fg:crust bg:green)]($style)"
 
 [haskell]
 style = "bg:green"
-format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+format = "[[ ( $version) ](fg:crust bg:green)]($style)"
 
 [python]
 style = "bg:green"
-format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+format = "[[ ( $version) ](fg:crust bg:green)]($style)"
 
 [docker_context]
-symbol = ""
+symbol = ""
 style = "bg:sapphire"
 format = "[[ $symbol( $context) ](fg:crust bg:sapphire)]($style)"
 
 [conda]
-symbol = "  "
+symbol = "  "
 style = "fg:crust bg:sapphire"
 format = "[$symbol$environment ]($style)"
 ignore_base = false
@@ -161,7 +161,7 @@ ignore_base = false
 disabled = false
 time_format = "%R"
 style = "bg:lavender"
-format = "[[  $time ](fg:crust bg:lavender)]($style)"
+format = "[[  $time ](fg:crust bg:lavender)]($style)"
 
 [line_break]
 disabled = true
@@ -177,7 +177,7 @@ vimcmd_visual_symbol = "[❮](bold fg:yellow)"
 
 [cmd_duration]
 show_milliseconds = true
-format = "  in $duration "
+format = " in $duration "
 style = "bg:lavender"
 disabled = false
 show_notifications = true
