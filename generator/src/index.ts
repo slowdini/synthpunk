@@ -7,6 +7,7 @@ import { generateVSCodeTheme } from "./targets/vscode";
 import { generateZedTheme } from "./targets/zed";
 import { generateWeztermTheme, tomlStringify } from "./targets/wezterm";
 import { generateStarshipToml } from "./targets/starship";
+import { generateNeovimPalette, stringifyNeovimThemeModule, stringifyNeovimColorsFile } from "./targets/neovim";
 import { loadTerminalMapping } from "./terminalMapping";
 import { VariantName, VARIANT_DISPLAY_NAMES, VARIANTS } from "./types";
 
@@ -16,6 +17,9 @@ const ZED_DIR = path.join(PROJECT_DIR, "themes", "zed", "themes");
 const VSCODE_DIR = path.join(PROJECT_DIR, "themes", "vscode", "themes");
 const WEZTERM_DIR = path.join(PROJECT_DIR, "themes", "wezterm");
 const STARSHIP_DIR = path.join(PROJECT_DIR, "themes", "starship");
+const NEOVIM_DIR = path.join(PROJECT_DIR, "themes", "neovim");
+const NEOVIM_COLORS_DIR = path.join(NEOVIM_DIR, "colors");
+const NEOVIM_LUA_DIR = path.join(NEOVIM_DIR, "lua", "synthpunk");
 
 const VARIANT_VSCODE_FILE: Record<VariantName, string> = {
   "pastel-dark": "synthpunk-pastel-dark-color-theme.json",
@@ -114,6 +118,42 @@ function generateAll() {
   const starshipPath = path.join(STARSHIP_DIR, "starship.toml");
   fs.writeFileSync(starshipPath, starshipToml);
   console.log(`Generated ${starshipPath}`);
+
+  // Generate Neovim themes
+  ensureDir(NEOVIM_COLORS_DIR);
+  ensureDir(NEOVIM_LUA_DIR);
+
+  // Build all variant palettes
+  const neovimPalettes: Record<VariantName, ReturnType<typeof generateNeovimPalette>> = {} as Record<VariantName, ReturnType<typeof generateNeovimPalette>>;
+  for (const variant of VARIANTS) {
+    const palette = loadPalette(PALETTE_DIR, variant);
+    neovimPalettes[variant] = generateNeovimPalette(variant, palette, uiMapping, syntaxMapping, scopes, fontStyles);
+  }
+
+  // Write shared theme.lua
+  const themeModuleLua = stringifyNeovimThemeModule(
+    neovimPalettes["pastel-dark"],
+    neovimPalettes["pastel-light"],
+    neovimPalettes["neon-dark"],
+    neovimPalettes["neon-light"],
+  );
+  const themeModulePath = path.join(NEOVIM_LUA_DIR, "theme.lua");
+  fs.writeFileSync(themeModulePath, themeModuleLua);
+  console.log(`Generated ${themeModulePath}`);
+
+  // Write per-variant colors files
+  const NEOVIM_COLORS_FILE: Record<VariantName, string> = {
+    "pastel-dark": "synthpunk-pastel-dark.lua",
+    "pastel-light": "synthpunk-pastel-light.lua",
+    "neon-dark": "synthpunk-neon-dark.lua",
+    "neon-light": "synthpunk-neon-light.lua",
+  };
+  for (const variant of VARIANTS) {
+    const lua = stringifyNeovimColorsFile(variant);
+    const filePath = path.join(NEOVIM_COLORS_DIR, NEOVIM_COLORS_FILE[variant]);
+    fs.writeFileSync(filePath, lua);
+    console.log(`Generated ${filePath}`);
+  }
 }
 
 generateAll();
