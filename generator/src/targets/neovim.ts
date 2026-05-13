@@ -36,6 +36,203 @@ function pc(palette: Palette, colorName: string, alpha?: number): string {
   return colorToHex(color, alpha);
 }
 
+const TS_TO_CLASSIC: Record<string, string> = {
+  "comment": "Comment",
+  "comment.block": "Comment",
+  "comment.line": "Comment",
+  "comment.line.double-slash": "Comment",
+  "comment.line.number-sign": "Comment",
+  "comment.triple-slash": "Comment",
+  "string": "String",
+  "string.quoted.double": "String",
+  "string.quoted.single": "String",
+  "string.quoted.triple": "String",
+  "string.unquoted": "String",
+  "string.regexp": "String",
+  "constant.character.escape": "SpecialChar",
+  "constant.character.escape.backslash": "SpecialChar",
+  "constant.numeric": "Number",
+  "constant.numeric.float": "Number",
+  "constant.numeric.integer": "Number",
+  "constant.numeric.hex": "Number",
+  "constant.numeric.octal": "Number",
+  "constant.numeric.binary": "Number",
+  "constant.language.boolean": "Boolean",
+  "constant.language.true": "Boolean",
+  "constant.language.false": "Boolean",
+  "constant": "Constant",
+  "constant.language": "Constant",
+  "constant.language.null": "Constant",
+  "constant.language.undefined": "Constant",
+  "constant.language.nan": "Constant",
+  "keyword": "Keyword",
+  "keyword.control": "Keyword",
+  "keyword.control.import": "Keyword",
+  "keyword.control.from": "Keyword",
+  "keyword.control.export": "Keyword",
+  "keyword.control.return": "Keyword",
+  "keyword.control.flow": "Keyword",
+  "keyword.control.conditional": "Keyword",
+  "keyword.control.loop": "Keyword",
+  "keyword.operator": "Operator",
+  "keyword.operator.arithmetic": "Operator",
+  "keyword.operator.assignment": "Operator",
+  "keyword.operator.comparison": "Operator",
+  "keyword.operator.logical": "Operator",
+  "keyword.operator.new": "Operator",
+  "keyword.operator.expression": "Operator",
+  "storage.type": "Type",
+  "storage.type.class": "Type",
+  "storage.type.enum": "Type",
+  "storage.type.interface": "Type",
+  "storage.type.struct": "Type",
+  "storage.type.function": "Type",
+  "storage.type.method": "Type",
+  "storage.modifier": "StorageClass",
+  "storage.modifier.async": "StorageClass",
+  "storage.modifier.const": "StorageClass",
+  "storage.modifier.static": "StorageClass",
+  "storage.modifier.abstract": "StorageClass",
+  "storage.modifier.readonly": "StorageClass",
+  "storage.modifier.mutable": "StorageClass",
+  "storage.modifier.private": "StorageClass",
+  "storage.modifier.public": "StorageClass",
+  "storage.modifier.protected": "StorageClass",
+  "entity.name.function": "Function",
+  "entity.name.function.member": "Function",
+  "entity.name.function.constructor": "Function",
+  "entity.name.type.class": "Type",
+  "entity.name.type": "Type",
+  "entity.name.type.enum": "Type",
+  "entity.name.type.interface": "Type",
+  "entity.name.type.struct": "Type",
+  "entity.name.type.alias": "Type",
+  "entity.name.namespace": "Identifier",
+  "entity.name.module": "Identifier",
+  "entity.name.package": "Identifier",
+  "entity.name.tag": "Tag",
+  "entity.name.tag.html": "Tag",
+  "entity.name.tag.xml": "Tag",
+  "entity.name.tag.jsx": "Tag",
+  "entity.other.attribute": "Identifier",
+  "entity.other.attribute-name": "Identifier",
+  "entity.other.attribute-name.html": "Identifier",
+  "entity.other.attribute-name.xml": "Identifier",
+  "entity.other.attribute-name.jsx": "Identifier",
+  "entity.other.attribute-name.css": "Identifier",
+  "entity.name.selector": "Structure",
+  "variable": "Identifier",
+  "variable.other": "Identifier",
+  "variable.other.member": "Identifier",
+  "variable.other.object": "Identifier",
+  "variable.other.constant": "Identifier",
+  "variable.parameter": "Identifier",
+  "entity.name.variable.parameter": "Identifier",
+  "variable.other.property": "Identifier",
+  "entity.name.variable.member": "Identifier",
+  "support.function": "Function",
+  "support.type": "Type",
+  "support.class": "Type",
+  "meta.function-call": "Normal",
+  "meta.method-call": "Normal",
+  "meta.method": "Normal",
+  "meta.var": "Normal",
+  "meta.property": "Normal",
+  "meta.attribute": "Normal",
+  "meta.selector": "Normal",
+  "meta.brace": "Normal",
+  "meta.preprocessor": "PreProc",
+  "meta.preprocessor.directive": "PreProc",
+  "meta.deprecated": "Comment",
+  "punctuation": "Delimiter",
+  "punctuation.terminator": "Delimiter",
+  "punctuation.separator": "Delimiter",
+  "punctuation.separator.colon": "Delimiter",
+  "punctuation.separator.comma": "Delimiter",
+  "punctuation.separator.dot": "Delimiter",
+  "punctuation.separator.arrow": "Delimiter",
+  "punctuation.separator.key-value": "Delimiter",
+  "punctuation.section": "Delimiter",
+  "punctuation.section.brackets": "Delimiter",
+  "punctuation.section.parens": "Delimiter",
+  "punctuation.section.braces": "Delimiter",
+  "punctuation.definition.brackets": "Delimiter",
+  "punctuation.definition.parens": "Delimiter",
+  "punctuation.definition.braces": "Delimiter",
+  "keyword.control.directive": "PreProc",
+  "keyword.control.preprocessor": "PreProc",
+  "string.other.link": "Underlined",
+  "markup.underline.link": "Underlined",
+  "constant.other.reference.link": "Underlined",
+  "markup.heading": "Title",
+  "entity.name.section": "Title",
+  "heading": "Title",
+  "markup.bold": "Bold",
+  "markup.italic": "Italic",
+  "markup.deleted": "Comment",
+  "markup.strikethrough": "Comment",
+  "invalid": "Error",
+  "invalid.illegal": "Error",
+  "invalid.deprecated": "Error",
+  "decorator": "Identifier",
+  "meta.decorator": "Identifier",
+};
+
+function resolveClassicGroup(scope: string): string | null {
+  if (TS_TO_CLASSIC[scope]) return TS_TO_CLASSIC[scope];
+  const parts = scope.split(".");
+  for (let i = parts.length; i > 0; i--) {
+    const key = parts.slice(0, i).join(".");
+    if (TS_TO_CLASSIC[key]) return TS_TO_CLASSIC[key];
+  }
+  return null;
+}
+
+function buildSyntaxGroups(
+  palette: Palette,
+  syntaxMapping: SyntaxMapping,
+  uiMapping: UIMapping,
+  scopes: ScopeEntry[],
+  fontStyles: Record<string, FontStyleMapping>,
+): { treesitter: Record<string, NeovimHighlightGroup>; classic: Record<string, NeovimHighlightGroup> } {
+  const treesitter: Record<string, NeovimHighlightGroup> = {};
+  const classic: Record<string, NeovimHighlightGroup> = {};
+
+  for (const entry of scopes) {
+    const group: NeovimHighlightGroup = {};
+
+    const parts = entry.syntaxRole.split(".");
+    const syntaxGroup = (syntaxMapping as Record<string, Record<string, string>>)[parts[0]];
+    if (syntaxGroup && syntaxGroup[parts[1]]) {
+      group.fg = resolveSyntaxColor(syntaxMapping, palette, entry.syntaxRole);
+    } else {
+      group.fg = resolveUIColor(uiMapping, palette, parts[0], parts[1]);
+    }
+
+    const fontStyle = fontStyles[entry.syntaxRole];
+    if (fontStyle) {
+      if (fontStyle.fontStyle === "italic") group.italic = true;
+      if (fontStyle.fontWeight === "bold") group.bold = true;
+    }
+
+    if (entry.syntaxRole === "invalid.deprecated") {
+      group.strikethrough = true;
+    }
+
+    for (const scope of entry.scope) {
+      const tsGroup = `@${scope}`;
+      treesitter[tsGroup] = group;
+
+      const classicGroup = resolveClassicGroup(scope);
+      if (classicGroup) {
+        classic[classicGroup] = { ...group };
+      }
+    }
+  }
+
+  return { treesitter, classic };
+}
+
 function buildUIGroups(variant: VariantName, palette: Palette, uiMapping: UIMapping): Record<string, NeovimHighlightGroup> {
   const type = VARIANT_TYPE[variant];
   const isDark = type === "dark";
@@ -125,6 +322,7 @@ export function generateNeovimPalette(
   const isDark = type === "dark";
 
   const ui = buildUIGroups(variant, palette, uiMapping);
+  const syntaxGroups = buildSyntaxGroups(palette, syntaxMapping, uiMapping, scopes, fontStyles);
 
   const terminal: string[] = [];
   if (isDark) {
@@ -156,12 +354,37 @@ export function generateNeovimPalette(
   terminal.push(uc(uiMapping, palette, "terminal", "bright_cyan"));
   terminal.push(uc(uiMapping, palette, "terminal", "bright_white"));
 
+  const lspLinks: Record<string, string> = {
+    "@lsp.type.class": "@type",
+    "@lsp.type.comment": "@comment",
+    "@lsp.type.decorator": "@attribute",
+    "@lsp.type.enum": "@type",
+    "@lsp.type.enumMember": "@constant",
+    "@lsp.type.event": "@type",
+    "@lsp.type.function": "@function",
+    "@lsp.type.interface": "@type",
+    "@lsp.type.keyword": "@keyword",
+    "@lsp.type.macro": "@constant",
+    "@lsp.type.method": "@function.method",
+    "@lsp.type.namespace": "@namespace",
+    "@lsp.type.number": "@number",
+    "@lsp.type.operator": "@operator",
+    "@lsp.type.parameter": "@variable.parameter",
+    "@lsp.type.property": "@property",
+    "@lsp.type.regexp": "@string",
+    "@lsp.type.string": "@string",
+    "@lsp.type.struct": "@type",
+    "@lsp.type.type": "@type",
+    "@lsp.type.typeParameter": "@type",
+    "@lsp.type.variable": "@variable",
+  };
+
   return {
     meta: { name, variant, type },
     ui,
-    syntaxTreesitter: {},
-    syntaxClassic: {},
-    lspLinks: {},
+    syntaxTreesitter: syntaxGroups.treesitter,
+    syntaxClassic: syntaxGroups.classic,
+    lspLinks,
     terminal,
   };
 }

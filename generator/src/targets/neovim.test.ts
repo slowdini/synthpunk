@@ -43,4 +43,62 @@ describe("generateNeovimPalette", () => {
 
     expect(result.terminal).toHaveLength(16);
   });
+
+  test("pastel-dark has @comment with correct fg and italic", () => {
+    const { palette, uiMapping, syntaxMapping, scopes, fontStyles } = loadFixtures("pastel-dark");
+    const result = generateNeovimPalette("pastel-dark", palette, uiMapping, syntaxMapping, scopes, fontStyles);
+
+    expect(result.syntaxTreesitter["@comment"]).toBeDefined();
+    expect(result.syntaxTreesitter["@comment"].fg).toBe("#705880");
+    expect(result.syntaxTreesitter["@comment"].italic).toBe(true);
+  });
+
+  test("pastel-dark has matching Comment classic group", () => {
+    const { palette, uiMapping, syntaxMapping, scopes, fontStyles } = loadFixtures("pastel-dark");
+    const result = generateNeovimPalette("pastel-dark", palette, uiMapping, syntaxMapping, scopes, fontStyles);
+
+    expect(result.syntaxClassic.Comment).toBeDefined();
+    expect(result.syntaxClassic.Comment.fg).toBe("#FF5470");
+    expect(result.syntaxClassic.Comment.strikethrough).toBe(true);
+  });
+
+  test("pastel-dark has @string with correct fg", () => {
+    const { palette, uiMapping, syntaxMapping, scopes, fontStyles } = loadFixtures("pastel-dark");
+    const result = generateNeovimPalette("pastel-dark", palette, uiMapping, syntaxMapping, scopes, fontStyles);
+
+    expect(result.syntaxTreesitter["@string"]).toBeDefined();
+    expect(result.syntaxTreesitter["@string"].fg).toBe("#7FD7B5");
+  });
+
+  test("pastel-dark has @keyword with correct fg", () => {
+    const { palette, uiMapping, syntaxMapping, scopes, fontStyles } = loadFixtures("pastel-dark");
+    const result = generateNeovimPalette("pastel-dark", palette, uiMapping, syntaxMapping, scopes, fontStyles);
+
+    expect(result.syntaxTreesitter["@keyword"]).toBeDefined();
+    expect(result.syntaxTreesitter["@keyword"].fg).toBe("#FF9BB6");
+  });
+
+  test("pastel-dark has @entity.name.function with correct fg", () => {
+    const { palette, uiMapping, syntaxMapping, scopes, fontStyles } = loadFixtures("pastel-dark");
+    const result = generateNeovimPalette("pastel-dark", palette, uiMapping, syntaxMapping, scopes, fontStyles);
+
+    expect(result.syntaxTreesitter["@entity.name.function"]).toBeDefined();
+    expect(result.syntaxTreesitter["@entity.name.function"].fg).toBe("#8BA4FF");
+  });
+
+  test("neon-dark has @keyword with correct fg", () => {
+    const { palette, uiMapping, syntaxMapping, scopes, fontStyles } = loadFixtures("neon-dark");
+    const result = generateNeovimPalette("neon-dark", palette, uiMapping, syntaxMapping, scopes, fontStyles);
+
+    expect(result.syntaxTreesitter["@keyword"]).toBeDefined();
+    expect(result.syntaxTreesitter["@keyword"].fg).toBe("#FF5CA8");
+  });
+
+  test("all four variants generate without throwing", () => {
+    const variants: VariantName[] = ["pastel-dark", "pastel-light", "neon-dark", "neon-light"];
+    for (const v of variants) {
+      const { palette, uiMapping, syntaxMapping, scopes, fontStyles } = loadFixtures(v);
+      expect(() => generateNeovimPalette(v, palette, uiMapping, syntaxMapping, scopes, fontStyles)).not.toThrow();
+    }
+  });
 });
