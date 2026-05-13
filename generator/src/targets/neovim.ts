@@ -224,7 +224,7 @@ function buildSyntaxGroups(
       treesitter[tsGroup] = group;
 
       const classicGroup = resolveClassicGroup(scope);
-      if (classicGroup) {
+      if (classicGroup && !classic[classicGroup]) {
         classic[classicGroup] = { ...group };
       }
     }

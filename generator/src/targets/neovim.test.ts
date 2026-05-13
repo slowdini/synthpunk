@@ -58,8 +58,8 @@ describe("generateNeovimPalette", () => {
     const result = generateNeovimPalette("pastel-dark", palette, uiMapping, syntaxMapping, scopes, fontStyles);
 
     expect(result.syntaxClassic.Comment).toBeDefined();
-    expect(result.syntaxClassic.Comment.fg).toBe("#FF5470");
-    expect(result.syntaxClassic.Comment.strikethrough).toBe(true);
+    expect(result.syntaxClassic.Comment.fg).toBe("#705880");
+    expect(result.syntaxClassic.Comment.italic).toBe(true);
   });
 
   test("pastel-dark has @string with correct fg", () => {
