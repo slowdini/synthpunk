@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { generateNeovimPalette } from "./neovim";
+import { generateNeovimPalette, stringifyNeovimThemeModule, stringifyNeovimColorsFile } from "./neovim";
 import { loadPalette } from "../palette";
 import { loadUIMapping } from "../uiMapping";
 import { loadSyntaxMapping, loadScopes, loadFontStyles } from "../syntaxMapping";
@@ -100,5 +100,54 @@ describe("generateNeovimPalette", () => {
       const { palette, uiMapping, syntaxMapping, scopes, fontStyles } = loadFixtures(v);
       expect(() => generateNeovimPalette(v, palette, uiMapping, syntaxMapping, scopes, fontStyles)).not.toThrow();
     }
+  });
+});
+
+describe("stringifyNeovimThemeModule", () => {
+  function loadPal(v: VariantName) {
+    const { palette, uiMapping, syntaxMapping, scopes, fontStyles } = loadFixtures(v);
+    return generateNeovimPalette(v, palette, uiMapping, syntaxMapping, scopes, fontStyles);
+  }
+
+  test("produces valid Lua with all required sections", () => {
+    const output = stringifyNeovimThemeModule(
+      loadPal("pastel-dark"),
+      loadPal("pastel-light"),
+      loadPal("neon-dark"),
+      loadPal("neon-light"),
+    );
+
+    expect(output).toContain('["pastel-dark"]');
+    expect(output).toContain('["pastel-light"]');
+    expect(output).toContain('["neon-dark"]');
+    expect(output).toContain('["neon-light"]');
+    expect(output).toContain("local function hl(group, opts)");
+    expect(output).toContain("termguicolors");
+    expect(output).toContain("palette.ui");
+    expect(output).toContain("palette.syntaxTreesitter");
+    expect(output).toContain("palette.syntaxClassic");
+    expect(output).toContain("palette.lspLinks");
+    expect(output).toContain("palette.terminal");
+  });
+
+  test("contains pastel-dark Normal colors", () => {
+    const output = stringifyNeovimThemeModule(
+      loadPal("pastel-dark"),
+      loadPal("pastel-light"),
+      loadPal("neon-dark"),
+      loadPal("neon-light"),
+    );
+
+    expect(output).toContain('"#F0E0F0"');
+    expect(output).toContain('"#1E1028"');
+  });
+});
+
+describe("stringifyNeovimColorsFile", () => {
+  test("produces thin require-based file", () => {
+    const output = stringifyNeovimColorsFile("pastel-dark");
+
+    expect(output).toContain('vim.g.colors_name = "synthpunk-pastel-dark"');
+    expect(output).toContain('require("synthpunk.theme").apply("pastel-dark")');
   });
 });

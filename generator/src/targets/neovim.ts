@@ -388,3 +388,107 @@ export function generateNeovimPalette(
     terminal,
   };
 }
+
+function stringifyNeovimLuaValue(value: unknown, indent: number = 0): string {
+  const pad = "  ".repeat(indent);
+  const padInner = "  ".repeat(indent + 1);
+
+  if (value === null || value === undefined) return "nil";
+  if (typeof value === "boolean") return value ? "true" : "false";
+  if (typeof value === "number") return String(value);
+  if (typeof value === "string") {
+    if (value.match(/^[a-zA-Z_][a-zA-Z0-9_]*$/)) return value;
+    return `"${value}"`;
+  }
+  if (Array.isArray(value)) {
+    if (value.length === 0) return "{}";
+    const items = value.map(v => `${padInner}${stringifyNeovimLuaValue(v, indent + 1)}`).join(",\n");
+    return `{\n${items}\n${pad}}`;
+  }
+  if (typeof value === "object") {
+    const entries = Object.entries(value as Record<string, unknown>);
+    if (entries.length === 0) return "{}";
+    const items = entries.map(([k, v]) => {
+      const key = k.match(/^[a-zA-Z_][a-zA-Z0-9_]*$/) ? k : `["${k}"]`;
+      return `${padInner}${key} = ${stringifyNeovimLuaValue(v, indent + 1)}`;
+    }).join(",\n");
+    return `{\n${items}\n${pad}}`;
+  }
+  return "nil";
+}
+
+function stringifyNeovimVariantPalette(p: NeovimVariantPalette): string {
+  return stringifyNeovimLuaValue({
+    meta: p.meta,
+    ui: p.ui,
+    syntaxTreesitter: p.syntaxTreesitter,
+    syntaxClassic: p.syntaxClassic,
+    lspLinks: p.lspLinks,
+    terminal: p.terminal,
+  });
+}
+
+export function stringifyNeovimThemeModule(
+  pastelDark: NeovimVariantPalette,
+  pastelLight: NeovimVariantPalette,
+  neonDark: NeovimVariantPalette,
+  neonLight: NeovimVariantPalette,
+): string {
+  const lines: string[] = [];
+
+  lines.push("-- Synthpunk Neovim theme — generated; do not edit");
+  lines.push("");
+  lines.push("local M = {}");
+  lines.push("");
+  lines.push("local variants = {");
+  lines.push(`  ["pastel-dark"] = ${stringifyNeovimVariantPalette(pastelDark)},`);
+  lines.push(`  ["pastel-light"] = ${stringifyNeovimVariantPalette(pastelLight)},`);
+  lines.push(`  ["neon-dark"] = ${stringifyNeovimVariantPalette(neonDark)},`);
+  lines.push(`  ["neon-light"] = ${stringifyNeovimVariantPalette(neonLight)},`);
+  lines.push("}");
+  lines.push("");
+  lines.push("local function hl(group, opts)");
+  lines.push("  if opts.link then");
+  lines.push('    vim.api.nvim_set_hl(0, group, { link = opts.link })');
+  lines.push("    return");
+  lines.push("  end");
+  lines.push("  local ok, result = pcall(vim.api.nvim_set_hl, 0, group, opts)");
+  lines.push("  if not ok then");
+  lines.push('    vim.api.nvim_set_hl(0, group, { fg = opts.fg, bg = opts.bg })');
+  lines.push("  end");
+  lines.push("end");
+  lines.push("");
+  lines.push("function M.apply(variant)");
+  lines.push("  local palette = variants[variant]");
+  lines.push("  if not palette then");
+  lines.push('    vim.notify("synthpunk: unknown variant \\"" .. variant .. "\\"", vim.log.levels.ERROR)');
+  lines.push("    return");
+  lines.push("  end");
+  lines.push("");
+  lines.push('  vim.o.termguicolors = true');
+  lines.push('  vim.o.background = palette.meta.type');
+  lines.push("");
+  lines.push("  for group, opts in pairs(palette.ui) do hl(group, opts) end");
+  lines.push("  for group, opts in pairs(palette.syntaxTreesitter) do hl(group, opts) end");
+  lines.push("  for group, opts in pairs(palette.syntaxClassic) do hl(group, opts) end");
+  lines.push("  for from, to in pairs(palette.lspLinks) do hl(from, { link = to }) end");
+  lines.push("");
+  lines.push("  for i, color in ipairs(palette.terminal) do");
+  lines.push('    vim.g["terminal_color_" .. (i - 1)] = color');
+  lines.push("  end");
+  lines.push("end");
+  lines.push("");
+  lines.push("return M");
+  lines.push("");
+
+  return lines.join("\n");
+}
+
+export function stringifyNeovimColorsFile(variant: VariantName): string {
+  const lines: string[] = [];
+  lines.push("-- Synthpunk Neovim colorscheme — generated; do not edit");
+  lines.push(`vim.g.colors_name = "synthpunk-${variant}"`);
+  lines.push(`require("synthpunk.theme").apply("${variant}")`);
+  lines.push("");
+  return lines.join("\n");
+}
