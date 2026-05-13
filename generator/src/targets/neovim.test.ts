@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { generateNeovimPalette, stringifyNeovimThemeModule, stringifyNeovimColorsFile } from "./neovim";
+import { generateNeovimPalette } from "./neovim";
 import { loadPalette } from "../palette";
 import { loadUIMapping } from "../uiMapping";
 import { loadSyntaxMapping, loadScopes, loadFontStyles } from "../syntaxMapping";
@@ -37,7 +37,7 @@ describe("generateNeovimPalette", () => {
     expect(result.ui.Normal).toEqual({ fg: "#2E1A24", bg: "#FFF8F5" });
   });
 
-  test("terminal colors has 16 entries", () => {
+  test("terminal palette has 16 entries", () => {
     const { palette, uiMapping, syntaxMapping, scopes, fontStyles } = loadFixtures("pastel-dark");
     const result = generateNeovimPalette("pastel-dark", palette, uiMapping, syntaxMapping, scopes, fontStyles);
 
