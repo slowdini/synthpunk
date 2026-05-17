@@ -12,6 +12,8 @@
 		"typescript": "^6.0.3"
 	},
 	"scripts": {
+		"build": "bun run generator/index.ts",
+		"test": "bun test",
 		"format": "biome check --write",
 		"check": "biome check && tsc --noEmit",
 		"prepare": "husky"

@@ -15,7 +15,7 @@ import { loadTerminalMapping } from "./terminalMapping";
 import { VARIANT_DISPLAY_NAMES, VARIANTS, type VariantName } from "./types";
 import { loadUIMapping } from "./uiMapping";
 
-const PROJECT_DIR = path.resolve(import.meta.dir, "../..");
+const PROJECT_DIR = path.resolve(import.meta.dir, "../");
 const PALETTE_DIR = path.join(PROJECT_DIR, "palette");
 const ZED_DIR = path.join(PROJECT_DIR, "themes", "zed", "themes");
 const VSCODE_DIR = path.join(PROJECT_DIR, "themes", "vscode", "themes");
@@ -66,7 +66,7 @@ function generateAll() {
 		);
 		const fileName = VARIANT_VSCODE_FILE[variant];
 		const filePath = path.join(VSCODE_DIR, fileName);
-		fs.writeFileSync(filePath, `${JSON.stringify(theme, null, 2)}\n`);
+		fs.writeFileSync(filePath, `${JSON.stringify(theme, null, "\t")}\n`);
 		console.log(`Generated ${filePath}`);
 	}
 
@@ -89,7 +89,7 @@ function generateAll() {
 	const pastelZedPath = path.join(ZED_DIR, "synthpunk-pastel.json");
 	fs.writeFileSync(
 		pastelZedPath,
-		`${JSON.stringify(pastelZedTheme, null, 2)}\n`,
+		`${JSON.stringify(pastelZedTheme, null, "\t")}\n`,
 	);
 	console.log(`Generated ${pastelZedPath}`);
 
@@ -107,7 +107,10 @@ function generateAll() {
 		fontStyles,
 	);
 	const neonZedPath = path.join(ZED_DIR, "synthpunk-neon.json");
-	fs.writeFileSync(neonZedPath, `${JSON.stringify(neonZedTheme, null, 2)}\n`);
+	fs.writeFileSync(
+		neonZedPath,
+		`${JSON.stringify(neonZedTheme, null, "\t")}\n`,
+	);
 	console.log(`Generated ${neonZedPath}`);
 
 	// Generate WezTerm themes

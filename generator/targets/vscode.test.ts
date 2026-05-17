@@ -10,7 +10,7 @@ import type { VariantName } from "../types";
 import { loadUIMapping } from "../uiMapping";
 import { generateVSCodeTheme } from "./vscode";
 
-const PROJECT_DIR = path.resolve(import.meta.dir, "../../..");
+const PROJECT_DIR = path.resolve(import.meta.dir, "../..");
 const PALETTE_DIR = path.join(PROJECT_DIR, "palette");
 
 describe("generateVSCodeTheme", () => {

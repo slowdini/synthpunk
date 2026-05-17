@@ -3,7 +3,7 @@ import path from "node:path";
 import { colorToHex, loadPalette, resolveColor } from "./palette";
 import type { VariantName } from "./types";
 
-const PROJECT_DIR = path.resolve(import.meta.dir, "../..");
+const PROJECT_DIR = path.resolve(import.meta.dir, "../");
 const PALETTE_DIR = path.join(PROJECT_DIR, "palette");
 
 describe("loadPalette", () => {

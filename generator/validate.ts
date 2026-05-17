@@ -4,7 +4,7 @@ import { loadScopes, loadSyntaxMapping } from "./syntaxMapping";
 import type { VariantName } from "./types";
 import { loadUIMapping } from "./uiMapping";
 
-const PROJECT_DIR = path.resolve(import.meta.dir, "../..");
+const PROJECT_DIR = path.resolve(import.meta.dir, "../");
 const PALETTE_DIR = path.join(PROJECT_DIR, "palette");
 
 const VARIANTS: VariantName[] = [

@@ -10,7 +10,7 @@ import {
 } from "./syntaxMapping";
 import { loadUIMapping, resolveUIColor } from "./uiMapping";
 
-const PROJECT_DIR = path.resolve(import.meta.dir, "../..");
+const PROJECT_DIR = path.resolve(import.meta.dir, "../");
 const PALETTE_DIR = path.join(PROJECT_DIR, "palette");
 
 describe("loadUIMapping", () => {

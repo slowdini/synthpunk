@@ -14,7 +14,7 @@ import {
 	stringifyNeovimThemeModule,
 } from "./neovim";
 
-const PROJECT_DIR = path.resolve(import.meta.dir, "../../..");
+const PROJECT_DIR = path.resolve(import.meta.dir, "../..");
 const PALETTE_DIR = path.join(PROJECT_DIR, "palette");
 
 function loadFixtures(variant: VariantName) {

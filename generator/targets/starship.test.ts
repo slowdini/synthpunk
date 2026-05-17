@@ -5,7 +5,7 @@ import type { Palette, VariantName } from "../types";
 import { VARIANTS } from "../types";
 import { generateStarshipToml } from "./starship";
 
-const PROJECT_DIR = path.resolve(import.meta.dir, "../../..");
+const PROJECT_DIR = path.resolve(import.meta.dir, "../..");
 const PALETTE_DIR = path.join(PROJECT_DIR, "palette");
 
 function loadAllPalettes(): Record<VariantName, Palette> {

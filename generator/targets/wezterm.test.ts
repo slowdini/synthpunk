@@ -6,7 +6,7 @@ import type { VariantName } from "../types";
 import { loadUIMapping } from "../uiMapping";
 import { generateWeztermTheme, tomlStringify } from "./wezterm";
 
-const PROJECT_DIR = path.resolve(import.meta.dir, "../../..");
+const PROJECT_DIR = path.resolve(import.meta.dir, "../..");
 const PALETTE_DIR = path.join(PROJECT_DIR, "palette");
 
 function loadFixtures(variant: VariantName) {

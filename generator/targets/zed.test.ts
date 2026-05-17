@@ -5,7 +5,7 @@ import { loadFontStyles, loadSyntaxMapping } from "../syntaxMapping";
 import { loadUIMapping } from "../uiMapping";
 import { generateZedTheme } from "./zed";
 
-const PROJECT_DIR = path.resolve(import.meta.dir, "../../..");
+const PROJECT_DIR = path.resolve(import.meta.dir, "../..");
 const PALETTE_DIR = path.join(PROJECT_DIR, "palette");
 
 describe("generateZedTheme", () => {
