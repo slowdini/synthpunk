@@ -2,7 +2,6 @@ import { describe, expect, test } from "bun:test";
 import path from "node:path";
 import { loadPalette } from "../palette";
 import { loadFontStyles, loadSyntaxMapping } from "../syntaxMapping";
-import type { VariantName } from "../types";
 import { loadUIMapping } from "../uiMapping";
 import { generateZedTheme } from "./zed";
 
@@ -82,9 +81,9 @@ describe("generateZedTheme", () => {
 			string,
 			{ color: string }
 		>;
-		expect(syntax["keyword"].color).toBe("#5ED4E0ff");
-		expect(syntax["string"].color).toBe("#7FD7B5ff");
-		expect(syntax["comment"].color).toBe("#705880ff");
+		expect(syntax.keyword.color).toBe("#5ED4E0ff");
+		expect(syntax.string.color).toBe("#7FD7B5ff");
+		expect(syntax.comment.color).toBe("#705880ff");
 	});
 
 	test("has players array with 8 entries", () => {
@@ -159,8 +158,8 @@ describe("generateZedTheme", () => {
 			string,
 			{ color: string }
 		>;
-		expect(darkSyntax["keyword"].color).toBe("#5ED4E0ff");
-		expect(lightSyntax["keyword"].color).toBe("#FF9BB6ff");
+		expect(darkSyntax.keyword.color).toBe("#5ED4E0ff");
+		expect(lightSyntax.keyword.color).toBe("#FF9BB6ff");
 	});
 
 	test("dark theme terminal colors have correct format", () => {

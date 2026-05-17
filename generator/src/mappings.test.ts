@@ -8,7 +8,6 @@ import {
 	loadSyntaxMapping,
 	resolveSyntaxColor,
 } from "./syntaxMapping";
-import type { VariantName } from "./types";
 import { loadUIMapping, resolveUIColor } from "./uiMapping";
 
 const PROJECT_DIR = path.resolve(import.meta.dir, "../..");
@@ -85,7 +84,7 @@ describe("loadFontStyles", () => {
 		const fontStyles = loadFontStyles(PALETTE_DIR);
 		expect(fontStyles).toBeDefined();
 		expect(fontStyles["comments.line"].fontStyle).toBe("italic");
-		expect(fontStyles["emphasis_strong"].fontWeight).toBe("bold");
+		expect(fontStyles.emphasis_strong.fontWeight).toBe("bold");
 	});
 });
 

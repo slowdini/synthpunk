@@ -1,5 +1,5 @@
 import { adjustBrightness } from "../colorUtils";
-import { colorToHex, resolveColor } from "../palette";
+import { resolveColor } from "../palette";
 import type {
 	FontStyleMapping,
 	Palette,
@@ -267,62 +267,63 @@ function buildSyntax(
 ): Record<string, ZedSyntaxToken> {
 	const syntax: Record<string, ZedSyntaxToken> = {};
 
-	syntax["attribute"] = syn("yellow", palette);
-	syntax["boolean"] = syn("peach", palette);
-	syntax["comment"] = syn("overlay", palette);
+	syntax.attribute = syn("yellow", palette);
+	syntax.boolean = syn("peach", palette);
+	syntax.comment = syn("overlay", palette);
 	syntax["comment.doc"] = syn("subtext0", palette);
-	syntax["constant"] = syn("peach", palette);
-	syntax["embedded"] = syn("text", palette);
-	syntax["string"] = syn("green", palette);
+	syntax.constant = syn("peach", palette);
+	syntax.embedded = syn("text", palette);
+	syntax.string = syn("green", palette);
 	syntax["string.escape"] = syn("pink", palette);
 	syntax["string.regex"] = syn("peach", palette);
 	syntax["string.special"] = syn("peach", palette);
 	syntax["string.special.symbol"] = syn("peach", palette);
-	syntax["tag"] = syn("green", palette);
+	syntax.tag = syn("green", palette);
 	syntax["text.literal"] = syn("green", palette);
-	syntax["number"] = syn("peach", palette);
-	syntax["operator"] = syn("maroon", palette);
-	syntax["namespace"] = syn("flamingo", palette);
-	syntax["title"] = syn("red", palette, null, 400);
-	syntax["variable"] = syn("text", palette);
+	syntax.number = syn("peach", palette);
+	syntax.operator = syn("maroon", palette);
+	syntax.namespace = syn("flamingo", palette);
+	syntax.title = syn("red", palette, null, 400);
+	syntax.variable = syn("text", palette);
 	syntax["variable.special"] = syn("peach", palette);
-	syntax["type"] = syn("teal", palette);
-	syntax["selector"] = syn("yellow", palette);
+	syntax.type = syn("teal", palette);
+	syntax.selector = syn("yellow", palette);
 	syntax["selector.pseudo"] = isDark
 		? syn("lavender", palette)
 		: syn("blue", palette);
-	syntax["enum"] = syn("teal", palette);
-	syntax["link_uri"] = syn("sky", palette);
+	syntax.enum = syn("teal", palette);
+	syntax.link_uri = syn("sky", palette);
 	syntax["punctuation.special"] = syn("pink", palette);
 	syntax["punctuation.list_marker"] = syn("red", palette);
 	syntax["punctuation.markup"] = syn("red", palette);
-	syntax["primary"] = syn("text", palette);
-	syntax["predictive"] = syn("subtext0", palette, "italic", null);
+	syntax.primary = syn("text", palette);
+	syntax.predictive = syn("subtext0", palette, "italic", null);
 
 	// Dark/light divergent mappings
-	syntax["keyword"] = isDark ? syn("teal", palette) : syn("flamingo", palette);
-	syntax["preproc"] = isDark ? syn("teal", palette) : syn("flamingo", palette);
-	syntax["property"] = isDark ? syn("sky", palette) : syn("teal", palette);
+	syntax.keyword = isDark ? syn("teal", palette) : syn("flamingo", palette);
+	syntax.preproc = isDark ? syn("teal", palette) : syn("flamingo", palette);
+	syntax.property = isDark ? syn("sky", palette) : syn("teal", palette);
+	// biome-ignore lint/complexity/useLiteralKeys: typescript conflicts
 	syntax["constructor"] = isDark
 		? syn("lavender", palette)
 		: syn("blue", palette);
-	syntax["function"] = isDark ? syn("lavender", palette) : syn("blue", palette);
-	syntax["emphasis"] = isDark ? syn("lavender", palette) : syn("blue", palette);
-	syntax["label"] = isDark ? syn("lavender", palette) : syn("blue", palette);
-	syntax["link_text"] = isDark
+	syntax.function = isDark ? syn("lavender", palette) : syn("blue", palette);
+	syntax.emphasis = isDark ? syn("lavender", palette) : syn("blue", palette);
+	syntax.label = isDark ? syn("lavender", palette) : syn("blue", palette);
+	syntax.link_text = isDark
 		? syn("lavender", palette, "italic", null)
 		: syn("blue", palette, "italic", null);
-	syntax["variant"] = isDark ? syn("lavender", palette) : syn("blue", palette);
-	syntax["hint"] = syn("sapphire", palette);
+	syntax.variant = isDark ? syn("lavender", palette) : syn("blue", palette);
+	syntax.hint = syn("sapphire", palette);
 	syntax["emphasis.strong"] = syn("yellow", palette, null, 700);
 
-	syntax["punctuation"] = syn("text", palette);
+	syntax.punctuation = syn("text", palette);
 	syntax["punctuation.bracket"] = syn("subtext1", palette);
 	syntax["punctuation.delimiter"] = syn("subtext1", palette);
 
 	const commentLineStyle = fontStyles["comments.line"];
 	if (commentLineStyle?.fontStyle === "italic") {
-		syntax["comment"].font_style = "italic";
+		syntax.comment.font_style = "italic";
 		syntax["comment.doc"].font_style = "italic";
 	}
 
@@ -350,8 +351,8 @@ function buildPlayers(palette: Palette): ZedPlayer[] {
 function buildZedStyle(
 	palette: Palette,
 	isDark: boolean,
-	uiMapping: UIMapping,
-	syntaxMapping: SyntaxMapping,
+	_uiMapping: UIMapping,
+	_syntaxMapping: SyntaxMapping,
 	fontStyles: Record<string, FontStyleMapping>,
 ): ZedStyle {
 	const uiProps = buildUIStyle(palette, isDark);
@@ -366,7 +367,7 @@ function buildZedStyle(
 }
 
 export function generateZedTheme(
-	id: string,
+	_id: string,
 	displayName: string,
 	author: string,
 	darkPalette: Palette,

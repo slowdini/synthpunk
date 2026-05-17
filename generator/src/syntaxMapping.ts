@@ -26,7 +26,9 @@ export function resolveSyntaxColor(
 		);
 	}
 	const [group, role] = parts;
-	const groupMap = (mapping as Record<string, Record<string, string>>)[group];
+	const groupMap = (
+		mapping as unknown as Record<string, Record<string, string>>
+	)[group];
 	if (!groupMap) {
 		throw new Error(`Unknown syntax mapping group: "${group}"`);
 	}

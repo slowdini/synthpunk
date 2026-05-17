@@ -16,7 +16,9 @@ export function resolveUIColor(
 	key: string,
 	alpha?: number,
 ): string {
-	const groupMap = (mapping as Record<string, Record<string, string>>)[group];
+	const groupMap = (
+		mapping as unknown as Record<string, Record<string, string>>
+	)[group];
 	if (!groupMap) {
 		throw new Error(`Unknown UI mapping group: "${group}"`);
 	}

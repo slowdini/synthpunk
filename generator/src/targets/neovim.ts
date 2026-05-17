@@ -8,7 +8,7 @@ import type {
 	UIMapping,
 	VariantName,
 } from "../types";
-import { VARIANT_DISPLAY_NAMES, VARIANT_TYPE } from "../types";
+import { VARIANT_TYPE } from "../types";
 import { resolveUIColor } from "../uiMapping";
 
 export interface NeovimHighlightGroup {
@@ -219,9 +219,9 @@ function buildSyntaxGroups(
 
 		const parts = entry.syntaxRole.split(".");
 		const syntaxGroup = (
-			syntaxMapping as Record<string, Record<string, string>>
+			syntaxMapping as unknown as Record<string, Record<string, string>>
 		)[parts[0]];
-		if (syntaxGroup && syntaxGroup[parts[1]]) {
+		if (syntaxGroup?.[parts[1]]) {
 			group.fg = resolveSyntaxColor(syntaxMapping, palette, entry.syntaxRole);
 		} else {
 			group.fg = resolveUIColor(uiMapping, palette, parts[0], parts[1]);
@@ -257,7 +257,7 @@ function buildUIGroups(
 	uiMapping: UIMapping,
 ): Record<string, NeovimHighlightGroup> {
 	const type = VARIANT_TYPE[variant];
-	const isDark = type === "dark";
+	const _isDark = type === "dark";
 
 	return {
 		Normal: {

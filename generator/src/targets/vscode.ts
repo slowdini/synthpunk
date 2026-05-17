@@ -1,4 +1,4 @@
-import { adjustBrightness, hexToRgb } from "../colorUtils";
+import { adjustBrightness } from "../colorUtils";
 import { OPACITY_RULES } from "../opacity";
 import { colorToHex, resolveColor } from "../palette";
 import { resolveSyntaxColor } from "../syntaxMapping";
@@ -67,9 +67,9 @@ export function generateVSCodeTheme(
 
 	const colors: Record<string, string> = {};
 
-	colors["focusBorder"] = pc(palette, "lavender");
-	colors["foreground"] = uc(uiMapping, palette, "text", "primary");
-	colors["disabledForeground"] = uc(uiMapping, palette, "text", "tertiary");
+	colors.focusBorder = pc(palette, "lavender");
+	colors.foreground = uc(uiMapping, palette, "text", "primary");
+	colors.disabledForeground = uc(uiMapping, palette, "text", "tertiary");
 	colors["selection.background"] = uc(
 		uiMapping,
 		palette,
@@ -77,7 +77,7 @@ export function generateVSCodeTheme(
 		"selection",
 		OPACITY_RULES.selection,
 	);
-	colors["errorForeground"] = uc(uiMapping, palette, "status", "error");
+	colors.errorForeground = uc(uiMapping, palette, "status", "error");
 
 	colors["editor.background"] = uc(uiMapping, palette, "editor", "background");
 	colors["editor.foreground"] = uc(uiMapping, palette, "editor", "foreground");
@@ -484,9 +484,9 @@ export function generateVSCodeTheme(
 
 		const parts = entry.syntaxRole.split(".");
 		const syntaxGroup = (
-			syntaxMapping as Record<string, Record<string, string>>
+			syntaxMapping as unknown as Record<string, Record<string, string>>
 		)[parts[0]];
-		if (syntaxGroup && syntaxGroup[parts[1]]) {
+		if (syntaxGroup?.[parts[1]]) {
 			settings.foreground = resolveSyntaxColor(
 				syntaxMapping,
 				palette,

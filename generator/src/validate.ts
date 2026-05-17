@@ -1,4 +1,3 @@
-import fs from "node:fs";
 import path from "node:path";
 import { loadPalette } from "./palette";
 import { loadScopes, loadSyntaxMapping } from "./syntaxMapping";
@@ -66,9 +65,9 @@ function validateMappings(): boolean {
 			"vcs",
 		] as const;
 		for (const group of groups) {
-			const groupMap = (uiMapping as Record<string, Record<string, string>>)[
-				group
-			];
+			const groupMap = (
+				uiMapping as unknown as Record<string, Record<string, string>>
+			)[group];
 			for (const [key, colorName] of Object.entries(groupMap)) {
 				if (!(colorName in palette.colors)) {
 					console.error(
@@ -93,7 +92,7 @@ function validateMappings(): boolean {
 		] as const;
 		for (const group of syntaxGroups) {
 			const groupMap = (
-				syntaxMapping as Record<string, Record<string, string>>
+				syntaxMapping as unknown as Record<string, Record<string, string>>
 			)[group];
 			if (!groupMap) continue;
 			for (const [key, colorName] of Object.entries(groupMap)) {
@@ -119,9 +118,9 @@ function validateScopes(): boolean {
 		const parts = entry.syntaxRole.split(".");
 		const group = parts[0];
 		const role = parts.slice(1).join(".");
-		const groupMap = (syntaxMapping as Record<string, Record<string, string>>)[
-			group
-		];
+		const groupMap = (
+			syntaxMapping as unknown as Record<string, Record<string, string>>
+		)[group];
 		if (!groupMap || !(role in groupMap)) {
 			console.error(
 				`  Unknown syntaxRole "${entry.syntaxRole}" in scope "${entry.name}"`,
@@ -140,7 +139,7 @@ export function validate(): boolean {
 	const m = validateMappings();
 	console.log("\nValidating scopes...");
 	const s = validateScopes();
-	console.log("\n" + "=".repeat(50));
+	console.log(`\n${"=".repeat(50)}`);
 	if (p && m && s) {
 		console.log("All validations passed!");
 		return true;

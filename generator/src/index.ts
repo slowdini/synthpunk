@@ -66,7 +66,7 @@ function generateAll() {
 		);
 		const fileName = VARIANT_VSCODE_FILE[variant];
 		const filePath = path.join(VSCODE_DIR, fileName);
-		fs.writeFileSync(filePath, JSON.stringify(theme, null, 2) + "\n");
+		fs.writeFileSync(filePath, `${JSON.stringify(theme, null, 2)}\n`);
 		console.log(`Generated ${filePath}`);
 	}
 
@@ -89,7 +89,7 @@ function generateAll() {
 	const pastelZedPath = path.join(ZED_DIR, "synthpunk-pastel.json");
 	fs.writeFileSync(
 		pastelZedPath,
-		JSON.stringify(pastelZedTheme, null, 2) + "\n",
+		`${JSON.stringify(pastelZedTheme, null, 2)}\n`,
 	);
 	console.log(`Generated ${pastelZedPath}`);
 
@@ -107,7 +107,7 @@ function generateAll() {
 		fontStyles,
 	);
 	const neonZedPath = path.join(ZED_DIR, "synthpunk-neon.json");
-	fs.writeFileSync(neonZedPath, JSON.stringify(neonZedTheme, null, 2) + "\n");
+	fs.writeFileSync(neonZedPath, `${JSON.stringify(neonZedTheme, null, 2)}\n`);
 	console.log(`Generated ${neonZedPath}`);
 
 	// Generate WezTerm themes
