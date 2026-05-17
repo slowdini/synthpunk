@@ -1,71 +1,71 @@
 {
-  "$schema": "../schemas/ui-mapping.json",
-  "info": {
-    "name": "synthpunk-ui-mapping",
-    "description": "Editor-agnostic UI role to palette color mappings",
-    "version": "0.1.0"
-  },
-  "background": {
-    "base": "base",
-    "elevated": "mantle",
-    "deepest": "crust"
-  },
-  "surface": {
-    "default": "surface0",
-    "hover": "surface1",
-    "active": "surface2"
-  },
-  "text": {
-    "primary": "text",
-    "secondary": "subtext1",
-    "tertiary": "subtext0",
-    "accent": "teal",
-    "on_accent": "base"
-  },
-  "border": {
-    "default": "surface1",
-    "focused": "lavender",
-    "selected": "teal",
-    "disabled": "surface0"
-  },
-  "editor": {
-    "background": "base",
-    "foreground": "text",
-    "line_number": "overlay",
-    "active_line_number": "teal",
-    "active_line_background": "surface0",
-    "selection": "teal",
-    "cursor": "lavender",
-    "find_match": "flamingo",
-    "find_active_match": "red"
-  },
-  "terminal": {
-    "black": "text",
-    "red": "red",
-    "green": "green",
-    "yellow": "yellow",
-    "blue": "blue",
-    "magenta": "pink",
-    "cyan": "teal",
-    "white": "subtext1",
-    "bright_black": "subtext0",
-    "bright_red": "red",
-    "bright_green": "green",
-    "bright_yellow": "yellow",
-    "bright_blue": "blue",
-    "bright_magenta": "pink",
-    "bright_cyan": "teal",
-    "bright_white": "text"
-  },
-  "status": {
-    "error": "red",
-    "warning": "yellow",
-    "success": "green",
-    "info": "blue"
-  },
-  "vcs": {
-    "added": "green",
-    "modified": "yellow",
-    "deleted": "red"
-  }
+	"$schema": "../schemas/ui-mapping.json",
+	"info": {
+		"name": "synthpunk-ui-mapping",
+		"description": "Editor-agnostic UI role to palette color mappings",
+		"version": "0.1.0"
+	},
+	"background": {
+		"base": "base",
+		"elevated": "mantle",
+		"deepest": "crust"
+	},
+	"surface": {
+		"default": "surface0",
+		"hover": "surface1",
+		"active": "surface2"
+	},
+	"text": {
+		"primary": "text",
+		"secondary": "subtext1",
+		"tertiary": "subtext0",
+		"accent": "teal",
+		"on_accent": "base"
+	},
+	"border": {
+		"default": "surface1",
+		"focused": "lavender",
+		"selected": "teal",
+		"disabled": "surface0"
+	},
+	"editor": {
+		"background": "base",
+		"foreground": "text",
+		"line_number": "overlay",
+		"active_line_number": "teal",
+		"active_line_background": "surface0",
+		"selection": "teal",
+		"cursor": "lavender",
+		"find_match": "flamingo",
+		"find_active_match": "red"
+	},
+	"terminal": {
+		"black": "text",
+		"red": "red",
+		"green": "green",
+		"yellow": "yellow",
+		"blue": "blue",
+		"magenta": "pink",
+		"cyan": "teal",
+		"white": "subtext1",
+		"bright_black": "subtext0",
+		"bright_red": "red",
+		"bright_green": "green",
+		"bright_yellow": "yellow",
+		"bright_blue": "blue",
+		"bright_magenta": "pink",
+		"bright_cyan": "teal",
+		"bright_white": "text"
+	},
+	"status": {
+		"error": "red",
+		"warning": "yellow",
+		"success": "green",
+		"info": "blue"
+	},
+	"vcs": {
+		"added": "green",
+		"modified": "yellow",
+		"deleted": "red"
+	}
 }

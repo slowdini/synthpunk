@@ -1,46 +1,46 @@
 {
-  "name": "synthpunk",
-  "displayName": "Synthpunk",
-  "description": "High-energy synthwave-inspired color themes for VSCode",
-  "version": "0.1.0",
-  "publisher": "synthpunk",
-  "license": "MIT",
-  "engines": {
-    "vscode": "^1.80.0"
-  },
-  "categories": [
-    "Themes"
-  ],
-  "keywords": [
-    "synthwave",
-    "vaporwave",
-    "pastel",
-    "neon",
-    "dark",
-    "light"
-  ],
-  "contributes": {
-    "themes": [
-      {
-        "label": "Synthpunk Pastel Dark",
-        "uiTheme": "vs-dark",
-        "path": "./themes/synthpunk-pastel-dark-color-theme.json"
-      },
-      {
-        "label": "Synthpunk Pastel Light",
-        "uiTheme": "vs",
-        "path": "./themes/synthpunk-pastel-light-color-theme.json"
-      },
-      {
-        "label": "Synthpunk Neon Dark",
-        "uiTheme": "vs-dark",
-        "path": "./themes/synthpunk-neon-dark-color-theme.json"
-      },
-      {
-        "label": "Synthpunk Neon Light",
-        "uiTheme": "vs",
-        "path": "./themes/synthpunk-neon-light-color-theme.json"
-      }
-    ]
-  }
+	"name": "synthpunk",
+	"displayName": "Synthpunk",
+	"description": "High-energy synthwave-inspired color themes for VSCode",
+	"version": "0.1.0",
+	"publisher": "synthpunk",
+	"license": "MIT",
+	"engines": {
+		"vscode": "^1.80.0"
+	},
+	"categories": [
+		"Themes"
+	],
+	"keywords": [
+		"synthwave",
+		"vaporwave",
+		"pastel",
+		"neon",
+		"dark",
+		"light"
+	],
+	"contributes": {
+		"themes": [
+			{
+				"label": "Synthpunk Pastel Dark",
+				"uiTheme": "vs-dark",
+				"path": "./themes/synthpunk-pastel-dark-color-theme.json"
+			},
+			{
+				"label": "Synthpunk Pastel Light",
+				"uiTheme": "vs",
+				"path": "./themes/synthpunk-pastel-light-color-theme.json"
+			},
+			{
+				"label": "Synthpunk Neon Dark",
+				"uiTheme": "vs-dark",
+				"path": "./themes/synthpunk-neon-dark-color-theme.json"
+			},
+			{
+				"label": "Synthpunk Neon Light",
+				"uiTheme": "vs",
+				"path": "./themes/synthpunk-neon-light-color-theme.json"
+			}
+		]
+	}
 }

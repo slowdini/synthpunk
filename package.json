@@ -1,0 +1,22 @@
+{
+	"name": "add-linting-formatting-setup",
+	"module": "index.ts",
+	"type": "module",
+	"private": true,
+	"devDependencies": {
+		"@biomejs/biome": "2.4.15",
+		"@types/bun": "latest",
+		"@types/node": "^25.8.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^17.0.5",
+		"typescript": "^6.0.3"
+	},
+	"scripts": {
+		"format": "biome check --write",
+		"check": "biome check && tsc --noEmit",
+		"prepare": "husky"
+	},
+	"lint-staged": {
+		"*.{js,ts,jsx,tsx,json}": "biome check --write --no-errors-on-unmatched"
+	}
+}

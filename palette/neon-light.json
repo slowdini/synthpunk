@@ -1,33 +1,125 @@
 {
-  "$schema": "../schemas/base.json",
-  "info": {
-    "name": "synthpunk-neon-light",
-    "description": "Synthpunk Neon light mode palette — holographic iridescence",
-    "version": "0.1.0"
-  },
-  "colors": {
-    "rosewater": { "hex": "E8A0C0", "rgb": [232, 160, 192], "description": "Pearlescent pink for delicate accents" },
-    "flamingo": { "hex": "E06098", "rgb": [224, 96, 152], "description": "Holographic pink for lively highlights" },
-    "pink": { "hex": "D04080", "rgb": [208, 64, 128], "description": "Prism magenta for strings, escape sequences" },
-    "maroon": { "hex": "B04068", "rgb": [176, 64, 104], "description": "Deep rose for parameters, operators" },
-    "red": { "hex": "E04058", "rgb": [224, 64, 88], "description": "Coral-red for errors, critical" },
-    "peach": { "hex": "E88050", "rgb": [232, 128, 80], "description": "Opalescent orange for types, constants" },
-    "yellow": { "hex": "D8B030", "rgb": [216, 176, 48], "description": "Golden iridescence for attributes, classes" },
-    "green": { "hex": "40C080", "rgb": [64, 192, 128], "description": "Iridescent mint for success, strings" },
-    "teal": { "hex": "30C0C8", "rgb": [48, 192, 200], "description": "Opalescent cyan for keywords, info" },
-    "sky": { "hex": "4098D8", "rgb": [64, 152, 216], "description": "Prismatic blue for methods, variables" },
-    "sapphire": { "hex": "6070C8", "rgb": [96, 112, 200], "description": "Iridescent periwinkle for built-ins, types" },
-    "blue": { "hex": "8050C8", "rgb": [128, 80, 200], "description": "Prismatic purple for functions, links" },
-    "lavender": { "hex": "B050D0", "rgb": [176, 80, 208], "description": "Opalescent violet for functions, highlights" },
-    "text": { "hex": "2A1A30", "rgb": [42, 26, 48], "description": "Primary text — deep purple-brown" },
-    "subtext1": { "hex": "6B5A78", "rgb": [107, 90, 120], "description": "Secondary text" },
-    "subtext0": { "hex": "A898B0", "rgb": [168, 152, 176], "description": "Tertiary text, placeholders" },
-    "overlay": { "hex": "C0A8C8", "rgb": [192, 168, 200], "description": "Overlays, disabled states, comments" },
-    "surface2": { "hex": "E0C8E8", "rgb": [224, 200, 232], "description": "Highest surface elevation" },
-    "surface1": { "hex": "E8D8F0", "rgb": [232, 216, 240], "description": "Mid surface elevation" },
-    "surface0": { "hex": "F0E8F5", "rgb": [240, 232, 245], "description": "Lowest surface elevation" },
-    "base": { "hex": "FAF6FA", "rgb": [250, 246, 250], "description": "Primary background — pearlescent white" },
-    "mantle": { "hex": "F5F0F5", "rgb": [245, 240, 245], "description": "Slightly darker than base" },
-    "crust": { "hex": "F0E8F0", "rgb": [240, 232, 240], "description": "Darkest background depth" }
-  }
+	"$schema": "../schemas/base.json",
+	"info": {
+		"name": "synthpunk-neon-light",
+		"description": "Synthpunk Neon light mode palette — holographic iridescence",
+		"version": "0.1.0"
+	},
+	"colors": {
+		"rosewater": {
+			"hex": "E8A0C0",
+			"rgb": [232, 160, 192],
+			"description": "Pearlescent pink for delicate accents"
+		},
+		"flamingo": {
+			"hex": "E06098",
+			"rgb": [224, 96, 152],
+			"description": "Holographic pink for lively highlights"
+		},
+		"pink": {
+			"hex": "D04080",
+			"rgb": [208, 64, 128],
+			"description": "Prism magenta for strings, escape sequences"
+		},
+		"maroon": {
+			"hex": "B04068",
+			"rgb": [176, 64, 104],
+			"description": "Deep rose for parameters, operators"
+		},
+		"red": {
+			"hex": "E04058",
+			"rgb": [224, 64, 88],
+			"description": "Coral-red for errors, critical"
+		},
+		"peach": {
+			"hex": "E88050",
+			"rgb": [232, 128, 80],
+			"description": "Opalescent orange for types, constants"
+		},
+		"yellow": {
+			"hex": "D8B030",
+			"rgb": [216, 176, 48],
+			"description": "Golden iridescence for attributes, classes"
+		},
+		"green": {
+			"hex": "40C080",
+			"rgb": [64, 192, 128],
+			"description": "Iridescent mint for success, strings"
+		},
+		"teal": {
+			"hex": "30C0C8",
+			"rgb": [48, 192, 200],
+			"description": "Opalescent cyan for keywords, info"
+		},
+		"sky": {
+			"hex": "4098D8",
+			"rgb": [64, 152, 216],
+			"description": "Prismatic blue for methods, variables"
+		},
+		"sapphire": {
+			"hex": "6070C8",
+			"rgb": [96, 112, 200],
+			"description": "Iridescent periwinkle for built-ins, types"
+		},
+		"blue": {
+			"hex": "8050C8",
+			"rgb": [128, 80, 200],
+			"description": "Prismatic purple for functions, links"
+		},
+		"lavender": {
+			"hex": "B050D0",
+			"rgb": [176, 80, 208],
+			"description": "Opalescent violet for functions, highlights"
+		},
+		"text": {
+			"hex": "2A1A30",
+			"rgb": [42, 26, 48],
+			"description": "Primary text — deep purple-brown"
+		},
+		"subtext1": {
+			"hex": "6B5A78",
+			"rgb": [107, 90, 120],
+			"description": "Secondary text"
+		},
+		"subtext0": {
+			"hex": "A898B0",
+			"rgb": [168, 152, 176],
+			"description": "Tertiary text, placeholders"
+		},
+		"overlay": {
+			"hex": "C0A8C8",
+			"rgb": [192, 168, 200],
+			"description": "Overlays, disabled states, comments"
+		},
+		"surface2": {
+			"hex": "E0C8E8",
+			"rgb": [224, 200, 232],
+			"description": "Highest surface elevation"
+		},
+		"surface1": {
+			"hex": "E8D8F0",
+			"rgb": [232, 216, 240],
+			"description": "Mid surface elevation"
+		},
+		"surface0": {
+			"hex": "F0E8F5",
+			"rgb": [240, 232, 245],
+			"description": "Lowest surface elevation"
+		},
+		"base": {
+			"hex": "FAF6FA",
+			"rgb": [250, 246, 250],
+			"description": "Primary background — pearlescent white"
+		},
+		"mantle": {
+			"hex": "F5F0F5",
+			"rgb": [245, 240, 245],
+			"description": "Slightly darker than base"
+		},
+		"crust": {
+			"hex": "F0E8F0",
+			"rgb": [240, 232, 240],
+			"description": "Darkest background depth"
+		}
+	}
 }

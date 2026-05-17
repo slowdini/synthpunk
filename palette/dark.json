@@ -1,33 +1,125 @@
 {
-  "$schema": "../schemas/base.json",
-  "info": {
-    "name": "synthpunk-pastel-dark",
-    "description": "Synthpunk Pastel dark mode palette — cool and nocturnal vaporwave",
-    "version": "0.1.0"
-  },
-  "colors": {
-    "rosewater": { "hex": "FFE8F0", "rgb": [255, 232, 240], "description": "Soft blush pink for delicate accents" },
-    "flamingo": { "hex": "FF9BB6", "rgb": [255, 155, 182], "description": "Warm pink for lively highlights" },
-    "pink": { "hex": "FF7DB0", "rgb": [255, 125, 176], "description": "Vivid pink for strings, escape sequences" },
-    "maroon": { "hex": "D48BA0", "rgb": [212, 139, 160], "description": "Muted mauve for parameters, operators" },
-    "red": { "hex": "FF5470", "rgb": [255, 84, 112], "description": "Vibrant coral-red for errors, critical" },
-    "peach": { "hex": "FFA07A", "rgb": [255, 160, 122], "description": "Soft orange for types, constants" },
-    "yellow": { "hex": "FFE4B5", "rgb": [255, 228, 181], "description": "Pale cream gold for attributes, classes" },
-    "green": { "hex": "7FD7B5", "rgb": [127, 215, 181], "description": "Soft mint for success, strings" },
-    "teal": { "hex": "5ED4E0", "rgb": [94, 212, 224], "description": "Retro cyan for keywords, info" },
-    "sky": { "hex": "7AC8FF", "rgb": [122, 200, 255], "description": "Bright sky blue for methods, variables" },
-    "sapphire": { "hex": "7AA8C0", "rgb": [122, 168, 192], "description": "Muted blue for built-ins, types" },
-    "blue": { "hex": "8BA4FF", "rgb": [139, 164, 255], "description": "Soft periwinkle for functions, links" },
-    "lavender": { "hex": "C49BFF", "rgb": [196, 155, 255], "description": "Soft purple for functions, highlights" },
-    "text": { "hex": "F0E0F0", "rgb": [240, 224, 240], "description": "Primary text — soft lavender-white" },
-    "subtext1": { "hex": "C8B0D8", "rgb": [200, 176, 216], "description": "Secondary text" },
-    "subtext0": { "hex": "A090B8", "rgb": [160, 144, 184], "description": "Tertiary text, placeholders" },
-    "overlay": { "hex": "705880", "rgb": [112, 88, 128], "description": "Overlays, disabled states, comments" },
-    "surface2": { "hex": "4A3860", "rgb": [74, 56, 96], "description": "Highest surface elevation" },
-    "surface1": { "hex": "3A2850", "rgb": [58, 40, 80], "description": "Mid surface elevation" },
-    "surface0": { "hex": "2E1E40", "rgb": [46, 30, 64], "description": "Lowest surface elevation" },
-    "base": { "hex": "1E1028", "rgb": [30, 16, 40], "description": "Primary background — deep purple-black" },
-    "mantle": { "hex": "160A20", "rgb": [22, 10, 32], "description": "Slightly darker than base" },
-    "crust": { "hex": "0D0612", "rgb": [13, 6, 18], "description": "Darkest background depth" }
-  }
+	"$schema": "../schemas/base.json",
+	"info": {
+		"name": "synthpunk-pastel-dark",
+		"description": "Synthpunk Pastel dark mode palette — cool and nocturnal vaporwave",
+		"version": "0.1.0"
+	},
+	"colors": {
+		"rosewater": {
+			"hex": "FFE8F0",
+			"rgb": [255, 232, 240],
+			"description": "Soft blush pink for delicate accents"
+		},
+		"flamingo": {
+			"hex": "FF9BB6",
+			"rgb": [255, 155, 182],
+			"description": "Warm pink for lively highlights"
+		},
+		"pink": {
+			"hex": "FF7DB0",
+			"rgb": [255, 125, 176],
+			"description": "Vivid pink for strings, escape sequences"
+		},
+		"maroon": {
+			"hex": "D48BA0",
+			"rgb": [212, 139, 160],
+			"description": "Muted mauve for parameters, operators"
+		},
+		"red": {
+			"hex": "FF5470",
+			"rgb": [255, 84, 112],
+			"description": "Vibrant coral-red for errors, critical"
+		},
+		"peach": {
+			"hex": "FFA07A",
+			"rgb": [255, 160, 122],
+			"description": "Soft orange for types, constants"
+		},
+		"yellow": {
+			"hex": "FFE4B5",
+			"rgb": [255, 228, 181],
+			"description": "Pale cream gold for attributes, classes"
+		},
+		"green": {
+			"hex": "7FD7B5",
+			"rgb": [127, 215, 181],
+			"description": "Soft mint for success, strings"
+		},
+		"teal": {
+			"hex": "5ED4E0",
+			"rgb": [94, 212, 224],
+			"description": "Retro cyan for keywords, info"
+		},
+		"sky": {
+			"hex": "7AC8FF",
+			"rgb": [122, 200, 255],
+			"description": "Bright sky blue for methods, variables"
+		},
+		"sapphire": {
+			"hex": "7AA8C0",
+			"rgb": [122, 168, 192],
+			"description": "Muted blue for built-ins, types"
+		},
+		"blue": {
+			"hex": "8BA4FF",
+			"rgb": [139, 164, 255],
+			"description": "Soft periwinkle for functions, links"
+		},
+		"lavender": {
+			"hex": "C49BFF",
+			"rgb": [196, 155, 255],
+			"description": "Soft purple for functions, highlights"
+		},
+		"text": {
+			"hex": "F0E0F0",
+			"rgb": [240, 224, 240],
+			"description": "Primary text — soft lavender-white"
+		},
+		"subtext1": {
+			"hex": "C8B0D8",
+			"rgb": [200, 176, 216],
+			"description": "Secondary text"
+		},
+		"subtext0": {
+			"hex": "A090B8",
+			"rgb": [160, 144, 184],
+			"description": "Tertiary text, placeholders"
+		},
+		"overlay": {
+			"hex": "705880",
+			"rgb": [112, 88, 128],
+			"description": "Overlays, disabled states, comments"
+		},
+		"surface2": {
+			"hex": "4A3860",
+			"rgb": [74, 56, 96],
+			"description": "Highest surface elevation"
+		},
+		"surface1": {
+			"hex": "3A2850",
+			"rgb": [58, 40, 80],
+			"description": "Mid surface elevation"
+		},
+		"surface0": {
+			"hex": "2E1E40",
+			"rgb": [46, 30, 64],
+			"description": "Lowest surface elevation"
+		},
+		"base": {
+			"hex": "1E1028",
+			"rgb": [30, 16, 40],
+			"description": "Primary background — deep purple-black"
+		},
+		"mantle": {
+			"hex": "160A20",
+			"rgb": [22, 10, 32],
+			"description": "Slightly darker than base"
+		},
+		"crust": {
+			"hex": "0D0612",
+			"rgb": [13, 6, 18],
+			"description": "Darkest background depth"
+		}
+	}
 }

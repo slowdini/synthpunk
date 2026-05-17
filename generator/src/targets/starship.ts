@@ -1,4 +1,4 @@
-import type { VariantName, Palette } from "../types";
+import type { Palette, VariantName } from "../types";
 import { VARIANTS } from "../types";
 
 const LANGUAGE_SYMBOLS: Record<string, string> = {
