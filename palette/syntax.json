@@ -1,61 +1,61 @@
 {
-  "$schema": "../schemas/syntax.json",
-  "info": {
-    "name": "synthpunk-syntax",
-    "description": "Language-agnostic syntax highlighting mappings for synthpunk-pastel",
-    "version": "0.1.0"
-  },
-  "keywords": {
-    "keyword": "flamingo",
-    "control": "flamingo",
-    "operator": "maroon"
-  },
-  "storage": {
-    "type": "peach",
-    "modifier": "lavender",
-    "class": "yellow"
-  },
-  "literals": {
-    "string": "green",
-    "number": "peach",
-    "boolean": "peach",
-    "constant": "peach"
-  },
-  "comments": {
-    "line": "overlay",
-    "block": "overlay"
-  },
-  "functions": {
-    "function": "blue",
-    "method": "sky",
-    "parameter": "maroon"
-  },
-  "variables": {
-    "variable": "text",
-    "property": "teal",
-    "attribute": "sapphire"
-  },
-  "entities": {
-    "namespace": "flamingo",
-    "tag": "green",
-    "attribute": "yellow"
-  },
-  "support": {
-    "type": "sky",
-    "class": "blue",
-    "function": "sapphire"
-  },
-  "invalid": {
-    "illegal": "red",
-    "deprecated": "red"
-  },
-  "emphasis": {
-    "emphasis": "lavender",
-    "emphasis_strong": "yellow"
-  },
-  "fontStyles": {
-    "emphasis": { "fontStyle": "normal" },
-    "emphasis_strong": { "fontWeight": "bold" },
-    "comments.line": { "fontStyle": "italic" }
-  }
+	"$schema": "../schemas/syntax.json",
+	"info": {
+		"name": "synthpunk-syntax",
+		"description": "Language-agnostic syntax highlighting mappings for synthpunk-pastel",
+		"version": "0.1.0"
+	},
+	"keywords": {
+		"keyword": "flamingo",
+		"control": "flamingo",
+		"operator": "maroon"
+	},
+	"storage": {
+		"type": "peach",
+		"modifier": "lavender",
+		"class": "yellow"
+	},
+	"literals": {
+		"string": "green",
+		"number": "peach",
+		"boolean": "peach",
+		"constant": "peach"
+	},
+	"comments": {
+		"line": "overlay",
+		"block": "overlay"
+	},
+	"functions": {
+		"function": "blue",
+		"method": "sky",
+		"parameter": "maroon"
+	},
+	"variables": {
+		"variable": "text",
+		"property": "teal",
+		"attribute": "sapphire"
+	},
+	"entities": {
+		"namespace": "flamingo",
+		"tag": "green",
+		"attribute": "yellow"
+	},
+	"support": {
+		"type": "sky",
+		"class": "blue",
+		"function": "sapphire"
+	},
+	"invalid": {
+		"illegal": "red",
+		"deprecated": "red"
+	},
+	"emphasis": {
+		"emphasis": "lavender",
+		"emphasis_strong": "yellow"
+	},
+	"fontStyles": {
+		"emphasis": { "fontStyle": "normal" },
+		"emphasis_strong": { "fontWeight": "bold" },
+		"comments.line": { "fontStyle": "italic" }
+	}
 }

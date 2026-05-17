@@ -1,51 +1,51 @@
 {
-  "$schema": "../schemas/terminal-mapping.json",
-  "info": {
-    "name": "synthpunk-terminal",
-    "description": "Terminal-agnostic UI role to palette color mappings",
-    "version": "0.1.0"
-  },
-  "cursor": {
-    "bg": "lavender",
-    "fg": "base",
-    "border": "lavender"
-  },
-  "selection": {
-    "fg": "text",
-    "bg": "teal",
-    "bg_alpha": 0.3
-  },
-  "tab_bar": {
-    "background": "mantle",
-    "active_tab": {
-      "bg": "base",
-      "fg": "text"
-    },
-    "inactive_tab": {
-      "bg": "mantle",
-      "fg": "subtext1"
-    },
-    "new_tab": {
-      "bg": "mantle",
-      "fg": "subtext1"
-    }
-  },
-  "scrollbar": {
-    "thumb": "subtext1",
-    "thumb_hover": "subtext0"
-  },
-  "split": "surface1",
-  "compose_cursor": "flamingo",
-  "quick_select": {
-    "label_bg": "peach",
-    "label_fg": "base",
-    "match_bg": "teal",
-    "match_fg": "base"
-  },
-  "copy_mode": {
-    "active_highlight_bg": "teal",
-    "active_highlight_fg": "base",
-    "inactive_highlight_bg": "overlay",
-    "inactive_highlight_fg": "text"
-  }
+	"$schema": "../schemas/terminal-mapping.json",
+	"info": {
+		"name": "synthpunk-terminal",
+		"description": "Terminal-agnostic UI role to palette color mappings",
+		"version": "0.1.0"
+	},
+	"cursor": {
+		"bg": "lavender",
+		"fg": "base",
+		"border": "lavender"
+	},
+	"selection": {
+		"fg": "text",
+		"bg": "teal",
+		"bg_alpha": 0.3
+	},
+	"tab_bar": {
+		"background": "mantle",
+		"active_tab": {
+			"bg": "base",
+			"fg": "text"
+		},
+		"inactive_tab": {
+			"bg": "mantle",
+			"fg": "subtext1"
+		},
+		"new_tab": {
+			"bg": "mantle",
+			"fg": "subtext1"
+		}
+	},
+	"scrollbar": {
+		"thumb": "subtext1",
+		"thumb_hover": "subtext0"
+	},
+	"split": "surface1",
+	"compose_cursor": "flamingo",
+	"quick_select": {
+		"label_bg": "peach",
+		"label_fg": "base",
+		"match_bg": "teal",
+		"match_fg": "base"
+	},
+	"copy_mode": {
+		"active_highlight_bg": "teal",
+		"active_highlight_fg": "base",
+		"inactive_highlight_bg": "overlay",
+		"inactive_highlight_fg": "text"
+	}
 }

@@ -1,27 +1,32 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "type": "object",
-  "title": "Synthpunk Base Palette Schema",
-  "required": ["info", "colors"],
-  "properties": {
-    "info": {
-      "type": "object",
-      "properties": {
-        "name": { "type": "string" },
-        "description": { "type": "string" },
-        "version": { "type": "string" }
-      }
-    },
-    "colors": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "hex": { "type": "string" },
-          "rgb": { "type": "array", "items": { "type": "integer" }, "minItems": 3, "maxItems": 3 },
-          "description": { "type": "string" }
-        }
-      }
-    }
-  }
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"title": "Synthpunk Base Palette Schema",
+	"required": ["info", "colors"],
+	"properties": {
+		"info": {
+			"type": "object",
+			"properties": {
+				"name": { "type": "string" },
+				"description": { "type": "string" },
+				"version": { "type": "string" }
+			}
+		},
+		"colors": {
+			"type": "object",
+			"additionalProperties": {
+				"type": "object",
+				"properties": {
+					"hex": { "type": "string" },
+					"rgb": {
+						"type": "array",
+						"items": { "type": "integer" },
+						"minItems": 3,
+						"maxItems": 3
+					},
+					"description": { "type": "string" }
+				}
+			}
+		}
+	}
 }

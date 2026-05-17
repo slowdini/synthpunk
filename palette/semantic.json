@@ -1,44 +1,44 @@
 {
-  "$schema": "../schemas/semantic.json",
-  "info": {
-    "name": "synthpunk-semantic",
-    "description": "Semantic role mappings for Synthpunk color palette",
-    "version": "0.1.0"
-  },
-  "background": {
-    "base": "base",
-    "mantle": "mantle",
-    "crust": "crust"
-  },
-  "surface": {
-    "surface0": "surface0",
-    "surface1": "surface1",
-    "surface2": "surface2"
-  },
-  "overlay": {
-    "overlay0": "overlay",
-    "overlay1": "overlay",
-    "overlay2": "overlay"
-  },
-  "text": {
-    "primary": "text",
-    "subtext1": "subtext1",
-    "subtext0": "subtext0"
-  },
-  "accent": {
-    "default": "pink",
-    "hover": "flamingo"
-  },
-  "status": {
-    "success": "green",
-    "warning": "yellow",
-    "error": "red",
-    "info": "blue"
-  },
-  "border": {
-    "default": "surface0",
-    "focused": "lavender",
-    "selected": "pink",
-    "disabled": "overlay"
-  }
+	"$schema": "../schemas/semantic.json",
+	"info": {
+		"name": "synthpunk-semantic",
+		"description": "Semantic role mappings for Synthpunk color palette",
+		"version": "0.1.0"
+	},
+	"background": {
+		"base": "base",
+		"mantle": "mantle",
+		"crust": "crust"
+	},
+	"surface": {
+		"surface0": "surface0",
+		"surface1": "surface1",
+		"surface2": "surface2"
+	},
+	"overlay": {
+		"overlay0": "overlay",
+		"overlay1": "overlay",
+		"overlay2": "overlay"
+	},
+	"text": {
+		"primary": "text",
+		"subtext1": "subtext1",
+		"subtext0": "subtext0"
+	},
+	"accent": {
+		"default": "pink",
+		"hover": "flamingo"
+	},
+	"status": {
+		"success": "green",
+		"warning": "yellow",
+		"error": "red",
+		"info": "blue"
+	},
+	"border": {
+		"default": "surface0",
+		"focused": "lavender",
+		"selected": "pink",
+		"disabled": "overlay"
+	}
 }

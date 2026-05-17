@@ -1,36 +1,66 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "type": "object",
-  "title": "Synthpunk Syntax Schema",
-  "required": ["info"],
-  "properties": {
-    "info": {
-      "type": "object",
-      "properties": {
-        "name": { "type": "string" },
-        "description": { "type": "string" },
-        "version": { "type": "string" }
-      }
-    },
-    "keywords": { "type": "object", "additionalProperties": { "type": "string" } },
-    "storage": { "type": "object", "additionalProperties": { "type": "string" } },
-    "literals": { "type": "object", "additionalProperties": { "type": "string" } },
-    "comments": { "type": "object", "additionalProperties": { "type": "string" } },
-    "functions": { "type": "object", "additionalProperties": { "type": "string" } },
-    "variables": { "type": "object", "additionalProperties": { "type": "string" } },
-    "entities": { "type": "object", "additionalProperties": { "type": "string" } },
-    "support": { "type": "object", "additionalProperties": { "type": "string" } },
-    "invalid": { "type": "object", "additionalProperties": { "type": "string" } },
-    "emphasis": { "type": "object", "additionalProperties": { "type": "string" } },
-    "fontStyles": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "fontStyle": { "type": "string", "enum": ["normal", "italic"] },
-          "fontWeight": { "type": "string", "enum": ["normal", "bold"] }
-        }
-      }
-    }
-  }
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"type": "object",
+	"title": "Synthpunk Syntax Schema",
+	"required": ["info"],
+	"properties": {
+		"info": {
+			"type": "object",
+			"properties": {
+				"name": { "type": "string" },
+				"description": { "type": "string" },
+				"version": { "type": "string" }
+			}
+		},
+		"keywords": {
+			"type": "object",
+			"additionalProperties": { "type": "string" }
+		},
+		"storage": {
+			"type": "object",
+			"additionalProperties": { "type": "string" }
+		},
+		"literals": {
+			"type": "object",
+			"additionalProperties": { "type": "string" }
+		},
+		"comments": {
+			"type": "object",
+			"additionalProperties": { "type": "string" }
+		},
+		"functions": {
+			"type": "object",
+			"additionalProperties": { "type": "string" }
+		},
+		"variables": {
+			"type": "object",
+			"additionalProperties": { "type": "string" }
+		},
+		"entities": {
+			"type": "object",
+			"additionalProperties": { "type": "string" }
+		},
+		"support": {
+			"type": "object",
+			"additionalProperties": { "type": "string" }
+		},
+		"invalid": {
+			"type": "object",
+			"additionalProperties": { "type": "string" }
+		},
+		"emphasis": {
+			"type": "object",
+			"additionalProperties": { "type": "string" }
+		},
+		"fontStyles": {
+			"type": "object",
+			"additionalProperties": {
+				"type": "object",
+				"properties": {
+					"fontStyle": { "type": "string", "enum": ["normal", "italic"] },
+					"fontWeight": { "type": "string", "enum": ["normal", "bold"] }
+				}
+			}
+		}
+	}
 }
