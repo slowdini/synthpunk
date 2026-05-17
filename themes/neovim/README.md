@@ -1,6 +1,6 @@
 # Synthpunk for Neovim
 
-A Neovim colorscheme generated from the [Synthpunk](https://github.com/anomalyco/synthpunk) palette.
+A Neovim colorscheme generated from the [Synthpunk](https://github.com/slowdini/synthpunk) palette.
 
 ## Variants
 
@@ -14,7 +14,7 @@ A Neovim colorscheme generated from the [Synthpunk](https://github.com/anomalyco
 ### Manual (no plugin manager)
 
 ```bash
-git clone https://github.com/anomalyco/synthpunk /tmp/synthpunk
+git clone https://github.com/slowdini/synthpunk /tmp/synthpunk
 cp -r /tmp/synthpunk/themes/neovim/* ~/.config/nvim/
 ```
 
@@ -28,7 +28,7 @@ vim.cmd("colorscheme synthpunk-pastel-dark")
 
 ```lua
 {
-  "anomalyco/synthpunk",
+  "slowdini/synthpunk",
   dir = "~/path/to/synthpunk/themes/neovim",
   lazy = false,
   priority = 1000,
