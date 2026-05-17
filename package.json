@@ -1,0 +1,16 @@
+{
+	"name": "add-linting-formatting-setup",
+	"module": "index.ts",
+	"type": "module",
+	"private": true,
+	"devDependencies": {
+		"@biomejs/biome": "2.4.15",
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"scripts": {
+		"format": "biome check --write"
+	}
+}
