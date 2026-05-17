@@ -177,6 +177,8 @@ function buildUIStyle(palette: Palette, isDark: boolean): Record<string, string 
     "version_control.word_added": s("green", 0.35),
     "version_control.word_deleted": s("red", 0.8),
     "version_control.deleted": s("red"),
+    "version_control.conflict_marker.ours": s("green", 0.15),
+    "version_control.conflict_marker.theirs": s("blue", 0.15),
     conflict: s("yellow"),
     "conflict.background": s("yellow", 0.1),
     "conflict.border": s("yellow", 0.2),

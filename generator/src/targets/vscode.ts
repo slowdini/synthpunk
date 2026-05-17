@@ -74,6 +74,13 @@ export function generateVSCodeTheme(
   colors["editor.wordHighlightBackground"] = pc(palette, "lavender", 0x1A / 255);
   colors["editor.wordHighlightStrongBackground"] = uc(uiMapping, palette, "editor", "selection", OPACITY_RULES.word_highlight_write);
 
+  colors["merge.currentHeaderBackground"] = uc(uiMapping, palette, "vcs", "added", 0.3);
+  colors["merge.currentContentBackground"] = uc(uiMapping, palette, "vcs", "added", 0.15);
+  colors["merge.incomingHeaderBackground"] = pc(palette, "blue", 0.3);
+  colors["merge.incomingContentBackground"] = pc(palette, "blue", 0.15);
+  colors["merge.commonHeaderBackground"] = pc(palette, "subtext0", 0.3);
+  colors["merge.commonContentBackground"] = pc(palette, "subtext0", 0.15);
+
   colors["editorGutter.background"] = uc(uiMapping, palette, "editor", "background");
   colors["editorGutter.modifiedBackground"] = uc(uiMapping, palette, "vcs", "modified", 0x80 / 255);
   colors["editorGutter.addedBackground"] = uc(uiMapping, palette, "vcs", "added", 0x80 / 255);
