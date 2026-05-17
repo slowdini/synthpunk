@@ -27,7 +27,7 @@ vim.cmd("colorscheme synthpunk-pastel-dark")
 ### Lazy.nvim
 
 ```lua
-{
+return {
   "slowdini/synthpunk",
   dir = "~/path/to/synthpunk/themes/neovim",
   lazy = false,
