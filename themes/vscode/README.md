@@ -24,8 +24,4 @@ To test this extension locally in VSCode:
 
 ## Theme Generation
 
-Themes are generated from palette source files. Do not edit theme files directly — run:
-
-```bash
-cd generator && bun run src/index.ts
-```
+Themes are generated from palette source files. Do not edit theme files directly — run `bun run build` from the repo root.
