@@ -1,6 +1,6 @@
 id = "synthpunk"
 name = "Synthpunk"
-version = "0.1.0"
+version = "0.1.1"
 schema_version = 1
 authors = ["Synthpunk"]
 description = "Synthwave-inspired color themes (pastel + neon, dark + light) for Zed"
