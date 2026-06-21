@@ -18,8 +18,4 @@ A [Nerd Font](https://www.nerdfonts.com/) must be installed and enabled in your 
 
 ## Regenerating
 
-Run from the project root:
-
-```sh
-cd generator && bun run src/index.ts
-```
+Run `bun run build` from the repo root.
