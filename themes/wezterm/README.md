@@ -25,8 +25,4 @@ Available color schemes:
 
 ## Regenerating
 
-Run from the project root:
-
-```sh
-cd generator && bun run src/index.ts
-```
+Run `bun run build` from the repo root.

@@ -1,8 +1,10 @@
 {
-	"name": "add-linting-formatting-setup",
+	"name": "synthpunk",
+	"version": "0.1.1",
 	"module": "index.ts",
 	"type": "module",
 	"private": true,
+	"license": "MIT",
 	"devDependencies": {
 		"@biomejs/biome": "2.4.15",
 		"@types/bun": "latest",
@@ -12,7 +14,7 @@
 		"typescript": "^6.0.3"
 	},
 	"scripts": {
-		"build": "bun run generator/index.ts",
+		"build": "bun run generator/index.ts && biome format --write themes/vscode/themes/*.json themes/zed/themes/*.json",
 		"test": "bun test",
 		"format": "biome check --write",
 		"check": "biome check && tsc --noEmit",

@@ -1,0 +1,217 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  tag-and-release:
+    name: Tag and create GitHub release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      is_release: ${{ steps.tag-check.outputs.is_release }}
+      tag: ${{ steps.version.outputs.tag }}
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Read version from package.json
+        id: version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Version on main: $VERSION"
+
+      - name: Check if tag already exists (idempotency)
+        id: tag-check
+        run: |
+          if git rev-parse "${{ steps.version.outputs.tag }}" >/dev/null 2>&1; then
+            echo "Tag ${{ steps.version.outputs.tag }} already exists — skipping release."
+            echo "is_release=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "is_release=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build release notes
+        if: steps.tag-check.outputs.is_release == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_BODY=$(gh pr list \
+            --state merged \
+            --base main \
+            --limit 1 \
+            --json body \
+            --jq '.[0].body // ""')
+
+          if [ -n "$PR_BODY" ] && ! echo "$PR_BODY" | grep -q "Replace this paragraph"; then
+            echo "Using release PR body for notes."
+            printf '%s\n' "$PR_BODY" > /tmp/release-notes.md
+          else
+            echo "Falling back to auto-generated notes."
+            PREVIOUS_TAG=$(git tag --sort=-creatordate \
+              | grep -v "^${{ steps.version.outputs.tag }}$" \
+              | head -n1)
+            if [ -n "$PREVIOUS_TAG" ]; then
+              gh api "repos/${{ github.repository }}/releases/generate-notes" \
+                -f tag_name="${{ steps.version.outputs.tag }}" \
+                -f previous_tag_name="$PREVIOUS_TAG" \
+                --jq '.body' > /tmp/release-notes.md
+            else
+              gh api "repos/${{ github.repository }}/releases/generate-notes" \
+                -f tag_name="${{ steps.version.outputs.tag }}" \
+                --jq '.body' > /tmp/release-notes.md
+            fi
+          fi
+
+          echo "--- Release notes preview ---"
+          cat /tmp/release-notes.md
+          echo "--- end preview ---"
+
+      - name: Create GitHub release
+        if: steps.tag-check.outputs.is_release == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ steps.version.outputs.tag }}" \
+            --title "Synthpunk ${{ steps.version.outputs.tag }}" \
+            --notes-file /tmp/release-notes.md
+
+      - name: Create and push tag
+        if: steps.tag-check.outputs.is_release == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag "${{ steps.version.outputs.tag }}"
+          git push origin "${{ steps.version.outputs.tag }}"
+
+  build-artifacts:
+    name: Build and upload release artifacts
+    needs: tag-and-release
+    if: needs.tag-and-release.outputs.is_release == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.tag-and-release.outputs.tag }}
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build themes
+        run: bun run build
+
+      - name: Run tests
+        run: bun test --pass-with-no-tests
+
+      - name: Upload Group 2 files to release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ needs.tag-and-release.outputs.tag }}
+        run: |
+          gh release upload "$TAG" \
+            themes/starship/starship.toml \
+            themes/wezterm/synthpunk-pastel-dark.toml \
+            themes/wezterm/synthpunk-pastel-light.toml \
+            themes/wezterm/synthpunk-neon-dark.toml \
+            themes/wezterm/synthpunk-neon-light.toml
+
+      - name: Build VS Code VSIX
+        run: |
+          cd themes/vscode
+          npx --yes @vscode/vsce package -o "../../synthpunk-${{ needs.tag-and-release.outputs.tag }}.vsix"
+
+      - name: Upload VSIX as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: synthpunk-vsix
+          path: synthpunk-${{ needs.tag-and-release.outputs.tag }}.vsix
+
+  publish-vscode:
+    name: Publish to VS Code Marketplace
+    needs: build-artifacts
+    if: vars.PUBLISH_VSCODE == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: synthpunk-vsix
+
+      - name: Publish to VS Code Marketplace
+        run: npx --yes @vscode/vsce publish --package-path synthpunk-*.vsix -p ${{ secrets.VS_MARKETPLACE_TOKEN }}
+
+  publish-openvsx:
+    name: Publish to OpenVSX
+    needs: build-artifacts
+    if: vars.PUBLISH_OPENVSX == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: synthpunk-vsix
+
+      - name: Publish to OpenVSX
+        run: npx --yes ovsx publish synthpunk-*.vsix -p ${{ secrets.OVSX_TOKEN }}
+
+  publish-zed:
+    name: Publish Zed extension
+    needs: [build-artifacts, tag-and-release]
+    if: vars.PUBLISH_ZED == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.tag-and-release.outputs.tag }}
+
+      - name: Publish Zed extension
+        working-directory: themes/zed
+        run: |
+          # The zed CLI may not be available on CI runners. If this fails,
+          # see RELEASE.md for manual publishing instructions.
+          zed extension publish
+
+  publish-neovim:
+    name: Publish to synthpunk.nvim repo
+    needs: [build-artifacts, tag-and-release]
+    if: vars.PUBLISH_NVIM == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.tag-and-release.outputs.tag }}
+          fetch-depth: 0
+
+      - name: Clone synthpunk.nvim
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SYNTHPUNK_NVIM_DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_DEPLOY_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          GIT_SSH_COMMAND="ssh -i ~/.ssh/deploy_key" git clone git@github.com:slowdini/synthpunk.nvim.git /tmp/synthpunk.nvim
+
+      - name: Copy neovim files and push
+        env:
+          TAG: ${{ needs.tag-and-release.outputs.tag }}
+          GIT_SSH_COMMAND: ssh -i ~/.ssh/deploy_key
+        run: |
+          cd /tmp/synthpunk.nvim
+          find . -maxdepth 1 -not -name '.git' -not -name '.' -exec rm -rf {} +
+          cp -r "$GITHUB_WORKSPACE/themes/neovim/"* .
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: release $TAG"
+          git tag "$TAG"
+          git push origin main
+          git push origin "$TAG"
