@@ -1,0 +1,14 @@
+{
+	"name": "synthpunk-preview-generator",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"description": "Generates README marketing images (icon + syntax-highlight previews) from the Synthpunk VS Code themes.",
+	"scripts": {
+		"generate": "bun run generate.ts"
+	},
+	"dependencies": {
+		"puppeteer-core": "^25.1.0",
+		"shiki": "^4.2.0"
+	}
+}
