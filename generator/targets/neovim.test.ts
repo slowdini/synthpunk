@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import path from "node:path";
+import { contrastRatio, hexToRgb } from "../colorUtils";
 import { loadPalette } from "../palette";
 import {
 	loadFontStyles,
@@ -16,6 +17,14 @@ import {
 
 const PROJECT_DIR = path.resolve(import.meta.dir, "../..");
 const PALETTE_DIR = path.join(PROJECT_DIR, "palette");
+
+// terminal[] indices: 0 black, 1-6 chromatic (red..cyan), 7 white,
+// 8 bright_black, 9-14 bright chromatic, 15 bright_white.
+const CHROMATIC_TERMINAL_INDICES = [1, 2, 3, 4, 5, 6, 9, 10, 11, 12, 13, 14];
+
+function contrastWithBg(color: string, background: string): number {
+	return contrastRatio(hexToRgb(color), hexToRgb(background));
+}
 
 function loadFixtures(variant: VariantName) {
 	const palette = loadPalette(PALETTE_DIR, variant);
@@ -74,6 +83,46 @@ describe("generateNeovimPalette", () => {
 		);
 
 		expect(result.terminal).toHaveLength(16);
+	});
+
+	for (const variant of ["pastel-light", "neon-light"] as VariantName[]) {
+		test(`${variant} chromatic terminal colors meet 3:1 contrast on background`, () => {
+			const { palette, uiMapping, syntaxMapping, scopes, fontStyles } =
+				loadFixtures(variant);
+			const result = generateNeovimPalette(
+				variant,
+				palette,
+				uiMapping,
+				syntaxMapping,
+				scopes,
+				fontStyles,
+			);
+
+			const bg = result.ui.Normal.bg as string;
+			for (const i of CHROMATIC_TERMINAL_INDICES) {
+				expect(contrastWithBg(result.terminal[i], bg)).toBeGreaterThanOrEqual(
+					3,
+				);
+			}
+		});
+	}
+
+	test("dark chromatic terminal colors are unchanged by the contrast floor", () => {
+		const { palette, uiMapping, syntaxMapping, scopes, fontStyles } =
+			loadFixtures("pastel-dark");
+		const result = generateNeovimPalette(
+			"pastel-dark",
+			palette,
+			uiMapping,
+			syntaxMapping,
+			scopes,
+			fontStyles,
+		);
+
+		// Already legible on the dark background — palette values preserved.
+		expect(result.terminal[2]).toBe("#7FD7B5"); // green
+		expect(result.terminal[3]).toBe("#FFE4B5"); // yellow
+		expect(result.terminal[6]).toBe("#5ED4E0"); // cyan
 	});
 
 	test("pastel-dark has @comment with correct fg and italic", () => {

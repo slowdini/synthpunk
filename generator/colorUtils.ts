@@ -94,3 +94,78 @@ export function adjustBrightness(
 		number,
 	];
 }
+
+function clampRgb(rgb: number[]): [number, number, number] {
+	return rgb.map((c) => Math.max(0, Math.min(255, Math.round(c)))) as [
+		number,
+		number,
+		number,
+	];
+}
+
+/**
+ * WCAG 2.x relative luminance of an sRGB color (0 = black, 1 = white).
+ */
+export function relativeLuminance(rgb: [number, number, number]): number {
+	const channel = (c: number): number => {
+		const cs = c / 255;
+		return cs <= 0.03928 ? cs / 12.92 : ((cs + 0.055) / 1.055) ** 2.4;
+	};
+	const [r, g, b] = rgb;
+	return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b);
+}
+
+/**
+ * WCAG contrast ratio between two colors (1:1 .. 21:1). Order-independent.
+ */
+export function contrastRatio(
+	a: [number, number, number],
+	b: [number, number, number],
+): number {
+	const la = relativeLuminance(a);
+	const lb = relativeLuminance(b);
+	const hi = Math.max(la, lb);
+	const lo = Math.min(la, lb);
+	return (hi + 0.05) / (lo + 0.05);
+}
+
+/**
+ * Nudge a color's lightness just enough to reach `minRatio` contrast against
+ * `bg`, preserving hue and saturation. Darkens on a light background and
+ * lightens on a dark one. Returns the color unchanged when it already passes.
+ */
+export function ensureContrast(
+	rgb: [number, number, number],
+	bg: [number, number, number],
+	minRatio = 3,
+): [number, number, number] {
+	if (contrastRatio(rgb, bg) >= minRatio) return rgb;
+
+	const [h, s, l] = rgbToHsl(...rgb);
+	// Move lightness away from the background: toward black on a light bg,
+	// toward white on a dark one.
+	const targetL = relativeLuminance(bg) > 0.5 ? 0 : 1;
+	const ratioAt = (lightness: number): number =>
+		contrastRatio(clampRgb(hslToRgb(h, s, lightness)), bg);
+
+	// If even the extreme can't reach the target (e.g. a very saturated hue
+	// against a same-luminance bg), return the most-contrasting option we have.
+	if (ratioAt(targetL) < minRatio) {
+		return clampRgb(hslToRgb(h, s, targetL));
+	}
+
+	// Binary-search the smallest lightness change from `l` toward `targetL`
+	// that satisfies `minRatio`. `fail` anchors the side below target, `pass`
+	// the side at/above it; they converge on the boundary.
+	let fail = l;
+	let pass = targetL;
+	for (let i = 0; i < 24; i++) {
+		const mid = (fail + pass) / 2;
+		if (ratioAt(mid) >= minRatio) {
+			pass = mid;
+		} else {
+			fail = mid;
+		}
+	}
+	return clampRgb(hslToRgb(h, s, pass));
+}
