@@ -1,4 +1,4 @@
-import { adjustBrightness } from "../colorUtils";
+import { adjustBrightness, ensureContrast } from "../colorUtils";
 import { resolveColor } from "../palette";
 import type {
 	FontStyleMapping,
@@ -69,15 +69,38 @@ function hex8rgb(rgb: [number, number, number], alpha: number = 1): string {
 	return `#${hex}${a}`;
 }
 
+// Resolve a color and nudge it just enough to stay legible against the
+// terminal background. No-op when it already clears the floor (dark themes).
+function floor8(
+	palette: Palette,
+	colorName: string,
+	bgRgb: [number, number, number],
+	alpha: number = 1,
+	minRatio = 3,
+): string {
+	const color = resolveColor(palette, colorName);
+	const adjusted = ensureContrast(color.rgb, bgRgb, minRatio);
+	return hex8rgb(adjusted, alpha);
+}
+
+// "Bright" = more emphasized than the base: lighter on a dark background,
+// darker on a light one, then floored for legibility.
 function bright8(
 	palette: Palette,
 	colorName: string,
+	isDark: boolean,
+	bgRgb: [number, number, number],
 	factor: number = 0.2,
 	alpha: number = 1,
 ): string {
 	const color = resolveColor(palette, colorName);
-	const brightRgb = adjustBrightness(color.rgb, factor, "lighten");
-	return hex8rgb(brightRgb, alpha);
+	const emphasized = adjustBrightness(
+		color.rgb,
+		factor,
+		isDark ? "lighten" : "dim",
+	);
+	const adjusted = ensureContrast(emphasized, bgRgb, 3);
+	return hex8rgb(adjusted, alpha);
 }
 
 function dim8(
@@ -110,6 +133,9 @@ function buildUIStyle(
 ): Record<string, string | null> {
 	const s = (colorName: string, alpha?: number) =>
 		hex8(palette, colorName, alpha);
+	// Terminal background is the editor background; floor chromatic ANSI text
+	// against it so it stays legible (no-op on dark themes).
+	const bgRgb = resolveColor(palette, "base").rgb;
 
 	const result: Record<string, string | null> = {
 		border: s("surface1"),
@@ -184,23 +210,23 @@ function buildUIStyle(
 		"terminal.ansi.dim_black": isDark
 			? dim8(palette, "text", 0.3)
 			: dim8(palette, "text", 0.3),
-		"terminal.ansi.red": s("red"),
-		"terminal.ansi.bright_red": bright8(palette, "red"),
+		"terminal.ansi.red": floor8(palette, "red", bgRgb),
+		"terminal.ansi.bright_red": bright8(palette, "red", isDark, bgRgb),
 		"terminal.ansi.dim_red": dim8(palette, "red"),
-		"terminal.ansi.green": s("green"),
-		"terminal.ansi.bright_green": bright8(palette, "green"),
+		"terminal.ansi.green": floor8(palette, "green", bgRgb),
+		"terminal.ansi.bright_green": bright8(palette, "green", isDark, bgRgb),
 		"terminal.ansi.dim_green": dim8(palette, "green"),
-		"terminal.ansi.yellow": s("yellow"),
-		"terminal.ansi.bright_yellow": bright8(palette, "yellow"),
+		"terminal.ansi.yellow": floor8(palette, "yellow", bgRgb),
+		"terminal.ansi.bright_yellow": bright8(palette, "yellow", isDark, bgRgb),
 		"terminal.ansi.dim_yellow": dim8(palette, "yellow"),
-		"terminal.ansi.blue": s("blue"),
-		"terminal.ansi.bright_blue": bright8(palette, "blue"),
+		"terminal.ansi.blue": floor8(palette, "blue", bgRgb),
+		"terminal.ansi.bright_blue": bright8(palette, "blue", isDark, bgRgb),
 		"terminal.ansi.dim_blue": dim8(palette, "blue"),
-		"terminal.ansi.magenta": s("pink"),
-		"terminal.ansi.bright_magenta": bright8(palette, "pink"),
+		"terminal.ansi.magenta": floor8(palette, "pink", bgRgb),
+		"terminal.ansi.bright_magenta": bright8(palette, "pink", isDark, bgRgb),
 		"terminal.ansi.dim_magenta": dim8(palette, "pink"),
-		"terminal.ansi.cyan": s("teal"),
-		"terminal.ansi.bright_cyan": bright8(palette, "teal"),
+		"terminal.ansi.cyan": floor8(palette, "teal", bgRgb),
+		"terminal.ansi.bright_cyan": bright8(palette, "teal", isDark, bgRgb),
 		"terminal.ansi.dim_cyan": dim8(palette, "teal"),
 		"terminal.ansi.white": isDark ? s("subtext1") : s("subtext0"),
 		"terminal.ansi.bright_white": s("text"),

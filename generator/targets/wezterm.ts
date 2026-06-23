@@ -1,4 +1,4 @@
-import { adjustBrightness } from "../colorUtils";
+import { adjustBrightness, ensureContrast, rgbToHex } from "../colorUtils";
 import { colorToHex, resolveColor } from "../palette";
 import type {
 	Palette,
@@ -41,40 +41,58 @@ function hex(palette: Palette, colorName: string): string {
 	return colorToHex(color);
 }
 
+// Resolve a color and darken/lighten it just enough to stay legible against the
+// terminal background. A no-op when it already clears the contrast floor (so
+// dark themes, which already pass, are untouched).
+function floorHex(
+	palette: Palette,
+	colorName: string,
+	bgRgb: [number, number, number],
+	minRatio = 3,
+): string {
+	const color = resolveColor(palette, colorName);
+	const adjusted = ensureContrast(color.rgb, bgRgb, minRatio);
+	return `#${rgbToHex(...adjusted)}`;
+}
+
+// "Bright" means more emphasized than the base color: lighter on a dark
+// background, darker on a light one. Then floored for legibility.
 function brightHex(
 	palette: Palette,
 	colorName: string,
-	factor: number = 0.2,
+	isDark: boolean,
+	bgRgb: [number, number, number],
+	factor = 0.2,
+	minRatio = 3,
 ): string {
 	const color = resolveColor(palette, colorName);
-	const brightRgb = adjustBrightness(color.rgb, factor, "lighten");
-	return `#${brightRgb
-		.map((c) =>
-			Math.max(0, Math.min(255, Math.round(c)))
-				.toString(16)
-				.padStart(2, "0")
-				.toUpperCase(),
-		)
-		.join("")}`;
+	const emphasized = adjustBrightness(
+		color.rgb,
+		factor,
+		isDark ? "lighten" : "dim",
+	);
+	const adjusted = ensureContrast(emphasized, bgRgb, minRatio);
+	return `#${rgbToHex(...adjusted)}`;
 }
 
 function buildAnsiColors(
 	palette: Palette,
 	isDark: boolean,
 	uiMapping: UIMapping,
+	bgRgb: [number, number, number],
 ): string[] {
 	const t = uiMapping.terminal;
 	const ansi0 = isDark ? hex(palette, "crust") : hex(palette, t.black);
-	const ansi7 = isDark ? hex(palette, t.white) : hex(palette, t.white);
+	const ansi7 = hex(palette, t.white);
 
 	return [
 		ansi0,
-		hex(palette, t.red),
-		hex(palette, t.green),
-		hex(palette, t.yellow),
-		hex(palette, t.blue),
-		hex(palette, t.magenta),
-		hex(palette, t.cyan),
+		floorHex(palette, t.red, bgRgb),
+		floorHex(palette, t.green, bgRgb),
+		floorHex(palette, t.yellow, bgRgb),
+		floorHex(palette, t.blue, bgRgb),
+		floorHex(palette, t.magenta, bgRgb),
+		floorHex(palette, t.cyan, bgRgb),
 		ansi7,
 	];
 }
@@ -83,6 +101,7 @@ function buildBrightColors(
 	palette: Palette,
 	isDark: boolean,
 	uiMapping: UIMapping,
+	bgRgb: [number, number, number],
 ): string[] {
 	const t = uiMapping.terminal;
 	const bright0 = isDark ? hex(palette, "subtext0") : hex(palette, "subtext1");
@@ -90,12 +109,12 @@ function buildBrightColors(
 
 	return [
 		bright0,
-		brightHex(palette, t.red),
-		brightHex(palette, t.green),
-		brightHex(palette, t.yellow),
-		brightHex(palette, t.blue),
-		brightHex(palette, t.magenta),
-		brightHex(palette, t.cyan),
+		brightHex(palette, t.red, isDark, bgRgb),
+		brightHex(palette, t.green, isDark, bgRgb),
+		brightHex(palette, t.yellow, isDark, bgRgb),
+		brightHex(palette, t.blue, isDark, bgRgb),
+		brightHex(palette, t.magenta, isDark, bgRgb),
+		brightHex(palette, t.cyan, isDark, bgRgb),
 		bright7,
 	];
 }
@@ -108,6 +127,7 @@ export function generateWeztermTheme(
 ): WeztermTheme {
 	const isDark = VARIANT_TYPE[variant] === "dark";
 	const tm = terminalMapping;
+	const bgRgb = resolveColor(palette, "base").rgb;
 
 	const selectionRgb = resolveColor(palette, tm.selection.bg).rgb;
 	const selectionBg = `rgba(${selectionRgb.join(", ")}, ${tm.selection.bg_alpha})`;
@@ -138,8 +158,8 @@ export function generateWeztermTheme(
 				fg_color: hex(palette, tm.tab_bar.new_tab.fg),
 			},
 		},
-		ansi: buildAnsiColors(palette, isDark, uiMapping),
-		brights: buildBrightColors(palette, isDark, uiMapping),
+		ansi: buildAnsiColors(palette, isDark, uiMapping, bgRgb),
+		brights: buildBrightColors(palette, isDark, uiMapping, bgRgb),
 	};
 }
 

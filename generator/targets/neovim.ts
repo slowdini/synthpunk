@@ -1,3 +1,4 @@
+import { ensureContrast, rgbToHex } from "../colorUtils";
 import { colorToHex, resolveColor } from "../palette";
 import { resolveSyntaxColor } from "../syntaxMapping";
 import type {
@@ -47,6 +48,19 @@ function uc(
 function pc(palette: Palette, colorName: string, alpha?: number): string {
 	const color = resolveColor(palette, colorName);
 	return colorToHex(color, alpha);
+}
+
+// Resolve a color and nudge it just enough to stay legible against the
+// terminal background. No-op when it already clears the floor (dark themes).
+function floorPc(
+	palette: Palette,
+	colorName: string,
+	bgRgb: [number, number, number],
+	minRatio = 3,
+): string {
+	const color = resolveColor(palette, colorName);
+	const adjusted = ensureContrast(color.rgb, bgRgb, minRatio);
+	return `#${rgbToHex(...adjusted)}`;
 }
 
 const TS_TO_CLASSIC: Record<string, string> = {
@@ -436,18 +450,23 @@ export function generateNeovimPalette(
 		fontStyles,
 	);
 
+	// Terminal background is the editor background (base); floor chromatic ANSI
+	// text colors against it so they stay legible (no-op on dark themes).
+	const terminalBgRgb = resolveColor(palette, "base").rgb;
+	const t = uiMapping.terminal;
+
 	const terminal: string[] = [];
 	if (isDark) {
 		terminal.push(pc(palette, "crust"));
 	} else {
 		terminal.push(pc(palette, "text"));
 	}
-	terminal.push(uc(uiMapping, palette, "terminal", "red"));
-	terminal.push(uc(uiMapping, palette, "terminal", "green"));
-	terminal.push(uc(uiMapping, palette, "terminal", "yellow"));
-	terminal.push(uc(uiMapping, palette, "terminal", "blue"));
-	terminal.push(uc(uiMapping, palette, "terminal", "magenta"));
-	terminal.push(uc(uiMapping, palette, "terminal", "cyan"));
+	terminal.push(floorPc(palette, t.red, terminalBgRgb));
+	terminal.push(floorPc(palette, t.green, terminalBgRgb));
+	terminal.push(floorPc(palette, t.yellow, terminalBgRgb));
+	terminal.push(floorPc(palette, t.blue, terminalBgRgb));
+	terminal.push(floorPc(palette, t.magenta, terminalBgRgb));
+	terminal.push(floorPc(palette, t.cyan, terminalBgRgb));
 	if (isDark) {
 		terminal.push(uc(uiMapping, palette, "terminal", "white"));
 	} else {
@@ -458,12 +477,12 @@ export function generateNeovimPalette(
 	} else {
 		terminal.push(pc(palette, "subtext1"));
 	}
-	terminal.push(uc(uiMapping, palette, "terminal", "bright_red"));
-	terminal.push(uc(uiMapping, palette, "terminal", "bright_green"));
-	terminal.push(uc(uiMapping, palette, "terminal", "bright_yellow"));
-	terminal.push(uc(uiMapping, palette, "terminal", "bright_blue"));
-	terminal.push(uc(uiMapping, palette, "terminal", "bright_magenta"));
-	terminal.push(uc(uiMapping, palette, "terminal", "bright_cyan"));
+	terminal.push(floorPc(palette, t.bright_red, terminalBgRgb));
+	terminal.push(floorPc(palette, t.bright_green, terminalBgRgb));
+	terminal.push(floorPc(palette, t.bright_yellow, terminalBgRgb));
+	terminal.push(floorPc(palette, t.bright_blue, terminalBgRgb));
+	terminal.push(floorPc(palette, t.bright_magenta, terminalBgRgb));
+	terminal.push(floorPc(palette, t.bright_cyan, terminalBgRgb));
 	terminal.push(uc(uiMapping, palette, "terminal", "bright_white"));
 
 	const lspLinks: Record<string, string> = {

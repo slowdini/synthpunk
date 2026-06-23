@@ -1,4 +1,4 @@
-import { adjustBrightness } from "../colorUtils";
+import { adjustBrightness, ensureContrast, rgbToHex } from "../colorUtils";
 import { OPACITY_RULES } from "../opacity";
 import { colorToHex, resolveColor } from "../palette";
 import { resolveSyntaxColor } from "../syntaxMapping";
@@ -47,10 +47,35 @@ function pc(palette: Palette, colorName: string, alpha?: number): string {
 	return colorToHex(color, alpha);
 }
 
-function bright(palette: Palette, colorName: string): string {
+// Resolve a color and nudge it just enough to stay legible against the
+// terminal background. No-op when it already clears the floor (dark themes).
+function floor(
+	palette: Palette,
+	colorName: string,
+	bgRgb: [number, number, number],
+	minRatio = 3,
+): string {
 	const color = resolveColor(palette, colorName);
-	const brightRgb = adjustBrightness(color.rgb, 0.2, "lighten");
-	return `#${brightRgb.map((c) => c.toString(16).padStart(2, "0").toUpperCase()).join("")}`;
+	const adjusted = ensureContrast(color.rgb, bgRgb, minRatio);
+	return `#${rgbToHex(...adjusted)}`;
+}
+
+// "Bright" = more emphasized than the base: lighter on a dark background,
+// darker on a light one, then floored for legibility.
+function bright(
+	palette: Palette,
+	colorName: string,
+	isDark: boolean,
+	bgRgb: [number, number, number],
+): string {
+	const color = resolveColor(palette, colorName);
+	const emphasized = adjustBrightness(
+		color.rgb,
+		0.2,
+		isDark ? "lighten" : "dim",
+	);
+	const adjusted = ensureContrast(emphasized, bgRgb, 3);
+	return `#${rgbToHex(...adjusted)}`;
 }
 
 export function generateVSCodeTheme(
@@ -393,22 +418,25 @@ export function generateVSCodeTheme(
 	);
 	colors["terminal.foreground"] = uc(uiMapping, palette, "text", "primary");
 
+	// Terminal background matches the editor background; floor chromatic ANSI
+	// text colors against it so they stay legible (no-op on dark themes).
+	const terminalBgRgb = resolveColor(palette, "base").rgb;
+	const ansiFloor = (colorName: string) =>
+		floor(palette, colorName, terminalBgRgb);
+	const ansiBright = (colorName: string) =>
+		bright(palette, colorName, isDark, terminalBgRgb);
+
 	if (isDark) {
 		colors["terminal.ansiBlack"] = pc(palette, "crust");
 	} else {
 		colors["terminal.ansiBlack"] = pc(palette, "text");
 	}
-	colors["terminal.ansiRed"] = uc(uiMapping, palette, "terminal", "red");
-	colors["terminal.ansiGreen"] = uc(uiMapping, palette, "terminal", "green");
-	colors["terminal.ansiYellow"] = uc(uiMapping, palette, "terminal", "yellow");
-	colors["terminal.ansiBlue"] = uc(uiMapping, palette, "terminal", "blue");
-	colors["terminal.ansiMagenta"] = uc(
-		uiMapping,
-		palette,
-		"terminal",
-		"magenta",
-	);
-	colors["terminal.ansiCyan"] = uc(uiMapping, palette, "terminal", "cyan");
+	colors["terminal.ansiRed"] = ansiFloor(uiMapping.terminal.red);
+	colors["terminal.ansiGreen"] = ansiFloor(uiMapping.terminal.green);
+	colors["terminal.ansiYellow"] = ansiFloor(uiMapping.terminal.yellow);
+	colors["terminal.ansiBlue"] = ansiFloor(uiMapping.terminal.blue);
+	colors["terminal.ansiMagenta"] = ansiFloor(uiMapping.terminal.magenta);
+	colors["terminal.ansiCyan"] = ansiFloor(uiMapping.terminal.cyan);
 	colors["terminal.ansiWhite"] = uc(uiMapping, palette, "terminal", "white");
 	colors["terminal.ansiBrightBlack"] = uc(
 		uiMapping,
@@ -416,25 +444,20 @@ export function generateVSCodeTheme(
 		"terminal",
 		"bright_black",
 	);
-	colors["terminal.ansiBrightRed"] = bright(palette, uiMapping.terminal.red);
-	colors["terminal.ansiBrightGreen"] = bright(
-		palette,
-		uiMapping.terminal.green,
-	);
-	colors["terminal.ansiBrightYellow"] = bright(
-		palette,
-		uiMapping.terminal.yellow,
-	);
-	colors["terminal.ansiBrightBlue"] = bright(palette, uiMapping.terminal.blue);
-	colors["terminal.ansiBrightMagenta"] = bright(
-		palette,
-		uiMapping.terminal.magenta,
-	);
-	colors["terminal.ansiBrightCyan"] = bright(palette, uiMapping.terminal.cyan);
-	colors["terminal.ansiBrightWhite"] = bright(
-		palette,
-		uiMapping.terminal.white,
-	);
+	colors["terminal.ansiBrightRed"] = ansiBright(uiMapping.terminal.red);
+	colors["terminal.ansiBrightGreen"] = ansiBright(uiMapping.terminal.green);
+	colors["terminal.ansiBrightYellow"] = ansiBright(uiMapping.terminal.yellow);
+	colors["terminal.ansiBrightBlue"] = ansiBright(uiMapping.terminal.blue);
+	colors["terminal.ansiBrightMagenta"] = ansiBright(uiMapping.terminal.magenta);
+	colors["terminal.ansiBrightCyan"] = ansiBright(uiMapping.terminal.cyan);
+	// Structural "white" slot — stays light (no contrast floor / direction flip).
+	colors["terminal.ansiBrightWhite"] = `#${rgbToHex(
+		...adjustBrightness(
+			resolveColor(palette, uiMapping.terminal.white).rgb,
+			0.2,
+			"lighten",
+		),
+	)}`;
 
 	colors["input.background"] = uc(uiMapping, palette, "surface", "default");
 	colors["input.foreground"] = uc(uiMapping, palette, "text", "primary");
