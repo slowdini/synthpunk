@@ -1,10 +1,19 @@
 import { describe, expect, test } from "bun:test";
 import path from "node:path";
+import { contrastRatio, hexToRgb } from "../colorUtils";
 import { loadPalette } from "../palette";
 import { loadTerminalMapping } from "../terminalMapping";
 import type { VariantName } from "../types";
 import { loadUIMapping } from "../uiMapping";
 import { generateWeztermTheme, tomlStringify } from "./wezterm";
+
+// ANSI slots that carry chromatic foreground text (red, green, yellow, blue,
+// magenta, cyan). Indices 0 (black) and 7 (white) are structural and excluded.
+const CHROMATIC_INDICES = [1, 2, 3, 4, 5, 6];
+
+function contrastWithBg(color: string, background: string): number {
+	return contrastRatio(hexToRgb(color), hexToRgb(background));
+}
 
 const PROJECT_DIR = path.resolve(import.meta.dir, "../..");
 const PALETTE_DIR = path.join(PROJECT_DIR, "palette");
@@ -150,6 +159,61 @@ describe("generateWeztermTheme", () => {
 		expect(theme.brights).toHaveLength(8);
 		expect(theme.brights[0]).toBe("#6B4F5E"); // subtext1 (bright black, light)
 		expect(theme.brights[7]).toBe("#2E1A24"); // text (bright white)
+	});
+
+	test("pastel-light chromatic ANSI colors meet 3:1 contrast on background", () => {
+		const { palette, uiMapping, terminalMapping } =
+			loadFixtures("pastel-light");
+		const theme = generateWeztermTheme(
+			"pastel-light",
+			palette,
+			uiMapping,
+			terminalMapping,
+		);
+
+		for (const i of CHROMATIC_INDICES) {
+			expect(
+				contrastWithBg(theme.ansi[i], theme.background),
+			).toBeGreaterThanOrEqual(3);
+			expect(
+				contrastWithBg(theme.brights[i], theme.background),
+			).toBeGreaterThanOrEqual(3);
+		}
+	});
+
+	test("neon-light chromatic ANSI colors meet 3:1 contrast on background", () => {
+		const { palette, uiMapping, terminalMapping } = loadFixtures("neon-light");
+		const theme = generateWeztermTheme(
+			"neon-light",
+			palette,
+			uiMapping,
+			terminalMapping,
+		);
+
+		for (const i of CHROMATIC_INDICES) {
+			expect(
+				contrastWithBg(theme.ansi[i], theme.background),
+			).toBeGreaterThanOrEqual(3);
+			expect(
+				contrastWithBg(theme.brights[i], theme.background),
+			).toBeGreaterThanOrEqual(3);
+		}
+	});
+
+	test("dark chromatic ANSI colors are unchanged by the contrast floor", () => {
+		const { palette, uiMapping, terminalMapping } = loadFixtures("pastel-dark");
+		const theme = generateWeztermTheme(
+			"pastel-dark",
+			palette,
+			uiMapping,
+			terminalMapping,
+		);
+
+		// Already legible on the dark background, so the floor is a no-op:
+		// these exact palette-derived values must be preserved.
+		expect(theme.ansi[2]).toBe("#7FD7B5"); // green
+		expect(theme.ansi[3]).toBe("#FFE4B5"); // yellow
+		expect(theme.ansi[6]).toBe("#5ED4E0"); // cyan
 	});
 
 	test("scrollbar and split colors are set", () => {

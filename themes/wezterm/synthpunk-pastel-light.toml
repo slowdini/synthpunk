@@ -27,6 +27,6 @@ fg_color = "#6B4F5E"
 bg_color = "#FFF0EB"
 fg_color = "#6B4F5E"
 
-ansi = ["#2E1A24", "#FF5470", "#5AC09A", "#E8C468", "#8BA4FF", "#FF7DB0", "#5ED4E0", "#6B4F5E"]
+ansi = ["#2E1A24", "#FF516E", "#3EA27C", "#B68A1C", "#6989FF", "#FF4A91", "#219FAC", "#6B4F5E"]
 
-brights = ["#6B4F5E", "#FF768D", "#7BCDAE", "#EDD086", "#A2B6FF", "#FF97C0", "#7EDDE6", "#2E1A24"]
+brights = ["#6B4F5E", "#FF1037", "#3DA27D", "#B68A1C", "#3C66FF", "#FF3182", "#219FAC", "#2E1A24"]

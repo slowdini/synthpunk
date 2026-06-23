@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import path from "node:path";
+import { contrastRatio, hexToRgb } from "../colorUtils";
 import { loadPalette } from "../palette";
 import { loadFontStyles, loadSyntaxMapping } from "../syntaxMapping";
 import { loadUIMapping } from "../uiMapping";
@@ -7,6 +8,31 @@ import { generateZedTheme } from "./zed";
 
 const PROJECT_DIR = path.resolve(import.meta.dir, "../..");
 const PALETTE_DIR = path.join(PROJECT_DIR, "palette");
+
+const CHROMATIC_ANSI = ["red", "green", "yellow", "blue", "magenta", "cyan"];
+
+// 8-digit "#RRGGBBaa" -> contrast against another 8-digit color (alpha ignored).
+function contrastWithBg(color: string, background: string): number {
+	return contrastRatio(hexToRgb(color), hexToRgb(background));
+}
+
+function buildPastelTheme() {
+	const darkPalette = loadPalette(PALETTE_DIR, "pastel-dark");
+	const lightPalette = loadPalette(PALETTE_DIR, "pastel-light");
+	const uiMapping = loadUIMapping(PALETTE_DIR);
+	const syntaxMapping = loadSyntaxMapping(PALETTE_DIR);
+	const fontStyles = loadFontStyles(PALETTE_DIR);
+	return generateZedTheme(
+		"synthpunk-pastel",
+		"Synthpunk Pastel",
+		"Synthpunk",
+		darkPalette,
+		lightPalette,
+		uiMapping,
+		syntaxMapping,
+		fontStyles,
+	);
+}
 
 describe("generateZedTheme", () => {
 	test("produces two theme variants (dark and light)", () => {
@@ -183,6 +209,20 @@ describe("generateZedTheme", () => {
 		const style = theme.themes[0].style;
 		expect(style["terminal.ansi.black"]).toBe("#0D0612ff");
 		expect(style["terminal.ansi.red"]).toBe("#FF5470ff");
+	});
+
+	test("light theme chromatic terminal colors meet 3:1 contrast on background", () => {
+		const style = buildPastelTheme().themes[1].style; // light variant
+		const bg = style["terminal.background"] as string;
+
+		for (const name of CHROMATIC_ANSI) {
+			expect(
+				contrastWithBg(style[`terminal.ansi.${name}`] as string, bg),
+			).toBeGreaterThanOrEqual(3);
+			expect(
+				contrastWithBg(style[`terminal.ansi.bright_${name}`] as string, bg),
+			).toBeGreaterThanOrEqual(3);
+		}
 	});
 
 	test("schema and author are set correctly", () => {
