@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/icon.png" alt="Synthpunk icon" width="128" />
+  <img src="assets/icon.png" alt="Synthpunk icon" width="360" />
 </p>
 
 # Synthpunk
