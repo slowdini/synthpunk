@@ -14,6 +14,10 @@ High-energy synthwave-inspired color themes for Zed.
 - **Synthpunk Neon Dark** — Electric vaporwave neon on deep purple-black
 - **Synthpunk Neon Light** — Experimental holographic iridescence
 
+## Install
+
+Open **Extensions** in Zed (or run `zed: extensions`), search for **Synthpunk**, and install it. Then pick a variant from the theme picker (`theme selector: toggle`).
+
 ## Local Development
 
 To test this extension locally in Zed:

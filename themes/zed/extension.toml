@@ -1,7 +1,7 @@
-id = "synthpunk"
+id = "synthpunk-theme"
 name = "Synthpunk"
 version = "0.1.3"
 schema_version = 1
-authors = ["Synthpunk"]
-description = "Synthwave-inspired color themes (pastel + neon, dark + light) for Zed"
+authors = ["Synthpunk <samiamorwas@gmail.com>"]
+description = "Synthwave-inspired color themes in two families — Pastel and Neon — each with a dark and a light variant."
 repository = "https://github.com/slowdini/synthpunk"
