@@ -1,5 +1,7 @@
 <p align="center">
-  <img src="assets/icon.png" alt="Synthpunk icon" width="360" />
+  <img src="assets/readme.png"
+    alt="synthpunk — High-energy synthwave color schemes"
+    width="845" />
 </p>
 
 # Synthpunk
@@ -92,18 +94,6 @@ bun run format       # auto-format
 ```
 
 All theme files under `themes/` are generated from `palette/` by the generator. Never edit them directly — edit `palette/` and `generator/`, then run `bun run build`.
-
-## Releasing
-
-Releases are cut from `dev` and tagged from `main`:
-
-1. Merge feature PRs into `dev` after CI passes.
-2. When ready to ship, trigger the **Release PR** workflow with the next version number. It bumps every manifest via `scripts/bump-version.ts`, commits to `dev`, and opens a `dev → main` PR.
-3. Review the release PR and merge.
-4. Merging to `main` automatically tags `vX.Y.Z`, creates the GitHub release, uploads the Starship and WezTerm config files as release assets, builds the VS Code VSIX, and fans out publish jobs (VS Code Marketplace, OpenVSX, Zed, synthpunk.nvim) — each gated on a configured secret.
-5. After a release, merge `main` back into `dev` to keep them in sync.
-
-See [`RELEASE.md`](RELEASE.md) for manual publishing steps and prerequisite setup.
 
 ## License
 
