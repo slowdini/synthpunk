@@ -16,14 +16,11 @@ High-energy synthwave-inspired color themes for Zed.
 
 ## Install
 
-Open **Extensions** in Zed (or run `zed: extensions`), search for **Synthpunk**, and install it. Then pick a variant from the theme picker (`theme selector: toggle`).
+Synthpunk is not yet in the Zed extension registry (a listing is coming soon). Until then, install it as a dev extension:
 
-## Local Development
-
-To test this extension locally in Zed:
-
-1. Open Zed
-2. Go to **Extensions** (or run `zed: extensions`)
-3. Click **Install Dev Extension** (or run `zed: install dev extension`)
-4. Select this directory (`themes/zed/`)
-5. Select your preferred theme variant from the theme picker
+1. Clone this repository
+2. Open Zed
+3. Go to **Extensions** (or run `zed: extensions`)
+4. Click **Install Dev Extension** (or run `zed: install dev extension`)
+5. Select the `themes/zed/` directory
+6. Select your preferred theme variant from the theme picker
