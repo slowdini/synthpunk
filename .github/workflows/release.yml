@@ -154,23 +154,6 @@ jobs:
       - name: Publish to OpenVSX
         run: npx --yes ovsx publish synthpunk-*.vsix -p ${{ secrets.OVSX_TOKEN }}
 
-  publish-zed:
-    name: Publish Zed extension
-    needs: [build-artifacts, tag-and-release]
-    if: vars.PUBLISH_ZED == 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ needs.tag-and-release.outputs.tag }}
-
-      - name: Publish Zed extension
-        working-directory: themes/zed
-        run: |
-          # The zed CLI may not be available on CI runners. If this fails,
-          # see RELEASE.md for manual publishing instructions.
-          zed extension publish
-
   publish-neovim:
     name: Publish to synthpunk.nvim repo
     needs: [build-artifacts, tag-and-release]
