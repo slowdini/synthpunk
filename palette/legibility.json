@@ -1,0 +1,62 @@
+{
+	"$schema": "../schemas/legibility.json",
+	"info": {
+		"name": "synthpunk-legibility",
+		"description": "Which palette colors may be used as text on which backgrounds, and the minimum WCAG 2 contrast ratio each must meet in every variant",
+		"version": "0.1.0"
+	},
+	"tiers": {
+		"body": {
+			"min": 4.5,
+			"description": "Primary and secondary reading text"
+		},
+		"accent": {
+			"min": 3,
+			"description": "Syntax tokens, terminal ANSI colors, status and link text, and text drawn on accent fills"
+		},
+		"muted": {
+			"min": 2.5,
+			"description": "Comments, line numbers, placeholders, and inactive UI text"
+		}
+	},
+	"text": {
+		"text": "body",
+		"subtext1": "body",
+		"rosewater": "accent",
+		"flamingo": "accent",
+		"pink": "accent",
+		"maroon": "accent",
+		"red": "accent",
+		"peach": "accent",
+		"yellow": "accent",
+		"green": "accent",
+		"teal": "accent",
+		"sky": "accent",
+		"sapphire": "accent",
+		"blue": "accent",
+		"lavender": "accent",
+		"subtext0": "muted",
+		"overlay": "muted"
+	},
+	"surfaces": {
+		"base": ["body", "accent", "muted"],
+		"mantle": ["body", "accent", "muted"],
+		"crust": ["body", "accent", "muted"],
+		"surface0": ["body", "accent", "muted"],
+		"surface1": ["body", "accent", "muted"],
+		"surface2": ["body"]
+	},
+	"fills": {
+		"colors": [
+			"red",
+			"peach",
+			"yellow",
+			"green",
+			"sapphire",
+			"lavender",
+			"flamingo"
+		],
+		"text": ["base", "crust"],
+		"tier": "accent"
+	}
+}

@@ -18,6 +18,8 @@
 		"test": "bun test",
 		"format": "biome check --write",
 		"check": "biome check && tsc --noEmit",
+		"legibility": "bun run generator/legibility.ts",
+		"legibility:sheet": "bun run scripts/legibility-sheet.ts",
 		"prepare": "husky"
 	},
 	"lint-staged": {

@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import {
 	adjustBrightness,
+	composite,
 	contrastRatio,
 	ensureContrast,
 	hexToRgb,
@@ -126,5 +127,22 @@ describe("ensureContrast", () => {
 		const ratio = contrastRatio(fixed, LIGHT_BG);
 		expect(ratio).toBeGreaterThanOrEqual(3);
 		expect(ratio).toBeLessThan(4); // didn't slam to black
+	});
+});
+
+describe("composite", () => {
+	test("returns the foreground at alpha 1", () => {
+		expect(composite([255, 0, 0], 1, [0, 0, 255])).toEqual([255, 0, 0]);
+	});
+
+	test("returns the background at alpha 0", () => {
+		expect(composite([255, 0, 0], 0, [0, 0, 255])).toEqual([0, 0, 255]);
+	});
+
+	test("blends each sRGB channel linearly and rounds", () => {
+		// teal selection at 0.24 over the pastel-light base
+		expect(composite([94, 212, 224], 0.24, [255, 248, 245])).toEqual([
+			216, 239, 240,
+		]);
 	});
 });

@@ -1,5 +1,5 @@
 import path from "node:path";
-import { loadPalette } from "./palette";
+import { hexRgbMismatches, loadPalette } from "./palette";
 import { loadScopes, loadSyntaxMapping } from "./syntaxMapping";
 import type { VariantName } from "./types";
 import { loadUIMapping } from "./uiMapping";
@@ -20,18 +20,11 @@ function validatePalettes(): boolean {
 		try {
 			const palette = loadPalette(PALETTE_DIR, variant);
 			const colorNames = Object.keys(palette.colors);
-			let errors = 0;
-			for (const name of colorNames) {
-				const color = palette.colors[name];
-				const expectedHex = `${color.rgb[0].toString(16).padStart(2, "0").toUpperCase()}${color.rgb[1].toString(16).padStart(2, "0").toUpperCase()}${color.rgb[2].toString(16).padStart(2, "0").toUpperCase()}`;
-				if (color.hex.toUpperCase() !== expectedHex) {
-					console.error(
-						`  Hex/RGB mismatch for ${name}: hex=${color.hex}, expected=${expectedHex}`,
-					);
-					errors++;
-				}
+			const mismatches = hexRgbMismatches(palette);
+			for (const mismatch of mismatches) {
+				console.error(`  Hex/RGB mismatch for ${mismatch}`);
 			}
-			if (errors > 0) {
+			if (mismatches.length > 0) {
 				ok = false;
 			} else {
 				console.log(
