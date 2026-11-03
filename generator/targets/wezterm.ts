@@ -169,6 +169,11 @@ export function tomlStringify(name: string, theme: WeztermTheme): string {
 	lines.push(`# ${name}`);
 	lines.push("");
 
+	// WezTerm names a scheme from metadata.name, falling back to the file stem.
+	lines.push("[metadata]");
+	lines.push(`name = "${name}"`);
+	lines.push("");
+
 	lines.push("[colors]");
 	lines.push(`foreground = "${theme.foreground}"`);
 	lines.push(`background = "${theme.background}"`);
@@ -180,6 +185,12 @@ export function tomlStringify(name: string, theme: WeztermTheme): string {
 	lines.push(`scrollbar_thumb = "${theme.scrollbar_thumb}"`);
 	lines.push(`split = "${theme.split}"`);
 	lines.push(`compose_cursor = "${theme.compose_cursor}"`);
+	// Keys must precede the first sub-table header: anything written after
+	// `[colors.tab_bar...]` belongs to that sub-table, not to [colors].
+	const ansiStr = theme.ansi.map((c) => `"${c}"`).join(", ");
+	lines.push(`ansi = [${ansiStr}]`);
+	const brightsStr = theme.brights.map((c) => `"${c}"`).join(", ");
+	lines.push(`brights = [${brightsStr}]`);
 	lines.push("");
 
 	lines.push("[colors.tab_bar]");
@@ -199,14 +210,6 @@ export function tomlStringify(name: string, theme: WeztermTheme): string {
 	lines.push("[colors.tab_bar.new_tab]");
 	lines.push(`bg_color = "${theme.tab_bar.new_tab.bg_color}"`);
 	lines.push(`fg_color = "${theme.tab_bar.new_tab.fg_color}"`);
-	lines.push("");
-
-	const ansiStr = theme.ansi.map((c) => `"${c}"`).join(", ");
-	lines.push(`ansi = [${ansiStr}]`);
-	lines.push("");
-
-	const brightsStr = theme.brights.map((c) => `"${c}"`).join(", ");
-	lines.push(`brights = [${brightsStr}]`);
 	lines.push("");
 
 	return lines.join("\n");
