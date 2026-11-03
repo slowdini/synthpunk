@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { rgbToHex } from "./colorUtils";
 import type { Palette, ResolvedColor, VariantName } from "./types";
 
 const VARIANT_PALETTE_FILE: Record<VariantName, string> = {
@@ -41,4 +42,21 @@ export function colorToHex(color: ResolvedColor, alpha?: number): string {
 		.padStart(2, "0")
 		.toUpperCase();
 	return `#${color.hex}${a}`;
+}
+
+/**
+ * Colors whose `hex` and `rgb` fields disagree. Generators emit `hex` while
+ * contrast math reads `rgb`, so a mismatch makes checks measure the wrong color.
+ */
+export function hexRgbMismatches(palette: Palette): string[] {
+	const mismatches: string[] = [];
+	for (const [name, color] of Object.entries(palette.colors)) {
+		const fromRgb = rgbToHex(...color.rgb);
+		if (color.hex.toUpperCase() !== fromRgb) {
+			mismatches.push(
+				`${name}: hex ${color.hex} but rgb [${color.rgb.join(", ")}] is ${fromRgb}`,
+			);
+		}
+	}
+	return mismatches;
 }

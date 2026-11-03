@@ -11,24 +11,13 @@ A Neovim colorscheme generated from the [Synthpunk](https://github.com/slowdini/
 
 ## Installation
 
-### Lazy.nvim
+### From this repository
 
-```lua
-return {
-  "slowdini/synthpunk.nvim",
-  lazy = false,
-  priority = 1000,
-  config = function()
-    vim.cmd("colorscheme synthpunk-pastel-dark")
-  end,
-}
-```
-
-### Manual (no plugin manager)
+The colorscheme files are plain Lua — no plugin manager required:
 
 ```bash
-git clone https://github.com/slowdini/synthpunk.nvim /tmp/synthpunk.nvim
-cp -r /tmp/synthpunk.nvim/* ~/.config/nvim/
+git clone https://github.com/slowdini/synthpunk /tmp/synthpunk
+cp -r /tmp/synthpunk/themes/neovim/colors /tmp/synthpunk/themes/neovim/lua ~/.config/nvim/
 ```
 
 Then in your Neovim config:
@@ -36,6 +25,10 @@ Then in your Neovim config:
 ```lua
 vim.cmd("colorscheme synthpunk-pastel-dark")
 ```
+
+### Lazy.nvim
+
+The standalone [`slowdini/synthpunk.nvim`](https://github.com/slowdini/synthpunk.nvim) mirror is not published yet — until it is, use the manual install above.
 
 ## Requirements
 

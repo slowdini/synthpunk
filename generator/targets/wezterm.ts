@@ -1,4 +1,4 @@
-import { adjustBrightness, ensureContrast, rgbToHex } from "../colorUtils";
+import { adjustBrightness, rgbToHex } from "../colorUtils";
 import { colorToHex, resolveColor } from "../palette";
 import type {
 	Palette,
@@ -41,29 +41,13 @@ function hex(palette: Palette, colorName: string): string {
 	return colorToHex(color);
 }
 
-// Resolve a color and darken/lighten it just enough to stay legible against the
-// terminal background. A no-op when it already clears the contrast floor (so
-// dark themes, which already pass, are untouched).
-function floorHex(
-	palette: Palette,
-	colorName: string,
-	bgRgb: [number, number, number],
-	minRatio = 3,
-): string {
-	const color = resolveColor(palette, colorName);
-	const adjusted = ensureContrast(color.rgb, bgRgb, minRatio);
-	return `#${rgbToHex(...adjusted)}`;
-}
-
 // "Bright" means more emphasized than the base color: lighter on a dark
-// background, darker on a light one. Then floored for legibility.
+// background, darker on a light one, so it only ever gains contrast.
 function brightHex(
 	palette: Palette,
 	colorName: string,
 	isDark: boolean,
-	bgRgb: [number, number, number],
 	factor = 0.2,
-	minRatio = 3,
 ): string {
 	const color = resolveColor(palette, colorName);
 	const emphasized = adjustBrightness(
@@ -71,15 +55,13 @@ function brightHex(
 		factor,
 		isDark ? "lighten" : "dim",
 	);
-	const adjusted = ensureContrast(emphasized, bgRgb, minRatio);
-	return `#${rgbToHex(...adjusted)}`;
+	return `#${rgbToHex(...emphasized)}`;
 }
 
 function buildAnsiColors(
 	palette: Palette,
 	isDark: boolean,
 	uiMapping: UIMapping,
-	bgRgb: [number, number, number],
 ): string[] {
 	const t = uiMapping.terminal;
 	const ansi0 = isDark ? hex(palette, "crust") : hex(palette, t.black);
@@ -87,12 +69,12 @@ function buildAnsiColors(
 
 	return [
 		ansi0,
-		floorHex(palette, t.red, bgRgb),
-		floorHex(palette, t.green, bgRgb),
-		floorHex(palette, t.yellow, bgRgb),
-		floorHex(palette, t.blue, bgRgb),
-		floorHex(palette, t.magenta, bgRgb),
-		floorHex(palette, t.cyan, bgRgb),
+		hex(palette, t.red),
+		hex(palette, t.green),
+		hex(palette, t.yellow),
+		hex(palette, t.blue),
+		hex(palette, t.magenta),
+		hex(palette, t.cyan),
 		ansi7,
 	];
 }
@@ -101,7 +83,6 @@ function buildBrightColors(
 	palette: Palette,
 	isDark: boolean,
 	uiMapping: UIMapping,
-	bgRgb: [number, number, number],
 ): string[] {
 	const t = uiMapping.terminal;
 	const bright0 = isDark ? hex(palette, "subtext0") : hex(palette, "subtext1");
@@ -109,12 +90,12 @@ function buildBrightColors(
 
 	return [
 		bright0,
-		brightHex(palette, t.red, isDark, bgRgb),
-		brightHex(palette, t.green, isDark, bgRgb),
-		brightHex(palette, t.yellow, isDark, bgRgb),
-		brightHex(palette, t.blue, isDark, bgRgb),
-		brightHex(palette, t.magenta, isDark, bgRgb),
-		brightHex(palette, t.cyan, isDark, bgRgb),
+		brightHex(palette, t.red, isDark),
+		brightHex(palette, t.green, isDark),
+		brightHex(palette, t.yellow, isDark),
+		brightHex(palette, t.blue, isDark),
+		brightHex(palette, t.magenta, isDark),
+		brightHex(palette, t.cyan, isDark),
 		bright7,
 	];
 }
@@ -127,7 +108,6 @@ export function generateWeztermTheme(
 ): WeztermTheme {
 	const isDark = VARIANT_TYPE[variant] === "dark";
 	const tm = terminalMapping;
-	const bgRgb = resolveColor(palette, "base").rgb;
 
 	const selectionRgb = resolveColor(palette, tm.selection.bg).rgb;
 	const selectionBg = `rgba(${selectionRgb.join(", ")}, ${tm.selection.bg_alpha})`;
@@ -158,8 +138,8 @@ export function generateWeztermTheme(
 				fg_color: hex(palette, tm.tab_bar.new_tab.fg),
 			},
 		},
-		ansi: buildAnsiColors(palette, isDark, uiMapping, bgRgb),
-		brights: buildBrightColors(palette, isDark, uiMapping, bgRgb),
+		ansi: buildAnsiColors(palette, isDark, uiMapping),
+		brights: buildBrightColors(palette, isDark, uiMapping),
 	};
 }
 
@@ -167,6 +147,11 @@ export function tomlStringify(name: string, theme: WeztermTheme): string {
 	const lines: string[] = [];
 
 	lines.push(`# ${name}`);
+	lines.push("");
+
+	// WezTerm names a scheme from metadata.name, falling back to the file stem.
+	lines.push("[metadata]");
+	lines.push(`name = "${name}"`);
 	lines.push("");
 
 	lines.push("[colors]");
@@ -180,6 +165,12 @@ export function tomlStringify(name: string, theme: WeztermTheme): string {
 	lines.push(`scrollbar_thumb = "${theme.scrollbar_thumb}"`);
 	lines.push(`split = "${theme.split}"`);
 	lines.push(`compose_cursor = "${theme.compose_cursor}"`);
+	// Keys must precede the first sub-table header: anything written after
+	// `[colors.tab_bar...]` belongs to that sub-table, not to [colors].
+	const ansiStr = theme.ansi.map((c) => `"${c}"`).join(", ");
+	lines.push(`ansi = [${ansiStr}]`);
+	const brightsStr = theme.brights.map((c) => `"${c}"`).join(", ");
+	lines.push(`brights = [${brightsStr}]`);
 	lines.push("");
 
 	lines.push("[colors.tab_bar]");
@@ -199,14 +190,6 @@ export function tomlStringify(name: string, theme: WeztermTheme): string {
 	lines.push("[colors.tab_bar.new_tab]");
 	lines.push(`bg_color = "${theme.tab_bar.new_tab.bg_color}"`);
 	lines.push(`fg_color = "${theme.tab_bar.new_tab.fg_color}"`);
-	lines.push("");
-
-	const ansiStr = theme.ansi.map((c) => `"${c}"`).join(", ");
-	lines.push(`ansi = [${ansiStr}]`);
-	lines.push("");
-
-	const brightsStr = theme.brights.map((c) => `"${c}"`).join(", ");
-	lines.push(`brights = [${brightsStr}]`);
 	lines.push("");
 
 	return lines.join("\n");

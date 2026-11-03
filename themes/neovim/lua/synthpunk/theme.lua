@@ -7,7 +7,7 @@ local variants = {
   meta = {
     name = "synthpunk-pastel-dark",
     variant = "pastel-dark",
-    type = dark
+    type = "dark"
   },
   ui = {
     Normal = {
@@ -48,7 +48,7 @@ local variants = {
       bg = "#2E1E40"
     },
     LineNr = {
-      fg = "#705880",
+      fg = "#7D628E",
       bg = "#1E1028"
     },
     CursorLineNr = {
@@ -84,15 +84,15 @@ local variants = {
       bg = "#2E1E40"
     },
     Visual = {
-      bg = "#5ED4E0",
+      bg = "#362647",
       blend = 15
     },
     Search = {
-      fg = "#1E1028",
+      fg = "#0D0612",
       bg = "#FF9BB6"
     },
     IncSearch = {
-      fg = "#1E1028",
+      fg = "#0D0612",
       bg = "#FF5470"
     },
     Folded = {
@@ -151,13 +151,13 @@ local variants = {
       bold = true
     },
     NonText = {
-      fg = "#705880"
+      fg = "#7D628E"
     },
     Whitespace = {
-      fg = "#705880"
+      fg = "#7D628E"
     },
     SpecialKey = {
-      fg = "#705880"
+      fg = "#7D628E"
     },
     EndOfBuffer = {
       fg = "#1E1028"
@@ -177,17 +177,17 @@ local variants = {
       bg = "#1E1028"
     },
     Cursor = {
-      fg = "#1E1028",
+      fg = "#0D0612",
       bg = "#C49BFF"
     },
     lCursor = {
-      link = Cursor
+      link = "Cursor"
     },
     CursorIM = {
-      link = Cursor
+      link = "Cursor"
     },
     TermCursor = {
-      link = Cursor
+      link = "Cursor"
     },
     TermCursorNC = {
       bg = "#C49BFF"
@@ -200,6 +200,7 @@ local variants = {
       bg = "#3A2850"
     },
     Substitute = {
+      fg = "#0D0612",
       bg = "#FF9BB6"
     },
     SpellBad = {
@@ -245,27 +246,27 @@ local variants = {
   },
   syntaxTreesitter = {
     ["@comment"] = {
-      fg = "#705880",
+      fg = "#7D628E",
       italic = true
     },
     ["@comment.block"] = {
-      fg = "#705880",
+      fg = "#7D628E",
       italic = true
     },
     ["@comment.line"] = {
-      fg = "#705880",
+      fg = "#7D628E",
       italic = true
     },
     ["@comment.line.double-slash"] = {
-      fg = "#705880",
+      fg = "#7D628E",
       italic = true
     },
     ["@comment.line.number-sign"] = {
-      fg = "#705880",
+      fg = "#7D628E",
       italic = true
     },
     ["@comment.triple-slash"] = {
-      fg = "#705880",
+      fg = "#7D628E",
       italic = true
     },
     ["@string"] = {
@@ -673,7 +674,7 @@ local variants = {
   },
   syntaxClassic = {
     Comment = {
-      fg = "#705880",
+      fg = "#7D628E",
       italic = true
     },
     String = {
@@ -706,9 +707,6 @@ local variants = {
     Function = {
       fg = "#8BA4FF"
     },
-    Normal = {
-      fg = "#8BA4FF"
-    },
     Identifier = {
       fg = "#F0E0F0"
     },
@@ -724,17 +722,8 @@ local variants = {
     PreProc = {
       fg = "#FF9BB6"
     },
-    Underlined = {
-      fg = "#8BA4FF"
-    },
     Title = {
       fg = "#FFE4B5"
-    },
-    Bold = {
-      fg = "#FFE4B5"
-    },
-    Italic = {
-      fg = "#8BA4FF"
     },
     Error = {
       fg = "#FF5470"
@@ -787,7 +776,7 @@ local variants = {
   meta = {
     name = "synthpunk-pastel-light",
     variant = "pastel-light",
-    type = light
+    type = "light"
   },
   ui = {
     Normal = {
@@ -828,11 +817,11 @@ local variants = {
       bg = "#F0DEE8"
     },
     LineNr = {
-      fg = "#C4A8B8",
+      fg = "#A27690",
       bg = "#FFF8F5"
     },
     CursorLineNr = {
-      fg = "#5ED4E0"
+      fg = "#03808E"
     },
     SignColumn = {
       bg = "#FFF8F5"
@@ -844,7 +833,7 @@ local variants = {
       fg = "#E4CCD8"
     },
     FloatBorder = {
-      fg = "#C49BFF"
+      fg = "#8A51C8"
     },
     FloatTitle = {
       fg = "#2E1A24"
@@ -864,16 +853,16 @@ local variants = {
       bg = "#F0DEE8"
     },
     Visual = {
-      bg = "#5ED4E0",
+      bg = "#E7D5DC",
       blend = 15
     },
     Search = {
       fg = "#FFF8F5",
-      bg = "#FF9BB6"
+      bg = "#BB4970"
     },
     IncSearch = {
       fg = "#FFF8F5",
-      bg = "#FF5470"
+      bg = "#DB1836"
     },
     Folded = {
       fg = "#997A8A",
@@ -884,38 +873,38 @@ local variants = {
       bg = "#FFF8F5"
     },
     DiagnosticError = {
-      fg = "#FF5470"
+      fg = "#DB1836"
     },
     DiagnosticWarn = {
-      fg = "#E8C468"
+      fg = "#8F6C02"
     },
     DiagnosticInfo = {
-      fg = "#8BA4FF"
+      fg = "#4556D2"
     },
     DiagnosticHint = {
-      fg = "#5AC09A"
+      fg = "#037E55"
     },
     DiagnosticUnderlineError = {
-      sp = "#FF5470",
+      sp = "#DB1836",
       undercurl = true
     },
     DiagnosticUnderlineWarn = {
-      sp = "#E8C468",
+      sp = "#8F6C02",
       undercurl = true
     },
     DiagnosticUnderlineInfo = {
-      sp = "#8BA4FF",
+      sp = "#4556D2",
       undercurl = true
     },
     DiagnosticUnderlineHint = {
-      sp = "#5AC09A",
+      sp = "#037E55",
       undercurl = true
     },
     ErrorMsg = {
-      fg = "#FF5470"
+      fg = "#DB1836"
     },
     WarningMsg = {
-      fg = "#E8C468"
+      fg = "#8F6C02"
     },
     MsgArea = {
       fg = "#2E1A24"
@@ -924,29 +913,29 @@ local variants = {
       fg = "#997A8A"
     },
     MoreMsg = {
-      fg = "#5ED4E0"
+      fg = "#03808E"
     },
     ModeMsg = {
       fg = "#2E1A24",
       bold = true
     },
     NonText = {
-      fg = "#C4A8B8"
+      fg = "#A27690"
     },
     Whitespace = {
-      fg = "#C4A8B8"
+      fg = "#A27690"
     },
     SpecialKey = {
-      fg = "#C4A8B8"
+      fg = "#A27690"
     },
     EndOfBuffer = {
       fg = "#FFF8F5"
     },
     Directory = {
-      fg = "#5ED4E0"
+      fg = "#03808E"
     },
     MatchParen = {
-      fg = "#FF5470",
+      fg = "#DB1836",
       bold = true
     },
     ColorColumn = {
@@ -958,19 +947,19 @@ local variants = {
     },
     Cursor = {
       fg = "#FFF8F5",
-      bg = "#C49BFF"
+      bg = "#8A51C8"
     },
     lCursor = {
-      link = Cursor
+      link = "Cursor"
     },
     CursorIM = {
-      link = Cursor
+      link = "Cursor"
     },
     TermCursor = {
-      link = Cursor
+      link = "Cursor"
     },
     TermCursorNC = {
-      bg = "#C49BFF"
+      bg = "#8A51C8"
     },
     QuickFixLine = {
       bg = "#E4CCD8"
@@ -980,26 +969,27 @@ local variants = {
       bg = "#E4CCD8"
     },
     Substitute = {
-      bg = "#FF9BB6"
+      fg = "#FFF8F5",
+      bg = "#BB4970"
     },
     SpellBad = {
-      sp = "#FF5470",
+      sp = "#DB1836",
       undercurl = true
     },
     SpellCap = {
-      sp = "#E8C468",
+      sp = "#8F6C02",
       undercurl = true
     },
     SpellLocal = {
-      sp = "#8BA4FF",
+      sp = "#4556D2",
       undercurl = true
     },
     SpellRare = {
-      sp = "#5AC09A",
+      sp = "#037E55",
       undercurl = true
     },
     Question = {
-      fg = "#5ED4E0"
+      fg = "#03808E"
     },
     Bold = {
       bold = true
@@ -1011,231 +1001,231 @@ local variants = {
       underline = true
     },
     DiffAdd = {
-      fg = "#5AC09A"
+      fg = "#037E55"
     },
     DiffChange = {
-      fg = "#E8C468"
+      fg = "#8F6C02"
     },
     DiffDelete = {
-      fg = "#FF5470"
+      fg = "#DB1836"
     },
     DiffText = {
-      fg = "#C49BFF"
+      fg = "#8A51C8"
     }
   },
   syntaxTreesitter = {
     ["@comment"] = {
-      fg = "#C4A8B8",
+      fg = "#A27690",
       italic = true
     },
     ["@comment.block"] = {
-      fg = "#C4A8B8",
+      fg = "#A27690",
       italic = true
     },
     ["@comment.line"] = {
-      fg = "#C4A8B8",
+      fg = "#A27690",
       italic = true
     },
     ["@comment.line.double-slash"] = {
-      fg = "#C4A8B8",
+      fg = "#A27690",
       italic = true
     },
     ["@comment.line.number-sign"] = {
-      fg = "#C4A8B8",
+      fg = "#A27690",
       italic = true
     },
     ["@comment.triple-slash"] = {
-      fg = "#C4A8B8",
+      fg = "#A27690",
       italic = true
     },
     ["@string"] = {
-      fg = "#5AC09A"
+      fg = "#037E55"
     },
     ["@string.quoted.double"] = {
-      fg = "#5AC09A"
+      fg = "#037E55"
     },
     ["@string.quoted.single"] = {
-      fg = "#5AC09A"
+      fg = "#037E55"
     },
     ["@string.quoted.triple"] = {
-      fg = "#5AC09A"
+      fg = "#037E55"
     },
     ["@string.unquoted"] = {
-      fg = "#5AC09A"
+      fg = "#037E55"
     },
     ["@string.regexp"] = {
-      fg = "#5AC09A"
+      fg = "#037E55"
     },
     ["@constant.character.escape"] = {
-      fg = "#5AC09A"
+      fg = "#037E55"
     },
     ["@constant.character.escape.backslash"] = {
-      fg = "#5AC09A"
+      fg = "#037E55"
     },
     ["@constant.numeric"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@constant.numeric.float"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@constant.numeric.integer"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@constant.numeric.hex"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@constant.numeric.octal"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@constant.numeric.binary"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@constant.language.boolean"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@constant.language.true"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@constant.language.false"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@constant"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@constant.language"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@constant.language.null"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@constant.language.undefined"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@constant.language.nan"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@keyword"] = {
-      fg = "#FF9BB6"
+      fg = "#BB4970"
     },
     ["@keyword.control"] = {
-      fg = "#FF9BB6"
+      fg = "#BB4970"
     },
     ["@keyword.control.import"] = {
-      fg = "#FF9BB6"
+      fg = "#BB4970"
     },
     ["@keyword.control.from"] = {
-      fg = "#FF9BB6"
+      fg = "#BB4970"
     },
     ["@keyword.control.export"] = {
-      fg = "#FF9BB6"
+      fg = "#BB4970"
     },
     ["@keyword.control.return"] = {
-      fg = "#FF9BB6"
+      fg = "#BB4970"
     },
     ["@keyword.control.flow"] = {
-      fg = "#FF9BB6"
+      fg = "#BB4970"
     },
     ["@keyword.control.conditional"] = {
-      fg = "#FF9BB6"
+      fg = "#BB4970"
     },
     ["@keyword.control.loop"] = {
-      fg = "#FF9BB6"
+      fg = "#BB4970"
     },
     ["@keyword.operator"] = {
-      fg = "#D48BA0"
+      fg = "#7F3E4C"
     },
     ["@keyword.operator.arithmetic"] = {
-      fg = "#D48BA0"
+      fg = "#7F3E4C"
     },
     ["@keyword.operator.assignment"] = {
-      fg = "#D48BA0"
+      fg = "#7F3E4C"
     },
     ["@keyword.operator.comparison"] = {
-      fg = "#D48BA0"
+      fg = "#7F3E4C"
     },
     ["@keyword.operator.logical"] = {
-      fg = "#D48BA0"
+      fg = "#7F3E4C"
     },
     ["@keyword.operator.new"] = {
-      fg = "#D48BA0"
+      fg = "#7F3E4C"
     },
     ["@keyword.operator.expression"] = {
-      fg = "#D48BA0"
+      fg = "#7F3E4C"
     },
     ["@storage.type"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@storage.type.class"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@storage.type.enum"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@storage.type.interface"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@storage.type.struct"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@storage.type.function"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@storage.type.method"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@storage.modifier"] = {
-      fg = "#C49BFF"
+      fg = "#8A51C8"
     },
     ["@storage.modifier.async"] = {
-      fg = "#C49BFF"
+      fg = "#8A51C8"
     },
     ["@storage.modifier.const"] = {
-      fg = "#C49BFF"
+      fg = "#8A51C8"
     },
     ["@storage.modifier.static"] = {
-      fg = "#C49BFF"
+      fg = "#8A51C8"
     },
     ["@storage.modifier.abstract"] = {
-      fg = "#C49BFF"
+      fg = "#8A51C8"
     },
     ["@storage.modifier.readonly"] = {
-      fg = "#C49BFF"
+      fg = "#8A51C8"
     },
     ["@storage.modifier.mutable"] = {
-      fg = "#C49BFF"
+      fg = "#8A51C8"
     },
     ["@storage.modifier.private"] = {
-      fg = "#C49BFF"
+      fg = "#8A51C8"
     },
     ["@storage.modifier.public"] = {
-      fg = "#C49BFF"
+      fg = "#8A51C8"
     },
     ["@storage.modifier.protected"] = {
-      fg = "#C49BFF"
+      fg = "#8A51C8"
     },
     ["@entity.name.function"] = {
-      fg = "#8BA4FF"
+      fg = "#4556D2"
     },
     ["@support.function"] = {
-      fg = "#8BA4FF"
+      fg = "#4556D2"
     },
     ["@meta.function-call"] = {
-      fg = "#8BA4FF"
+      fg = "#4556D2"
     },
     ["@meta.method-call"] = {
-      fg = "#8BA4FF"
+      fg = "#4556D2"
     },
     ["@entity.name.function.member"] = {
-      fg = "#7AC8FF"
+      fg = "#026BAA"
     },
     ["@meta.method"] = {
-      fg = "#7AC8FF"
+      fg = "#026BAA"
     },
     ["@entity.name.function.constructor"] = {
-      fg = "#8BA4FF"
+      fg = "#4556D2"
     },
     ["@entity.name.type.class"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@variable"] = {
       fg = "#2E1A24"
@@ -1256,94 +1246,94 @@ local variants = {
       fg = "#2E1A24"
     },
     ["@variable.parameter"] = {
-      fg = "#D48BA0"
+      fg = "#7F3E4C"
     },
     ["@entity.name.variable.parameter"] = {
-      fg = "#D48BA0"
+      fg = "#7F3E4C"
     },
     ["@variable.other.property"] = {
-      fg = "#5ED4E0"
+      fg = "#03808E"
     },
     ["@entity.name.variable.member"] = {
-      fg = "#5ED4E0"
+      fg = "#03808E"
     },
     ["@meta.property"] = {
-      fg = "#5ED4E0"
+      fg = "#03808E"
     },
     ["@entity.other.attribute"] = {
-      fg = "#7AA8C0"
+      fg = "#546D86"
     },
     ["@meta.attribute"] = {
-      fg = "#7AA8C0"
+      fg = "#546D86"
     },
     ["@decorator"] = {
-      fg = "#7AA8C0"
+      fg = "#546D86"
     },
     ["@meta.decorator"] = {
-      fg = "#7AA8C0"
+      fg = "#546D86"
     },
     ["@entity.name.type"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@entity.name.type.enum"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@entity.name.type.interface"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@entity.name.type.struct"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@support.type"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@support.class"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@entity.name.type.alias"] = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     ["@entity.name.namespace"] = {
-      fg = "#FF9BB6"
+      fg = "#BB4970"
     },
     ["@entity.name.module"] = {
-      fg = "#FF9BB6"
+      fg = "#BB4970"
     },
     ["@entity.name.package"] = {
-      fg = "#FF9BB6"
+      fg = "#BB4970"
     },
     ["@entity.name.tag"] = {
-      fg = "#5AC09A"
+      fg = "#037E55"
     },
     ["@entity.name.tag.html"] = {
-      fg = "#5AC09A"
+      fg = "#037E55"
     },
     ["@entity.name.tag.xml"] = {
-      fg = "#5AC09A"
+      fg = "#037E55"
     },
     ["@entity.name.tag.jsx"] = {
-      fg = "#5AC09A"
+      fg = "#037E55"
     },
     ["@entity.other.attribute-name"] = {
-      fg = "#E8C468"
+      fg = "#8F6C02"
     },
     ["@entity.other.attribute-name.html"] = {
-      fg = "#E8C468"
+      fg = "#8F6C02"
     },
     ["@entity.other.attribute-name.xml"] = {
-      fg = "#E8C468"
+      fg = "#8F6C02"
     },
     ["@entity.other.attribute-name.jsx"] = {
-      fg = "#E8C468"
+      fg = "#8F6C02"
     },
     ["@entity.other.attribute-name.css"] = {
-      fg = "#E8C468"
+      fg = "#8F6C02"
     },
     ["@entity.name.selector"] = {
-      fg = "#E8C468"
+      fg = "#8F6C02"
     },
     ["@meta.selector"] = {
-      fg = "#E8C468"
+      fg = "#8F6C02"
     },
     ["@punctuation"] = {
       fg = "#2E1A24"
@@ -1394,130 +1384,118 @@ local variants = {
       fg = "#2E1A24"
     },
     ["@keyword.control.directive"] = {
-      fg = "#FF9BB6"
+      fg = "#BB4970"
     },
     ["@meta.preprocessor"] = {
-      fg = "#FF9BB6"
+      fg = "#BB4970"
     },
     ["@meta.preprocessor.directive"] = {
-      fg = "#FF9BB6"
+      fg = "#BB4970"
     },
     ["@keyword.control.preprocessor"] = {
-      fg = "#FF9BB6"
+      fg = "#BB4970"
     },
     ["@string.other.link"] = {
-      fg = "#8BA4FF"
+      fg = "#4556D2"
     },
     ["@markup.underline.link"] = {
-      fg = "#8BA4FF"
+      fg = "#4556D2"
     },
     ["@constant.other.reference.link"] = {
-      fg = "#8BA4FF"
+      fg = "#4556D2"
     },
     ["@markup.heading"] = {
-      fg = "#E8C468"
+      fg = "#8F6C02"
     },
     ["@entity.name.section"] = {
-      fg = "#E8C468"
+      fg = "#8F6C02"
     },
     ["@heading"] = {
-      fg = "#E8C468"
+      fg = "#8F6C02"
     },
     ["@markup.bold"] = {
-      fg = "#E8C468"
+      fg = "#8F6C02"
     },
     ["@markup.italic"] = {
-      fg = "#8BA4FF"
+      fg = "#4556D2"
     },
     ["@markup.deleted"] = {
-      fg = "#FF5470",
+      fg = "#DB1836",
       strikethrough = true
     },
     ["@markup.strikethrough"] = {
-      fg = "#FF5470",
+      fg = "#DB1836",
       strikethrough = true
     },
     ["@meta.deprecated"] = {
-      fg = "#FF5470",
+      fg = "#DB1836",
       strikethrough = true
     },
     ["@invalid"] = {
-      fg = "#FF5470"
+      fg = "#DB1836"
     },
     ["@invalid.illegal"] = {
-      fg = "#FF5470"
+      fg = "#DB1836"
     },
     ["@invalid.deprecated"] = {
-      fg = "#FF5470"
+      fg = "#DB1836"
     }
   },
   syntaxClassic = {
     Comment = {
-      fg = "#C4A8B8",
+      fg = "#A27690",
       italic = true
     },
     String = {
-      fg = "#5AC09A"
+      fg = "#037E55"
     },
     SpecialChar = {
-      fg = "#5AC09A"
+      fg = "#037E55"
     },
     Number = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     Boolean = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     Constant = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     Keyword = {
-      fg = "#FF9BB6"
+      fg = "#BB4970"
     },
     Operator = {
-      fg = "#D48BA0"
+      fg = "#7F3E4C"
     },
     Type = {
-      fg = "#FFA07A"
+      fg = "#BC4D04"
     },
     StorageClass = {
-      fg = "#C49BFF"
+      fg = "#8A51C8"
     },
     Function = {
-      fg = "#8BA4FF"
-    },
-    Normal = {
-      fg = "#8BA4FF"
+      fg = "#4556D2"
     },
     Identifier = {
       fg = "#2E1A24"
     },
     Tag = {
-      fg = "#5AC09A"
+      fg = "#037E55"
     },
     Structure = {
-      fg = "#E8C468"
+      fg = "#8F6C02"
     },
     Delimiter = {
       fg = "#2E1A24"
     },
     PreProc = {
-      fg = "#FF9BB6"
-    },
-    Underlined = {
-      fg = "#8BA4FF"
+      fg = "#BB4970"
     },
     Title = {
-      fg = "#E8C468"
-    },
-    Bold = {
-      fg = "#E8C468"
-    },
-    Italic = {
-      fg = "#8BA4FF"
+      fg = "#8F6C02"
     },
     Error = {
-      fg = "#FF5470"
+      fg = "#DB1836"
     }
   },
   lspLinks = {
@@ -1546,20 +1524,20 @@ local variants = {
   },
   terminal = {
     "#2E1A24",
-    "#FF516E",
-    "#3EA27C",
-    "#B68A1C",
-    "#6989FF",
-    "#FF4A91",
-    "#219FAC",
-    "#6B4F5E",
-    "#6B4F5E",
-    "#FF516E",
-    "#3EA27C",
-    "#B68A1C",
-    "#6989FF",
-    "#FF4A91",
-    "#219FAC",
+    "#DB1836",
+    "#037E55",
+    "#8F6C02",
+    "#4556D2",
+    "#BB218A",
+    "#03808E",
+    "#614755",
+    "#614755",
+    "#DB1836",
+    "#037E55",
+    "#8F6C02",
+    "#4556D2",
+    "#BB218A",
+    "#03808E",
     "#2E1A24"
   }
 },
@@ -1567,7 +1545,7 @@ local variants = {
   meta = {
     name = "synthpunk-neon-dark",
     variant = "neon-dark",
-    type = dark
+    type = "dark"
   },
   ui = {
     Normal = {
@@ -1608,7 +1586,7 @@ local variants = {
       bg = "#1A0D2E"
     },
     LineNr = {
-      fg = "#503870",
+      fg = "#6D4D99",
       bg = "#0F0620"
     },
     CursorLineNr = {
@@ -1644,15 +1622,15 @@ local variants = {
       bg = "#1A0D2E"
     },
     Visual = {
-      bg = "#00E8F0",
+      bg = "#21133A",
       blend = 15
     },
     Search = {
-      fg = "#0F0620",
+      fg = "#060210",
       bg = "#FF5CA8"
     },
     IncSearch = {
-      fg = "#0F0620",
+      fg = "#060210",
       bg = "#FF3A50"
     },
     Folded = {
@@ -1711,13 +1689,13 @@ local variants = {
       bold = true
     },
     NonText = {
-      fg = "#503870"
+      fg = "#6D4D99"
     },
     Whitespace = {
-      fg = "#503870"
+      fg = "#6D4D99"
     },
     SpecialKey = {
-      fg = "#503870"
+      fg = "#6D4D99"
     },
     EndOfBuffer = {
       fg = "#0F0620"
@@ -1737,17 +1715,17 @@ local variants = {
       bg = "#0F0620"
     },
     Cursor = {
-      fg = "#0F0620",
+      fg = "#060210",
       bg = "#D040FF"
     },
     lCursor = {
-      link = Cursor
+      link = "Cursor"
     },
     CursorIM = {
-      link = Cursor
+      link = "Cursor"
     },
     TermCursor = {
-      link = Cursor
+      link = "Cursor"
     },
     TermCursorNC = {
       bg = "#D040FF"
@@ -1760,6 +1738,7 @@ local variants = {
       bg = "#251540"
     },
     Substitute = {
+      fg = "#060210",
       bg = "#FF5CA8"
     },
     SpellBad = {
@@ -1805,27 +1784,27 @@ local variants = {
   },
   syntaxTreesitter = {
     ["@comment"] = {
-      fg = "#503870",
+      fg = "#6D4D99",
       italic = true
     },
     ["@comment.block"] = {
-      fg = "#503870",
+      fg = "#6D4D99",
       italic = true
     },
     ["@comment.line"] = {
-      fg = "#503870",
+      fg = "#6D4D99",
       italic = true
     },
     ["@comment.line.double-slash"] = {
-      fg = "#503870",
+      fg = "#6D4D99",
       italic = true
     },
     ["@comment.line.number-sign"] = {
-      fg = "#503870",
+      fg = "#6D4D99",
       italic = true
     },
     ["@comment.triple-slash"] = {
-      fg = "#503870",
+      fg = "#6D4D99",
       italic = true
     },
     ["@string"] = {
@@ -2233,7 +2212,7 @@ local variants = {
   },
   syntaxClassic = {
     Comment = {
-      fg = "#503870",
+      fg = "#6D4D99",
       italic = true
     },
     String = {
@@ -2266,9 +2245,6 @@ local variants = {
     Function = {
       fg = "#A060FF"
     },
-    Normal = {
-      fg = "#A060FF"
-    },
     Identifier = {
       fg = "#E8E0F0"
     },
@@ -2284,17 +2260,8 @@ local variants = {
     PreProc = {
       fg = "#FF5CA8"
     },
-    Underlined = {
-      fg = "#A060FF"
-    },
     Title = {
       fg = "#FFE040"
-    },
-    Bold = {
-      fg = "#FFE040"
-    },
-    Italic = {
-      fg = "#A060FF"
     },
     Error = {
       fg = "#FF3A50"
@@ -2347,7 +2314,7 @@ local variants = {
   meta = {
     name = "synthpunk-neon-light",
     variant = "neon-light",
-    type = light
+    type = "light"
   },
   ui = {
     Normal = {
@@ -2355,7 +2322,7 @@ local variants = {
       bg = "#FAF6FA"
     },
     NormalNC = {
-      fg = "#A898B0",
+      fg = "#9884A1",
       bg = "#FAF6FA"
     },
     NormalFloat = {
@@ -2367,11 +2334,11 @@ local variants = {
       bg = "#E0C8E8"
     },
     StatusLineNC = {
-      fg = "#A898B0",
+      fg = "#9884A1",
       bg = "#F0E8F5"
     },
     TabLine = {
-      fg = "#A898B0",
+      fg = "#9884A1",
       bg = "#F0E8F0"
     },
     TabLineFill = {
@@ -2388,11 +2355,11 @@ local variants = {
       bg = "#F0E8F5"
     },
     LineNr = {
-      fg = "#C0A8C8",
+      fg = "#A37FAE",
       bg = "#FAF6FA"
     },
     CursorLineNr = {
-      fg = "#30C0C8"
+      fg = "#00868C"
     },
     SignColumn = {
       bg = "#FAF6FA"
@@ -2424,43 +2391,43 @@ local variants = {
       bg = "#F0E8F5"
     },
     Visual = {
-      bg = "#30C0C8",
+      bg = "#ECDDF0",
       blend = 15
     },
     Search = {
       fg = "#FAF6FA",
-      bg = "#E06098"
+      bg = "#BA57A7"
     },
     IncSearch = {
       fg = "#FAF6FA",
       bg = "#E04058"
     },
     Folded = {
-      fg = "#A898B0",
+      fg = "#9884A1",
       bg = "#F0E8F5"
     },
     FoldColumn = {
-      fg = "#A898B0",
+      fg = "#9884A1",
       bg = "#FAF6FA"
     },
     DiagnosticError = {
       fg = "#E04058"
     },
     DiagnosticWarn = {
-      fg = "#D8B030"
+      fg = "#907206"
     },
     DiagnosticInfo = {
       fg = "#8050C8"
     },
     DiagnosticHint = {
-      fg = "#40C080"
+      fg = "#01844F"
     },
     DiagnosticUnderlineError = {
       sp = "#E04058",
       undercurl = true
     },
     DiagnosticUnderlineWarn = {
-      sp = "#D8B030",
+      sp = "#907206",
       undercurl = true
     },
     DiagnosticUnderlineInfo = {
@@ -2468,42 +2435,42 @@ local variants = {
       undercurl = true
     },
     DiagnosticUnderlineHint = {
-      sp = "#40C080",
+      sp = "#01844F",
       undercurl = true
     },
     ErrorMsg = {
       fg = "#E04058"
     },
     WarningMsg = {
-      fg = "#D8B030"
+      fg = "#907206"
     },
     MsgArea = {
       fg = "#2A1A30"
     },
     MsgSeparator = {
-      fg = "#A898B0"
+      fg = "#9884A1"
     },
     MoreMsg = {
-      fg = "#30C0C8"
+      fg = "#00868C"
     },
     ModeMsg = {
       fg = "#2A1A30",
       bold = true
     },
     NonText = {
-      fg = "#C0A8C8"
+      fg = "#A37FAE"
     },
     Whitespace = {
-      fg = "#C0A8C8"
+      fg = "#A37FAE"
     },
     SpecialKey = {
-      fg = "#C0A8C8"
+      fg = "#A37FAE"
     },
     EndOfBuffer = {
       fg = "#FAF6FA"
     },
     Directory = {
-      fg = "#30C0C8"
+      fg = "#00868C"
     },
     MatchParen = {
       fg = "#E04058",
@@ -2513,7 +2480,7 @@ local variants = {
       bg = "#F0E8F5"
     },
     Conceal = {
-      fg = "#A898B0",
+      fg = "#9884A1",
       bg = "#FAF6FA"
     },
     Cursor = {
@@ -2521,13 +2488,13 @@ local variants = {
       bg = "#B050D0"
     },
     lCursor = {
-      link = Cursor
+      link = "Cursor"
     },
     CursorIM = {
-      link = Cursor
+      link = "Cursor"
     },
     TermCursor = {
-      link = Cursor
+      link = "Cursor"
     },
     TermCursorNC = {
       bg = "#B050D0"
@@ -2540,14 +2507,15 @@ local variants = {
       bg = "#E8D8F0"
     },
     Substitute = {
-      bg = "#E06098"
+      fg = "#FAF6FA",
+      bg = "#BA57A7"
     },
     SpellBad = {
       sp = "#E04058",
       undercurl = true
     },
     SpellCap = {
-      sp = "#D8B030",
+      sp = "#907206",
       undercurl = true
     },
     SpellLocal = {
@@ -2555,11 +2523,11 @@ local variants = {
       undercurl = true
     },
     SpellRare = {
-      sp = "#40C080",
+      sp = "#01844F",
       undercurl = true
     },
     Question = {
-      fg = "#30C0C8"
+      fg = "#00868C"
     },
     Bold = {
       bold = true
@@ -2571,10 +2539,10 @@ local variants = {
       underline = true
     },
     DiffAdd = {
-      fg = "#40C080"
+      fg = "#01844F"
     },
     DiffChange = {
-      fg = "#D8B030"
+      fg = "#907206"
     },
     DiffDelete = {
       fg = "#E04058"
@@ -2585,121 +2553,121 @@ local variants = {
   },
   syntaxTreesitter = {
     ["@comment"] = {
-      fg = "#C0A8C8",
+      fg = "#A37FAE",
       italic = true
     },
     ["@comment.block"] = {
-      fg = "#C0A8C8",
+      fg = "#A37FAE",
       italic = true
     },
     ["@comment.line"] = {
-      fg = "#C0A8C8",
+      fg = "#A37FAE",
       italic = true
     },
     ["@comment.line.double-slash"] = {
-      fg = "#C0A8C8",
+      fg = "#A37FAE",
       italic = true
     },
     ["@comment.line.number-sign"] = {
-      fg = "#C0A8C8",
+      fg = "#A37FAE",
       italic = true
     },
     ["@comment.triple-slash"] = {
-      fg = "#C0A8C8",
+      fg = "#A37FAE",
       italic = true
     },
     ["@string"] = {
-      fg = "#40C080"
+      fg = "#01844F"
     },
     ["@string.quoted.double"] = {
-      fg = "#40C080"
+      fg = "#01844F"
     },
     ["@string.quoted.single"] = {
-      fg = "#40C080"
+      fg = "#01844F"
     },
     ["@string.quoted.triple"] = {
-      fg = "#40C080"
+      fg = "#01844F"
     },
     ["@string.unquoted"] = {
-      fg = "#40C080"
+      fg = "#01844F"
     },
     ["@string.regexp"] = {
-      fg = "#40C080"
+      fg = "#01844F"
     },
     ["@constant.character.escape"] = {
-      fg = "#40C080"
+      fg = "#01844F"
     },
     ["@constant.character.escape.backslash"] = {
-      fg = "#40C080"
+      fg = "#01844F"
     },
     ["@constant.numeric"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@constant.numeric.float"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@constant.numeric.integer"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@constant.numeric.hex"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@constant.numeric.octal"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@constant.numeric.binary"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@constant.language.boolean"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@constant.language.true"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@constant.language.false"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@constant"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@constant.language"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@constant.language.null"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@constant.language.undefined"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@constant.language.nan"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@keyword"] = {
-      fg = "#E06098"
+      fg = "#BA57A7"
     },
     ["@keyword.control"] = {
-      fg = "#E06098"
+      fg = "#BA57A7"
     },
     ["@keyword.control.import"] = {
-      fg = "#E06098"
+      fg = "#BA57A7"
     },
     ["@keyword.control.from"] = {
-      fg = "#E06098"
+      fg = "#BA57A7"
     },
     ["@keyword.control.export"] = {
-      fg = "#E06098"
+      fg = "#BA57A7"
     },
     ["@keyword.control.return"] = {
-      fg = "#E06098"
+      fg = "#BA57A7"
     },
     ["@keyword.control.flow"] = {
-      fg = "#E06098"
+      fg = "#BA57A7"
     },
     ["@keyword.control.conditional"] = {
-      fg = "#E06098"
+      fg = "#BA57A7"
     },
     ["@keyword.control.loop"] = {
-      fg = "#E06098"
+      fg = "#BA57A7"
     },
     ["@keyword.operator"] = {
       fg = "#B04068"
@@ -2723,25 +2691,25 @@ local variants = {
       fg = "#B04068"
     },
     ["@storage.type"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@storage.type.class"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@storage.type.enum"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@storage.type.interface"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@storage.type.struct"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@storage.type.function"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@storage.type.method"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@storage.modifier"] = {
       fg = "#B050D0"
@@ -2786,16 +2754,16 @@ local variants = {
       fg = "#8050C8"
     },
     ["@entity.name.function.member"] = {
-      fg = "#4098D8"
+      fg = "#1278B8"
     },
     ["@meta.method"] = {
-      fg = "#4098D8"
+      fg = "#1278B8"
     },
     ["@entity.name.function.constructor"] = {
       fg = "#8050C8"
     },
     ["@entity.name.type.class"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@variable"] = {
       fg = "#2A1A30"
@@ -2822,13 +2790,13 @@ local variants = {
       fg = "#B04068"
     },
     ["@variable.other.property"] = {
-      fg = "#30C0C8"
+      fg = "#00868C"
     },
     ["@entity.name.variable.member"] = {
-      fg = "#30C0C8"
+      fg = "#00868C"
     },
     ["@meta.property"] = {
-      fg = "#30C0C8"
+      fg = "#00868C"
     },
     ["@entity.other.attribute"] = {
       fg = "#6070C8"
@@ -2843,67 +2811,67 @@ local variants = {
       fg = "#6070C8"
     },
     ["@entity.name.type"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@entity.name.type.enum"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@entity.name.type.interface"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@entity.name.type.struct"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@support.type"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@support.class"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@entity.name.type.alias"] = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     ["@entity.name.namespace"] = {
-      fg = "#E06098"
+      fg = "#BA57A7"
     },
     ["@entity.name.module"] = {
-      fg = "#E06098"
+      fg = "#BA57A7"
     },
     ["@entity.name.package"] = {
-      fg = "#E06098"
+      fg = "#BA57A7"
     },
     ["@entity.name.tag"] = {
-      fg = "#40C080"
+      fg = "#01844F"
     },
     ["@entity.name.tag.html"] = {
-      fg = "#40C080"
+      fg = "#01844F"
     },
     ["@entity.name.tag.xml"] = {
-      fg = "#40C080"
+      fg = "#01844F"
     },
     ["@entity.name.tag.jsx"] = {
-      fg = "#40C080"
+      fg = "#01844F"
     },
     ["@entity.other.attribute-name"] = {
-      fg = "#D8B030"
+      fg = "#907206"
     },
     ["@entity.other.attribute-name.html"] = {
-      fg = "#D8B030"
+      fg = "#907206"
     },
     ["@entity.other.attribute-name.xml"] = {
-      fg = "#D8B030"
+      fg = "#907206"
     },
     ["@entity.other.attribute-name.jsx"] = {
-      fg = "#D8B030"
+      fg = "#907206"
     },
     ["@entity.other.attribute-name.css"] = {
-      fg = "#D8B030"
+      fg = "#907206"
     },
     ["@entity.name.selector"] = {
-      fg = "#D8B030"
+      fg = "#907206"
     },
     ["@meta.selector"] = {
-      fg = "#D8B030"
+      fg = "#907206"
     },
     ["@punctuation"] = {
       fg = "#2A1A30"
@@ -2954,16 +2922,16 @@ local variants = {
       fg = "#2A1A30"
     },
     ["@keyword.control.directive"] = {
-      fg = "#E06098"
+      fg = "#BA57A7"
     },
     ["@meta.preprocessor"] = {
-      fg = "#E06098"
+      fg = "#BA57A7"
     },
     ["@meta.preprocessor.directive"] = {
-      fg = "#E06098"
+      fg = "#BA57A7"
     },
     ["@keyword.control.preprocessor"] = {
-      fg = "#E06098"
+      fg = "#BA57A7"
     },
     ["@string.other.link"] = {
       fg = "#8050C8"
@@ -2975,16 +2943,16 @@ local variants = {
       fg = "#8050C8"
     },
     ["@markup.heading"] = {
-      fg = "#D8B030"
+      fg = "#907206"
     },
     ["@entity.name.section"] = {
-      fg = "#D8B030"
+      fg = "#907206"
     },
     ["@heading"] = {
-      fg = "#D8B030"
+      fg = "#907206"
     },
     ["@markup.bold"] = {
-      fg = "#D8B030"
+      fg = "#907206"
     },
     ["@markup.italic"] = {
       fg = "#8050C8"
@@ -3013,32 +2981,32 @@ local variants = {
   },
   syntaxClassic = {
     Comment = {
-      fg = "#C0A8C8",
+      fg = "#A37FAE",
       italic = true
     },
     String = {
-      fg = "#40C080"
+      fg = "#01844F"
     },
     SpecialChar = {
-      fg = "#40C080"
+      fg = "#01844F"
     },
     Number = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     Boolean = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     Constant = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     Keyword = {
-      fg = "#E06098"
+      fg = "#BA57A7"
     },
     Operator = {
       fg = "#B04068"
     },
     Type = {
-      fg = "#E88050"
+      fg = "#C65100"
     },
     StorageClass = {
       fg = "#B050D0"
@@ -3046,35 +3014,23 @@ local variants = {
     Function = {
       fg = "#8050C8"
     },
-    Normal = {
-      fg = "#8050C8"
-    },
     Identifier = {
       fg = "#2A1A30"
     },
     Tag = {
-      fg = "#40C080"
+      fg = "#01844F"
     },
     Structure = {
-      fg = "#D8B030"
+      fg = "#907206"
     },
     Delimiter = {
       fg = "#2A1A30"
     },
     PreProc = {
-      fg = "#E06098"
-    },
-    Underlined = {
-      fg = "#8050C8"
+      fg = "#BA57A7"
     },
     Title = {
-      fg = "#D8B030"
-    },
-    Bold = {
-      fg = "#D8B030"
-    },
-    Italic = {
-      fg = "#8050C8"
+      fg = "#907206"
     },
     Error = {
       fg = "#E04058"
@@ -3107,19 +3063,19 @@ local variants = {
   terminal = {
     "#2A1A30",
     "#E04058",
-    "#36A26C",
-    "#AD8B21",
+    "#01844F",
+    "#907206",
     "#8050C8",
     "#D04080",
-    "#289EA5",
-    "#6B5A78",
-    "#6B5A78",
+    "#00868C",
+    "#63536F",
+    "#63536F",
     "#E04058",
-    "#36A26C",
-    "#AD8B21",
+    "#01844F",
+    "#907206",
     "#8050C8",
     "#D04080",
-    "#289EA5",
+    "#00868C",
     "#2A1A30"
   }
 },

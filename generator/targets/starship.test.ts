@@ -75,9 +75,9 @@ describe("generateStarshipToml", () => {
 		expect(toml).toContain('crust = "#060210"');
 	});
 
-	test("each palette has exactly 23 color entries", () => {
+	test("each palette has exactly 24 color entries", () => {
 		const colorNames = Object.keys(palettes["pastel-dark"].colors);
-		expect(colorNames).toHaveLength(23);
+		expect(colorNames).toHaveLength(24);
 
 		const pastelDarkSection = toml
 			.split("[palettes.synthpunk_pastel_dark]")[1]
@@ -89,13 +89,13 @@ describe("generateStarshipToml", () => {
 					(line: string) =>
 						line.trim() && !line.startsWith("[") && line.includes("="),
 				) ?? [];
-		expect(pastelDarkLines).toHaveLength(23);
+		expect(pastelDarkLines).toHaveLength(24);
 	});
 
 	test("os module config exists with correct properties", () => {
 		expect(toml).toContain("[os]");
 		expect(toml).toContain("disabled = false");
-		expect(toml).toContain('style = "bg:red fg:crust"');
+		expect(toml).toContain('style = "bg:red fg:ink"');
 	});
 
 	test("os.symbols section exists", () => {
@@ -105,13 +105,13 @@ describe("generateStarshipToml", () => {
 	test("username module config exists with correct properties", () => {
 		expect(toml).toContain("[username]");
 		expect(toml).toContain("show_always = true");
-		expect(toml).toContain('style_user = "bg:red fg:crust"');
-		expect(toml).toContain('style_root = "bg:red fg:crust"');
+		expect(toml).toContain('style_user = "bg:red fg:ink"');
+		expect(toml).toContain('style_root = "bg:red fg:ink"');
 	});
 
 	test("directory module config exists with correct properties", () => {
 		expect(toml).toContain("[directory]");
-		expect(toml).toContain('style = "bg:peach fg:crust"');
+		expect(toml).toContain('style = "bg:peach fg:ink"');
 		expect(toml).toContain("truncation_length = 3");
 		expect(toml).toContain('truncation_symbol = ".../"');
 	});
@@ -155,7 +155,7 @@ describe("generateStarshipToml", () => {
 
 	test("conda module config exists", () => {
 		expect(toml).toContain("[conda]");
-		expect(toml).toContain('style = "fg:crust bg:sapphire"');
+		expect(toml).toContain('style = "fg:ink bg:sapphire"');
 	});
 
 	test("time module config exists", () => {

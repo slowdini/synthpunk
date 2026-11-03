@@ -41,7 +41,7 @@ describe("resolveUIColor", () => {
 		const mapping = loadUIMapping(PALETTE_DIR);
 		const palette = loadPalette(PALETTE_DIR, "pastel-dark");
 		const hex = resolveUIColor(mapping, palette, "editor", "selection", 0.24);
-		expect(hex).toBe("#5ED4E03D");
+		expect(hex).toBe("#4A38603D");
 	});
 });
 
@@ -65,7 +65,7 @@ describe("resolveSyntaxColor", () => {
 		const mapping = loadSyntaxMapping(PALETTE_DIR);
 		const palette = loadPalette(PALETTE_DIR, "pastel-dark");
 		const hex = resolveSyntaxColor(mapping, palette, "comments.line");
-		expect(hex).toBe("#705880");
+		expect(hex).toBe("#7D628E");
 	});
 });
 

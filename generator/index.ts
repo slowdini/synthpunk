@@ -17,7 +17,8 @@ import { loadUIMapping } from "./uiMapping";
 
 const PROJECT_DIR = path.resolve(import.meta.dir, "../");
 const PALETTE_DIR = path.join(PROJECT_DIR, "palette");
-const ZED_DIR = path.join(PROJECT_DIR, "themes", "zed", "themes");
+const ZED_EXTENSION_DIR = path.join(PROJECT_DIR, "themes", "zed");
+const ZED_DIR = path.join(ZED_EXTENSION_DIR, "themes");
 const VSCODE_DIR = path.join(PROJECT_DIR, "themes", "vscode", "themes");
 const WEZTERM_DIR = path.join(PROJECT_DIR, "themes", "wezterm");
 const STARSHIP_DIR = path.join(PROJECT_DIR, "themes", "starship");
@@ -112,6 +113,13 @@ function generateAll() {
 		`${JSON.stringify(neonZedTheme, null, "\t")}\n`,
 	);
 	console.log(`Generated ${neonZedPath}`);
+
+	// The Zed extension registry reads the license from the extension directory
+	// only (it never walks up to the repository root), so the root LICENSE has to
+	// be mirrored here or submission fails with "No license was found."
+	const zedLicensePath = path.join(ZED_EXTENSION_DIR, "LICENSE");
+	fs.copyFileSync(path.join(PROJECT_DIR, "LICENSE"), zedLicensePath);
+	console.log(`Generated ${zedLicensePath}`);
 
 	// Generate WezTerm themes
 	ensureDir(WEZTERM_DIR);

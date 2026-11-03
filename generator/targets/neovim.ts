@@ -1,4 +1,5 @@
-import { ensureContrast, rgbToHex } from "../colorUtils";
+import { composite, rgbToHex } from "../colorUtils";
+import { OPACITY_RULES } from "../opacity";
 import { colorToHex, resolveColor } from "../palette";
 import { resolveSyntaxColor } from "../syntaxMapping";
 import type {
@@ -48,19 +49,6 @@ function uc(
 function pc(palette: Palette, colorName: string, alpha?: number): string {
 	const color = resolveColor(palette, colorName);
 	return colorToHex(color, alpha);
-}
-
-// Resolve a color and nudge it just enough to stay legible against the
-// terminal background. No-op when it already clears the floor (dark themes).
-function floorPc(
-	palette: Palette,
-	colorName: string,
-	bgRgb: [number, number, number],
-	minRatio = 3,
-): string {
-	const color = resolveColor(palette, colorName);
-	const adjusted = ensureContrast(color.rgb, bgRgb, minRatio);
-	return `#${rgbToHex(...adjusted)}`;
 }
 
 const TS_TO_CLASSIC: Record<string, string> = {
@@ -265,6 +253,14 @@ function buildSyntaxGroups(
 	return { treesitter, classic };
 }
 
+// Neovim highlight groups are opaque, so the selection color is blended over
+// the editor background at the same opacity the other editors use.
+function selectionBg(uiMapping: UIMapping, palette: Palette): string {
+	const selection = resolveColor(palette, uiMapping.editor.selection).rgb;
+	const base = resolveColor(palette, uiMapping.editor.background).rgb;
+	return `#${rgbToHex(...composite(selection, OPACITY_RULES.selection, base))}`;
+}
+
 function buildUIGroups(
 	variant: VariantName,
 	palette: Palette,
@@ -331,7 +327,7 @@ function buildUIGroups(
 		},
 		PmenuThumb: { bg: uc(uiMapping, palette, "surface", "active") },
 		PmenuSbar: { bg: uc(uiMapping, palette, "surface", "default") },
-		Visual: { bg: uc(uiMapping, palette, "editor", "selection"), blend: 15 },
+		Visual: { bg: selectionBg(uiMapping, palette), blend: 15 },
 		Search: {
 			fg: uc(uiMapping, palette, "text", "on_accent"),
 			bg: uc(uiMapping, palette, "editor", "find_match"),
@@ -401,7 +397,10 @@ function buildUIGroups(
 			fg: uc(uiMapping, palette, "text", "primary"),
 			bg: uc(uiMapping, palette, "surface", "hover"),
 		},
-		Substitute: { bg: uc(uiMapping, palette, "editor", "find_match") },
+		Substitute: {
+			fg: uc(uiMapping, palette, "text", "on_accent"),
+			bg: uc(uiMapping, palette, "editor", "find_match"),
+		},
 		SpellBad: {
 			sp: uc(uiMapping, palette, "status", "error"),
 			undercurl: true,
@@ -449,10 +448,14 @@ export function generateNeovimPalette(
 		scopes,
 		fontStyles,
 	);
+	// apply() sets syntax groups after UI groups, and nvim_set_hl replaces a
+	// whole group, so a classic group sharing a UI group's name would erase it.
+	const syntaxClassic = Object.fromEntries(
+		Object.entries(syntaxGroups.classic).filter(
+			([group]) => !Object.hasOwn(ui, group),
+		),
+	);
 
-	// Terminal background is the editor background (base); floor chromatic ANSI
-	// text colors against it so they stay legible (no-op on dark themes).
-	const terminalBgRgb = resolveColor(palette, "base").rgb;
 	const t = uiMapping.terminal;
 
 	const terminal: string[] = [];
@@ -461,12 +464,12 @@ export function generateNeovimPalette(
 	} else {
 		terminal.push(pc(palette, "text"));
 	}
-	terminal.push(floorPc(palette, t.red, terminalBgRgb));
-	terminal.push(floorPc(palette, t.green, terminalBgRgb));
-	terminal.push(floorPc(palette, t.yellow, terminalBgRgb));
-	terminal.push(floorPc(palette, t.blue, terminalBgRgb));
-	terminal.push(floorPc(palette, t.magenta, terminalBgRgb));
-	terminal.push(floorPc(palette, t.cyan, terminalBgRgb));
+	terminal.push(pc(palette, t.red));
+	terminal.push(pc(palette, t.green));
+	terminal.push(pc(palette, t.yellow));
+	terminal.push(pc(palette, t.blue));
+	terminal.push(pc(palette, t.magenta));
+	terminal.push(pc(palette, t.cyan));
 	if (isDark) {
 		terminal.push(uc(uiMapping, palette, "terminal", "white"));
 	} else {
@@ -477,12 +480,12 @@ export function generateNeovimPalette(
 	} else {
 		terminal.push(pc(palette, "subtext1"));
 	}
-	terminal.push(floorPc(palette, t.bright_red, terminalBgRgb));
-	terminal.push(floorPc(palette, t.bright_green, terminalBgRgb));
-	terminal.push(floorPc(palette, t.bright_yellow, terminalBgRgb));
-	terminal.push(floorPc(palette, t.bright_blue, terminalBgRgb));
-	terminal.push(floorPc(palette, t.bright_magenta, terminalBgRgb));
-	terminal.push(floorPc(palette, t.bright_cyan, terminalBgRgb));
+	terminal.push(pc(palette, t.bright_red));
+	terminal.push(pc(palette, t.bright_green));
+	terminal.push(pc(palette, t.bright_yellow));
+	terminal.push(pc(palette, t.bright_blue));
+	terminal.push(pc(palette, t.bright_magenta));
+	terminal.push(pc(palette, t.bright_cyan));
 	terminal.push(uc(uiMapping, palette, "terminal", "bright_white"));
 
 	const lspLinks: Record<string, string> = {
@@ -514,7 +517,7 @@ export function generateNeovimPalette(
 		meta: { name, variant, type },
 		ui,
 		syntaxTreesitter: syntaxGroups.treesitter,
-		syntaxClassic: syntaxGroups.classic,
+		syntaxClassic,
 		lspLinks,
 		terminal,
 	};
@@ -527,10 +530,7 @@ function stringifyNeovimLuaValue(value: unknown, indent: number = 0): string {
 	if (value === null || value === undefined) return "nil";
 	if (typeof value === "boolean") return value ? "true" : "false";
 	if (typeof value === "number") return String(value);
-	if (typeof value === "string") {
-		if (value.match(/^[a-zA-Z_][a-zA-Z0-9_]*$/)) return value;
-		return `"${value}"`;
-	}
+	if (typeof value === "string") return `"${value}"`;
 	if (Array.isArray(value)) {
 		if (value.length === 0) return "{}";
 		const items = value
