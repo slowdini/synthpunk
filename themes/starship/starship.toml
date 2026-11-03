@@ -34,7 +34,7 @@ palette = 'synthpunk_pastel_dark'
 
 [os]
 disabled = false
-style = "bg:red fg:crust"
+style = "bg:red fg:ink"
 
 [os.symbols]
 Alpaquita = ""
@@ -80,12 +80,12 @@ Windows = ""
 
 [username]
 show_always = true
-style_user = "bg:red fg:crust"
-style_root = "bg:red fg:crust"
+style_user = "bg:red fg:ink"
+style_root = "bg:red fg:ink"
 format = "[ $user]($style)"
 
 [directory]
-style = "bg:peach fg:crust"
+style = "bg:peach fg:ink"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = ".../"
@@ -100,60 +100,60 @@ Developer = "󰲋 "
 [git_branch]
 symbol = ""
 style = "bg:yellow"
-format = "[[ $symbol $branch ](fg:crust bg:yellow)]($style)"
+format = "[[ $symbol $branch ](fg:ink bg:yellow)]($style)"
 
 [git_status]
 style = "bg:yellow"
-format = "[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)"
+format = "[[($all_status$ahead_behind )](fg:ink bg:yellow)]($style)"
 
 [c]
 style = "bg:green"
-format = "[[  ( $version) ](fg:crust bg:green)]($style)"
+format = "[[  ( $version) ](fg:ink bg:green)]($style)"
 
 [rust]
 style = "bg:green"
-format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+format = "[[ ( $version) ](fg:ink bg:green)]($style)"
 
 [golang]
 style = "bg:green"
-format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+format = "[[ ( $version) ](fg:ink bg:green)]($style)"
 
 [nodejs]
 style = "bg:green"
-format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+format = "[[ ( $version) ](fg:ink bg:green)]($style)"
 
 [bun]
 style = "bg:green"
-format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+format = "[[ ( $version) ](fg:ink bg:green)]($style)"
 
 [php]
 style = "bg:green"
-format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+format = "[[ ( $version) ](fg:ink bg:green)]($style)"
 
 [java]
 style = "bg:green"
-format = "[[  ( $version) ](fg:crust bg:green)]($style)"
+format = "[[  ( $version) ](fg:ink bg:green)]($style)"
 
 [kotlin]
 style = "bg:green"
-format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+format = "[[ ( $version) ](fg:ink bg:green)]($style)"
 
 [haskell]
 style = "bg:green"
-format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+format = "[[ ( $version) ](fg:ink bg:green)]($style)"
 
 [python]
 style = "bg:green"
-format = "[[ ( $version) ](fg:crust bg:green)]($style)"
+format = "[[ ( $version) ](fg:ink bg:green)]($style)"
 
 [docker_context]
 symbol = ""
 style = "bg:sapphire"
-format = "[[ $symbol( $context) ](fg:crust bg:sapphire)]($style)"
+format = "[[ $symbol( $context) ](fg:ink bg:sapphire)]($style)"
 
 [conda]
 symbol = "  "
-style = "fg:crust bg:sapphire"
+style = "fg:ink bg:sapphire"
 format = "[$symbol$environment ]($style)"
 ignore_base = false
 
@@ -161,7 +161,7 @@ ignore_base = false
 disabled = false
 time_format = "%R"
 style = "bg:lavender"
-format = "[[  $time ](fg:crust bg:lavender)]($style)"
+format = "[[  $time ](fg:ink bg:lavender)]($style)"
 
 [line_break]
 disabled = true
@@ -198,9 +198,10 @@ sapphire = "#7AA8C0"
 blue = "#8BA4FF"
 lavender = "#C49BFF"
 text = "#F0E0F0"
+ink = "#0D0612"
 subtext1 = "#C8B0D8"
 subtext0 = "#A090B8"
-overlay = "#705880"
+overlay = "#7D628E"
 surface2 = "#4A3860"
 surface1 = "#3A2850"
 surface0 = "#2E1E40"
@@ -209,23 +210,24 @@ mantle = "#160A20"
 crust = "#0D0612"
 
 [palettes.synthpunk_pastel_light]
-rosewater = "#F8B0C8"
-flamingo = "#FF9BB6"
-pink = "#FF7DB0"
-maroon = "#D48BA0"
-red = "#FF5470"
-peach = "#FFA07A"
-yellow = "#E8C468"
-green = "#5AC09A"
-teal = "#5ED4E0"
-sky = "#7AC8FF"
-sapphire = "#7AA8C0"
-blue = "#8BA4FF"
-lavender = "#C49BFF"
+rosewater = "#996377"
+flamingo = "#BB4970"
+pink = "#BB218A"
+maroon = "#7F3E4C"
+red = "#DB1836"
+peach = "#BC4D04"
+yellow = "#8F6C02"
+green = "#037E55"
+teal = "#03808E"
+sky = "#026BAA"
+sapphire = "#546D86"
+blue = "#4556D2"
+lavender = "#8A51C8"
 text = "#2E1A24"
-subtext1 = "#6B4F5E"
+ink = "#FFF8F5"
+subtext1 = "#614755"
 subtext0 = "#997A8A"
-overlay = "#C4A8B8"
+overlay = "#A27690"
 surface2 = "#D4B8C8"
 surface1 = "#E4CCD8"
 surface0 = "#F0DEE8"
@@ -248,9 +250,10 @@ sapphire = "#6080FF"
 blue = "#A060FF"
 lavender = "#D040FF"
 text = "#E8E0F0"
+ink = "#060210"
 subtext1 = "#B8A8D0"
 subtext0 = "#8878A0"
-overlay = "#503870"
+overlay = "#6D4D99"
 surface2 = "#301E50"
 surface1 = "#251540"
 surface0 = "#1A0D2E"
@@ -259,23 +262,24 @@ mantle = "#0A0418"
 crust = "#060210"
 
 [palettes.synthpunk_neon_light]
-rosewater = "#E8A0C0"
-flamingo = "#E06098"
+rosewater = "#A56584"
+flamingo = "#BA57A7"
 pink = "#D04080"
 maroon = "#B04068"
 red = "#E04058"
-peach = "#E88050"
-yellow = "#D8B030"
-green = "#40C080"
-teal = "#30C0C8"
-sky = "#4098D8"
+peach = "#C65100"
+yellow = "#907206"
+green = "#01844F"
+teal = "#00868C"
+sky = "#1278B8"
 sapphire = "#6070C8"
 blue = "#8050C8"
 lavender = "#B050D0"
 text = "#2A1A30"
-subtext1 = "#6B5A78"
-subtext0 = "#A898B0"
-overlay = "#C0A8C8"
+ink = "#FAF6FA"
+subtext1 = "#63536F"
+subtext0 = "#9884A1"
+overlay = "#A37FAE"
 surface2 = "#E0C8E8"
 surface1 = "#E8D8F0"
 surface0 = "#F0E8F5"

@@ -22,7 +22,7 @@ describe("loadPalette", () => {
 	test("loads neon-light palette", () => {
 		const palette = loadPalette(PALETTE_DIR, "neon-light");
 		expect(palette.info.name).toBe("synthpunk-neon-light");
-		expect(palette.colors.rosewater.hex).toBe("E8A0C0");
+		expect(palette.colors.rosewater.hex).toBe("A56584");
 	});
 
 	test("throws on missing palette file", () => {

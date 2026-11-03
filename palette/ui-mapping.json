@@ -20,7 +20,7 @@
 		"secondary": "subtext1",
 		"tertiary": "subtext0",
 		"accent": "teal",
-		"on_accent": "base"
+		"on_accent": "ink"
 	},
 	"border": {
 		"default": "surface1",
@@ -34,7 +34,7 @@
 		"line_number": "overlay",
 		"active_line_number": "teal",
 		"active_line_background": "surface0",
-		"selection": "teal",
+		"selection": "surface2",
 		"cursor": "lavender",
 		"find_match": "flamingo",
 		"find_active_match": "red"

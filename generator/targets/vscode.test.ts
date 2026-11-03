@@ -103,12 +103,4 @@ describe("generateVSCodeTheme", () => {
 			}
 		});
 	}
-
-	test("dark terminal ANSI colors are unchanged by the contrast floor", () => {
-		const theme = buildTheme("pastel-dark");
-		// Already legible on the dark background — palette values preserved.
-		expect(theme.colors["terminal.ansiGreen"]).toBe("#7FD7B5");
-		expect(theme.colors["terminal.ansiYellow"]).toBe("#FFE4B5");
-		expect(theme.colors["terminal.ansiCyan"]).toBe("#5ED4E0");
-	});
 });

@@ -76,6 +76,11 @@
 			"rgb": [232, 224, 240],
 			"description": "Primary text — soft lavender-white"
 		},
+		"ink": {
+			"hex": "060210",
+			"rgb": [6, 2, 16],
+			"description": "Text drawn on accent fills such as prompt segments, badges, and search hits"
+		},
 		"subtext1": {
 			"hex": "B8A8D0",
 			"rgb": [184, 168, 208],
@@ -87,8 +92,8 @@
 			"description": "Tertiary text, placeholders"
 		},
 		"overlay": {
-			"hex": "503870",
-			"rgb": [80, 56, 112],
+			"hex": "6D4D99",
+			"rgb": [109, 77, 153],
 			"description": "Overlays, disabled states, comments"
 		},
 		"surface2": {

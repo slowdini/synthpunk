@@ -161,7 +161,7 @@ describe("paletteViolations", () => {
 		).toEqual([{ kind: "missing", variant: "partial", color: "gray" }]);
 	});
 
-	test("runs against every repo palette", () => {
+	test("repo palettes meet every rule in every variant", () => {
 		const palettes = Object.fromEntries(
 			VARIANTS.map((v) => [v, loadPalette(PALETTE_DIR, v)]),
 		);
@@ -169,7 +169,7 @@ describe("paletteViolations", () => {
 			palettes,
 			loadLegibilityRules(PALETTE_DIR),
 		);
-		expect(violations.filter((v) => v.kind === "missing")).toEqual([]);
+		expect(violations).toEqual([]);
 	});
 });
 

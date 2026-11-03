@@ -1,4 +1,5 @@
-import { adjustBrightness, ensureContrast } from "../colorUtils";
+import { adjustBrightness } from "../colorUtils";
+import { OPACITY_RULES } from "../opacity";
 import { resolveColor } from "../palette";
 import type {
 	FontStyleMapping,
@@ -69,27 +70,12 @@ function hex8rgb(rgb: [number, number, number], alpha: number = 1): string {
 	return `#${hex}${a}`;
 }
 
-// Resolve a color and nudge it just enough to stay legible against the
-// terminal background. No-op when it already clears the floor (dark themes).
-function floor8(
-	palette: Palette,
-	colorName: string,
-	bgRgb: [number, number, number],
-	alpha: number = 1,
-	minRatio = 3,
-): string {
-	const color = resolveColor(palette, colorName);
-	const adjusted = ensureContrast(color.rgb, bgRgb, minRatio);
-	return hex8rgb(adjusted, alpha);
-}
-
 // "Bright" = more emphasized than the base: lighter on a dark background,
-// darker on a light one, then floored for legibility.
+// darker on a light one, so it only ever gains contrast.
 function bright8(
 	palette: Palette,
 	colorName: string,
 	isDark: boolean,
-	bgRgb: [number, number, number],
 	factor: number = 0.2,
 	alpha: number = 1,
 ): string {
@@ -99,8 +85,7 @@ function bright8(
 		factor,
 		isDark ? "lighten" : "dim",
 	);
-	const adjusted = ensureContrast(emphasized, bgRgb, 3);
-	return hex8rgb(adjusted, alpha);
+	return hex8rgb(emphasized, alpha);
 }
 
 function dim8(
@@ -133,9 +118,6 @@ function buildUIStyle(
 ): Record<string, string | null> {
 	const s = (colorName: string, alpha?: number) =>
 		hex8(palette, colorName, alpha);
-	// Terminal background is the editor background; floor chromatic ANSI text
-	// against it so it stays legible (no-op on dark themes).
-	const bgRgb = resolveColor(palette, "base").rgb;
 
 	const result: Record<string, string | null> = {
 		border: s("surface1"),
@@ -175,8 +157,10 @@ function buildUIStyle(
 		"tab_bar.background": s("mantle"),
 		"tab.inactive_background": s("mantle"),
 		"tab.active_background": s("base"),
-		"search.match_background": isDark ? s("flamingo", 0.2) : s("teal", 0.2),
-		"search.active_match_background": s("red", 0.2),
+		"search.match_background": isDark
+			? s("flamingo", OPACITY_RULES.search_match_other)
+			: s("teal", OPACITY_RULES.search_match_other),
+		"search.active_match_background": s("red", OPACITY_RULES.search_match),
 		"panel.background": s("mantle"),
 		"panel.focused_border": null,
 		"pane.focused_border": null,
@@ -200,7 +184,7 @@ function buildUIStyle(
 		"editor.document_highlight.read_background": isDark
 			? s("flamingo", 0.1)
 			: s("teal", 0.1),
-		"editor.document_highlight.write_background": s("overlay", 0.4),
+		"editor.document_highlight.write_background": s("overlay", 0.2),
 		"terminal.background": s("base"),
 		"terminal.foreground": s("text"),
 		"terminal.bright_foreground": s("text"),
@@ -210,32 +194,33 @@ function buildUIStyle(
 		"terminal.ansi.dim_black": isDark
 			? dim8(palette, "text", 0.3)
 			: dim8(palette, "text", 0.3),
-		"terminal.ansi.red": floor8(palette, "red", bgRgb),
-		"terminal.ansi.bright_red": bright8(palette, "red", isDark, bgRgb),
+		"terminal.ansi.red": s("red"),
+		"terminal.ansi.bright_red": bright8(palette, "red", isDark),
 		"terminal.ansi.dim_red": dim8(palette, "red"),
-		"terminal.ansi.green": floor8(palette, "green", bgRgb),
-		"terminal.ansi.bright_green": bright8(palette, "green", isDark, bgRgb),
+		"terminal.ansi.green": s("green"),
+		"terminal.ansi.bright_green": bright8(palette, "green", isDark),
 		"terminal.ansi.dim_green": dim8(palette, "green"),
-		"terminal.ansi.yellow": floor8(palette, "yellow", bgRgb),
-		"terminal.ansi.bright_yellow": bright8(palette, "yellow", isDark, bgRgb),
+		"terminal.ansi.yellow": s("yellow"),
+		"terminal.ansi.bright_yellow": bright8(palette, "yellow", isDark),
 		"terminal.ansi.dim_yellow": dim8(palette, "yellow"),
-		"terminal.ansi.blue": floor8(palette, "blue", bgRgb),
-		"terminal.ansi.bright_blue": bright8(palette, "blue", isDark, bgRgb),
+		"terminal.ansi.blue": s("blue"),
+		"terminal.ansi.bright_blue": bright8(palette, "blue", isDark),
 		"terminal.ansi.dim_blue": dim8(palette, "blue"),
-		"terminal.ansi.magenta": floor8(palette, "pink", bgRgb),
-		"terminal.ansi.bright_magenta": bright8(palette, "pink", isDark, bgRgb),
+		"terminal.ansi.magenta": s("pink"),
+		"terminal.ansi.bright_magenta": bright8(palette, "pink", isDark),
 		"terminal.ansi.dim_magenta": dim8(palette, "pink"),
-		"terminal.ansi.cyan": floor8(palette, "teal", bgRgb),
-		"terminal.ansi.bright_cyan": bright8(palette, "teal", isDark, bgRgb),
+		"terminal.ansi.cyan": s("teal"),
+		"terminal.ansi.bright_cyan": bright8(palette, "teal", isDark),
 		"terminal.ansi.dim_cyan": dim8(palette, "teal"),
 		"terminal.ansi.white": isDark ? s("subtext1") : s("subtext0"),
 		"terminal.ansi.bright_white": s("text"),
-		"terminal.ansi.dim_white": dim8(palette, "overlay"),
+		// Dimming overlay further on a dark background makes it unreadable.
+		"terminal.ansi.dim_white": isDark ? s("overlay") : dim8(palette, "overlay"),
 		"link_text.hover": isDark ? s("sky") : s("blue"),
 		"version_control.added": s("green"),
 		"version_control.modified": s("yellow"),
 		"version_control.word_added": s("green", 0.35),
-		"version_control.word_deleted": s("red", 0.8),
+		"version_control.word_deleted": s("red", 0.35),
 		"version_control.deleted": s("red"),
 		"version_control.conflict_marker.ours": s("green", 0.15),
 		"version_control.conflict_marker.theirs": s("blue", 0.15),
@@ -367,10 +352,14 @@ function buildPlayers(palette: Palette): ZedPlayer[] {
 		"yellow",
 		"peach",
 	];
-	return playerColors.map((colorName) => ({
+	return playerColors.map((colorName, i) => ({
 		cursor: hex8(palette, colorName),
 		background: hex8(palette, colorName),
-		selection: hex8(palette, colorName, 0.24),
+		// Player 0 is the local user, whose selection matches the other editors.
+		selection:
+			i === 0
+				? hex8(palette, "surface2", OPACITY_RULES.selection)
+				: hex8(palette, colorName, 0.24),
 	}));
 }
 

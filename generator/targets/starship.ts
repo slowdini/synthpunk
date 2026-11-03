@@ -128,7 +128,7 @@ export function generateStarshipToml(
 
 	lines.push("[os]");
 	lines.push("disabled = false");
-	lines.push(`style = "bg:red fg:crust"`);
+	lines.push(`style = "bg:red fg:ink"`);
 	lines.push("");
 
 	lines.push("[os.symbols]");
@@ -139,13 +139,13 @@ export function generateStarshipToml(
 
 	lines.push("[username]");
 	lines.push("show_always = true");
-	lines.push(`style_user = "bg:red fg:crust"`);
-	lines.push(`style_root = "bg:red fg:crust"`);
+	lines.push(`style_user = "bg:red fg:ink"`);
+	lines.push(`style_root = "bg:red fg:ink"`);
 	lines.push(`format = "[ $user]($style)"`);
 	lines.push("");
 
 	lines.push("[directory]");
-	lines.push(`style = "bg:peach fg:crust"`);
+	lines.push(`style = "bg:peach fg:ink"`);
 	lines.push(`format = "[ $path ]($style)"`);
 	lines.push("truncation_length = 3");
 	lines.push(`truncation_symbol = ".../"`);
@@ -162,13 +162,13 @@ export function generateStarshipToml(
 	lines.push("[git_branch]");
 	lines.push(`symbol = ""`);
 	lines.push(`style = "bg:yellow"`);
-	lines.push(`format = "[[ $symbol $branch ](fg:crust bg:yellow)]($style)"`);
+	lines.push(`format = "[[ $symbol $branch ](fg:ink bg:yellow)]($style)"`);
 	lines.push("");
 
 	lines.push("[git_status]");
 	lines.push(`style = "bg:yellow"`);
 	lines.push(
-		`format = "[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)"`,
+		`format = "[[($all_status$ahead_behind )](fg:ink bg:yellow)]($style)"`,
 	);
 	lines.push("");
 
@@ -177,7 +177,7 @@ export function generateStarshipToml(
 		lines.push(`[${lang}]`);
 		lines.push(`style = "bg:green"`);
 		lines.push(
-			`format = "[[ ${symbol}( $version) ](fg:crust bg:green)]($style)"`,
+			`format = "[[ ${symbol}( $version) ](fg:ink bg:green)]($style)"`,
 		);
 		lines.push("");
 	}
@@ -185,14 +185,12 @@ export function generateStarshipToml(
 	lines.push("[docker_context]");
 	lines.push(`symbol = ""`);
 	lines.push(`style = "bg:sapphire"`);
-	lines.push(
-		`format = "[[ $symbol( $context) ](fg:crust bg:sapphire)]($style)"`,
-	);
+	lines.push(`format = "[[ $symbol( $context) ](fg:ink bg:sapphire)]($style)"`);
 	lines.push("");
 
 	lines.push("[conda]");
 	lines.push(`symbol = "  "`);
-	lines.push(`style = "fg:crust bg:sapphire"`);
+	lines.push(`style = "fg:ink bg:sapphire"`);
 	lines.push(`format = "[$symbol$environment ]($style)"`);
 	lines.push("ignore_base = false");
 	lines.push("");
@@ -201,7 +199,7 @@ export function generateStarshipToml(
 	lines.push("disabled = false");
 	lines.push(`time_format = "%R"`);
 	lines.push(`style = "bg:lavender"`);
-	lines.push(`format = "[[  $time ](fg:crust bg:lavender)]($style)"`);
+	lines.push(`format = "[[  $time ](fg:ink bg:lavender)]($style)"`);
 	lines.push("");
 
 	lines.push("[line_break]");
