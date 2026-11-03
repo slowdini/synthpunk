@@ -169,3 +169,15 @@ export function ensureContrast(
 	}
 	return clampRgb(hslToRgb(h, s, pass));
 }
+
+/**
+ * The opaque color produced by drawing `fg` at `alpha` over `bg`, blended per
+ * sRGB channel the way editors and terminals render translucent backgrounds.
+ */
+export function composite(
+	fg: [number, number, number],
+	alpha: number,
+	bg: [number, number, number],
+): [number, number, number] {
+	return clampRgb(fg.map((c, i) => alpha * c + (1 - alpha) * bg[i]));
+}

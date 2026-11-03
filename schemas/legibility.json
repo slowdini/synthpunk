@@ -1,0 +1,65 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Legibility Rules",
+	"description": "Contrast tiers, the tier each palette color is held to as text, and the tiers each background must support in every variant",
+	"type": "object",
+	"required": ["info", "tiers", "text", "surfaces", "fills"],
+	"definitions": {
+		"tierList": {
+			"type": "array",
+			"items": { "type": "string" },
+			"uniqueItems": true
+		}
+	},
+	"properties": {
+		"info": {
+			"type": "object",
+			"required": ["name", "description", "version"],
+			"properties": {
+				"name": { "type": "string" },
+				"description": { "type": "string" },
+				"version": { "type": "string" }
+			}
+		},
+		"tiers": {
+			"description": "Named contrast tiers. `min` is the minimum WCAG 2 contrast ratio.",
+			"type": "object",
+			"additionalProperties": {
+				"type": "object",
+				"required": ["min", "description"],
+				"properties": {
+					"min": { "type": "number", "minimum": 1, "maximum": 21 },
+					"description": { "type": "string" }
+				}
+			}
+		},
+		"text": {
+			"description": "Palette color name -> the tier it is held to when used as text.",
+			"type": "object",
+			"additionalProperties": { "type": "string" }
+		},
+		"surfaces": {
+			"description": "Background palette color name -> tiers whose text colors must all pass on it in every variant.",
+			"type": "object",
+			"additionalProperties": { "$ref": "#/definitions/tierList" }
+		},
+		"fills": {
+			"description": "Accent colors used as solid backgrounds, the palette colors allowed as text on them, and the tier that text is held to.",
+			"type": "object",
+			"required": ["colors", "text", "tier"],
+			"properties": {
+				"colors": {
+					"type": "array",
+					"items": { "type": "string" },
+					"uniqueItems": true
+				},
+				"text": {
+					"type": "array",
+					"items": { "type": "string" },
+					"uniqueItems": true
+				},
+				"tier": { "type": "string" }
+			}
+		}
+	}
+}

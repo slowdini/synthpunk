@@ -1,7 +1,12 @@
 import { describe, expect, test } from "bun:test";
 import path from "node:path";
-import { colorToHex, loadPalette, resolveColor } from "./palette";
-import type { VariantName } from "./types";
+import {
+	colorToHex,
+	hexRgbMismatches,
+	loadPalette,
+	resolveColor,
+} from "./palette";
+import { VARIANTS, type VariantName } from "./types";
 
 const PROJECT_DIR = path.resolve(import.meta.dir, "../");
 const PALETTE_DIR = path.join(PROJECT_DIR, "palette");
@@ -64,5 +69,24 @@ describe("colorToHex", () => {
 			rgb: [255, 84, 112] as [number, number, number],
 		};
 		expect(colorToHex(color, 1)).toBe("#FF5470");
+	});
+});
+
+describe("hexRgbMismatches", () => {
+	test("reports a color whose hex and rgb disagree", () => {
+		const palette = {
+			info: { name: "fixture", description: "", version: "0" },
+			colors: {
+				ok: { hex: "FF5470", rgb: [255, 84, 112], description: "" },
+				bad: { hex: "FF5470", rgb: [255, 84, 113], description: "" },
+			},
+		} as Parameters<typeof hexRgbMismatches>[0];
+		expect(hexRgbMismatches(palette)).toEqual([
+			"bad: hex FF5470 but rgb [255, 84, 113] is FF5471",
+		]);
+	});
+
+	test.each(VARIANTS)("%s palette hex and rgb values agree", (variant) => {
+		expect(hexRgbMismatches(loadPalette(PALETTE_DIR, variant))).toEqual([]);
 	});
 });
