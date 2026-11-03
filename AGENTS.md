@@ -13,7 +13,7 @@ Synthpunk is a synthwave-inspired color scheme that ships as themes for multiple
   - `wezterm/` — WezTerm color scheme files (TOML)
   - `starship/` — Starship prompt config (TOML)
 - `scripts/` — release and review tooling (version bumping, legibility review sheet)
-- `tests/` — cross-target tests (version lockstep)
+- `tests/` — cross-target tests: version lockstep, and `tests/artifacts/`, which load each generated theme file the way its tool does and check its structure and legibility (the Neovim tests need `nvim`; set `NVIM_BIN` to pick a binary)
 - `assets/` — preview images for the README
 - `schemas/` — JSON schemas for palette files
 
@@ -33,4 +33,4 @@ bun run legibility:sheet  # write review/legibility.html for visual review
 
 - **Never edit `themes/**` directly.** These files are generated. Edit `palette/` and `generator/`, then run `bun run build`. CI enforces that committed artifacts match generator output.
 - **Version lockstep.** The version in `package.json`, `themes/vscode/package.json`, and `themes/zed/extension.toml` must always match. Use `bun scripts/bump-version.ts <version>` to bump all at once. The lockstep is enforced by `tests/lockstep.test.ts`.
-- **Legibility.** `palette/legibility.json` sets the minimum WCAG contrast for each kind of text (tiers), which tier each palette color is held to, and which backgrounds must support each tier in every variant. `bun run legibility` lists violations with suggested fixes. When palette colors change, regenerate the review sheet with `bun run legibility:sheet` and get a human review of it before merging.
+- **Legibility.** `palette/legibility.json` sets the minimum WCAG contrast for each kind of text (tiers), which tier each palette color is held to, and which backgrounds must support each tier in every variant. `bun test` fails when a palette breaks these rules or when any generated theme draws text below its tier (including on selection and highlight backgrounds); `bun run legibility` lists palette violations with suggested fixes. Fix violations in `palette/` or in the generator mapping, not with per-target contrast adjustments. When palette colors change, regenerate the review sheet with `bun run legibility:sheet` and get a human review of it before merging.

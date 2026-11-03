@@ -7,13 +7,13 @@
 	},
 	"colors": {
 		"rosewater": {
-			"hex": "E8A0C0",
-			"rgb": [232, 160, 192],
+			"hex": "A56584",
+			"rgb": [165, 101, 132],
 			"description": "Pearlescent pink for delicate accents"
 		},
 		"flamingo": {
-			"hex": "E06098",
-			"rgb": [224, 96, 152],
+			"hex": "BA57A7",
+			"rgb": [186, 87, 167],
 			"description": "Holographic pink for lively highlights"
 		},
 		"pink": {
@@ -32,28 +32,28 @@
 			"description": "Coral-red for errors, critical"
 		},
 		"peach": {
-			"hex": "E88050",
-			"rgb": [232, 128, 80],
+			"hex": "C65100",
+			"rgb": [198, 81, 0],
 			"description": "Opalescent orange for types, constants"
 		},
 		"yellow": {
-			"hex": "D8B030",
-			"rgb": [216, 176, 48],
+			"hex": "907206",
+			"rgb": [144, 114, 6],
 			"description": "Golden iridescence for attributes, classes"
 		},
 		"green": {
-			"hex": "40C080",
-			"rgb": [64, 192, 128],
+			"hex": "01844F",
+			"rgb": [1, 132, 79],
 			"description": "Iridescent mint for success, strings"
 		},
 		"teal": {
-			"hex": "30C0C8",
-			"rgb": [48, 192, 200],
+			"hex": "00868C",
+			"rgb": [0, 134, 140],
 			"description": "Opalescent cyan for keywords, info"
 		},
 		"sky": {
-			"hex": "4098D8",
-			"rgb": [64, 152, 216],
+			"hex": "1278B8",
+			"rgb": [18, 120, 184],
 			"description": "Prismatic blue for methods, variables"
 		},
 		"sapphire": {
@@ -76,19 +76,24 @@
 			"rgb": [42, 26, 48],
 			"description": "Primary text — deep purple-brown"
 		},
+		"ink": {
+			"hex": "FAF6FA",
+			"rgb": [250, 246, 250],
+			"description": "Text drawn on accent fills such as prompt segments, badges, and search hits"
+		},
 		"subtext1": {
-			"hex": "6B5A78",
-			"rgb": [107, 90, 120],
+			"hex": "63536F",
+			"rgb": [99, 83, 111],
 			"description": "Secondary text"
 		},
 		"subtext0": {
-			"hex": "A898B0",
-			"rgb": [168, 152, 176],
+			"hex": "9884A1",
+			"rgb": [152, 132, 161],
 			"description": "Tertiary text, placeholders"
 		},
 		"overlay": {
-			"hex": "C0A8C8",
-			"rgb": [192, 168, 200],
+			"hex": "A37FAE",
+			"rgb": [163, 127, 174],
 			"description": "Overlays, disabled states, comments"
 		},
 		"surface2": {

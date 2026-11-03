@@ -1,7 +1,19 @@
 import { describe, expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { VARIANT_DISPLAY_NAMES, VARIANTS } from "../../generator/types";
+import {
+	VARIANT_DISPLAY_NAMES,
+	VARIANT_TYPE,
+	VARIANTS,
+} from "../../generator/types";
+import {
+	ansiTier,
+	expectLegible,
+	flatten,
+	palette,
+	RULES,
+	textPair,
+} from "./pairs";
 
 // These tests parse the committed scheme files the way WezTerm does, rather
 // than inspecting the generator's in-memory object. CI's generator sync check
@@ -56,6 +68,45 @@ for (const variant of VARIANTS) {
 
 		// WezTerm names a scheme from metadata.name, else the file stem. The
 		// README tells users to set color_scheme to the display name.
+		test("text colors meet the legibility rules", () => {
+			const pal = palette(variant);
+			const bg = String(colors.background);
+			const ansi = [
+				...(colors.ansi as string[]),
+				...(colors.brights as string[]),
+			];
+			const tabBar = colors.tab_bar as Record<string, Table>;
+			const pairs = [
+				textPair("foreground", String(colors.foreground), bg, pal),
+				...ansi.flatMap((color, i) => {
+					const tier = ansiTier(i, VARIANT_TYPE[variant] === "dark");
+					return tier ? [textPair(`ansi ${i}`, color, bg, pal, tier)] : [];
+				}),
+				...["active_tab", "inactive_tab", "new_tab"].map((tab) =>
+					textPair(
+						`tab_bar.${tab}`,
+						String(tabBar[tab].fg_color),
+						String(tabBar[tab].bg_color),
+						pal,
+					),
+				),
+				textPair(
+					"cursor_fg on cursor_bg",
+					String(colors.cursor_fg),
+					String(colors.cursor_bg),
+					pal,
+					RULES.fills.tier,
+				),
+				textPair(
+					"selection_fg on selection_bg",
+					String(colors.selection_fg),
+					flatten(String(colors.selection_bg), bg),
+					pal,
+				),
+			];
+			expectLegible(pairs);
+		});
+
 		test("metadata.name is the display name used in the README", () => {
 			expect((scheme.metadata as Table)?.name).toBe(
 				VARIANT_DISPLAY_NAMES[variant],

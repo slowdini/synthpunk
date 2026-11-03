@@ -107,24 +107,6 @@ describe("generateNeovimPalette", () => {
 		});
 	}
 
-	test("dark chromatic terminal colors are unchanged by the contrast floor", () => {
-		const { palette, uiMapping, syntaxMapping, scopes, fontStyles } =
-			loadFixtures("pastel-dark");
-		const result = generateNeovimPalette(
-			"pastel-dark",
-			palette,
-			uiMapping,
-			syntaxMapping,
-			scopes,
-			fontStyles,
-		);
-
-		// Already legible on the dark background — palette values preserved.
-		expect(result.terminal[2]).toBe("#7FD7B5"); // green
-		expect(result.terminal[3]).toBe("#FFE4B5"); // yellow
-		expect(result.terminal[6]).toBe("#5ED4E0"); // cyan
-	});
-
 	test("pastel-dark has @comment with correct fg and italic", () => {
 		const { palette, uiMapping, syntaxMapping, scopes, fontStyles } =
 			loadFixtures("pastel-dark");
@@ -138,7 +120,7 @@ describe("generateNeovimPalette", () => {
 		);
 
 		expect(result.syntaxTreesitter["@comment"]).toBeDefined();
-		expect(result.syntaxTreesitter["@comment"].fg).toBe("#705880");
+		expect(result.syntaxTreesitter["@comment"].fg).toBe("#7D628E");
 		expect(result.syntaxTreesitter["@comment"].italic).toBe(true);
 	});
 
@@ -155,7 +137,7 @@ describe("generateNeovimPalette", () => {
 		);
 
 		expect(result.syntaxClassic.Comment).toBeDefined();
-		expect(result.syntaxClassic.Comment.fg).toBe("#705880");
+		expect(result.syntaxClassic.Comment.fg).toBe("#7D628E");
 		expect(result.syntaxClassic.Comment.italic).toBe(true);
 	});
 

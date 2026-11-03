@@ -109,7 +109,7 @@ describe("generateZedTheme", () => {
 		>;
 		expect(syntax.keyword.color).toBe("#5ED4E0ff");
 		expect(syntax.string.color).toBe("#7FD7B5ff");
-		expect(syntax.comment.color).toBe("#705880ff");
+		expect(syntax.comment.color).toBe("#7D628Eff");
 	});
 
 	test("has players array with 8 entries", () => {
@@ -185,7 +185,7 @@ describe("generateZedTheme", () => {
 			{ color: string }
 		>;
 		expect(darkSyntax.keyword.color).toBe("#5ED4E0ff");
-		expect(lightSyntax.keyword.color).toBe("#FF9BB6ff");
+		expect(lightSyntax.keyword.color).toBe("#BB4970ff");
 	});
 
 	test("dark theme terminal colors have correct format", () => {
