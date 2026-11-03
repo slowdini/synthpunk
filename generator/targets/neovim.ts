@@ -449,6 +449,13 @@ export function generateNeovimPalette(
 		scopes,
 		fontStyles,
 	);
+	// apply() sets syntax groups after UI groups, and nvim_set_hl replaces a
+	// whole group, so a classic group sharing a UI group's name would erase it.
+	const syntaxClassic = Object.fromEntries(
+		Object.entries(syntaxGroups.classic).filter(
+			([group]) => !Object.hasOwn(ui, group),
+		),
+	);
 
 	// Terminal background is the editor background (base); floor chromatic ANSI
 	// text colors against it so they stay legible (no-op on dark themes).
@@ -514,7 +521,7 @@ export function generateNeovimPalette(
 		meta: { name, variant, type },
 		ui,
 		syntaxTreesitter: syntaxGroups.treesitter,
-		syntaxClassic: syntaxGroups.classic,
+		syntaxClassic,
 		lspLinks,
 		terminal,
 	};
@@ -527,10 +534,7 @@ function stringifyNeovimLuaValue(value: unknown, indent: number = 0): string {
 	if (value === null || value === undefined) return "nil";
 	if (typeof value === "boolean") return value ? "true" : "false";
 	if (typeof value === "number") return String(value);
-	if (typeof value === "string") {
-		if (value.match(/^[a-zA-Z_][a-zA-Z0-9_]*$/)) return value;
-		return `"${value}"`;
-	}
+	if (typeof value === "string") return `"${value}"`;
 	if (Array.isArray(value)) {
 		if (value.length === 0) return "{}";
 		const items = value

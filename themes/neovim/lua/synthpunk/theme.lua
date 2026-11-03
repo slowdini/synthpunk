@@ -7,7 +7,7 @@ local variants = {
   meta = {
     name = "synthpunk-pastel-dark",
     variant = "pastel-dark",
-    type = dark
+    type = "dark"
   },
   ui = {
     Normal = {
@@ -181,13 +181,13 @@ local variants = {
       bg = "#C49BFF"
     },
     lCursor = {
-      link = Cursor
+      link = "Cursor"
     },
     CursorIM = {
-      link = Cursor
+      link = "Cursor"
     },
     TermCursor = {
-      link = Cursor
+      link = "Cursor"
     },
     TermCursorNC = {
       bg = "#C49BFF"
@@ -706,9 +706,6 @@ local variants = {
     Function = {
       fg = "#8BA4FF"
     },
-    Normal = {
-      fg = "#8BA4FF"
-    },
     Identifier = {
       fg = "#F0E0F0"
     },
@@ -724,17 +721,8 @@ local variants = {
     PreProc = {
       fg = "#FF9BB6"
     },
-    Underlined = {
-      fg = "#8BA4FF"
-    },
     Title = {
       fg = "#FFE4B5"
-    },
-    Bold = {
-      fg = "#FFE4B5"
-    },
-    Italic = {
-      fg = "#8BA4FF"
     },
     Error = {
       fg = "#FF5470"
@@ -787,7 +775,7 @@ local variants = {
   meta = {
     name = "synthpunk-pastel-light",
     variant = "pastel-light",
-    type = light
+    type = "light"
   },
   ui = {
     Normal = {
@@ -961,13 +949,13 @@ local variants = {
       bg = "#C49BFF"
     },
     lCursor = {
-      link = Cursor
+      link = "Cursor"
     },
     CursorIM = {
-      link = Cursor
+      link = "Cursor"
     },
     TermCursor = {
-      link = Cursor
+      link = "Cursor"
     },
     TermCursorNC = {
       bg = "#C49BFF"
@@ -1486,9 +1474,6 @@ local variants = {
     Function = {
       fg = "#8BA4FF"
     },
-    Normal = {
-      fg = "#8BA4FF"
-    },
     Identifier = {
       fg = "#2E1A24"
     },
@@ -1504,17 +1489,8 @@ local variants = {
     PreProc = {
       fg = "#FF9BB6"
     },
-    Underlined = {
-      fg = "#8BA4FF"
-    },
     Title = {
       fg = "#E8C468"
-    },
-    Bold = {
-      fg = "#E8C468"
-    },
-    Italic = {
-      fg = "#8BA4FF"
     },
     Error = {
       fg = "#FF5470"
@@ -1567,7 +1543,7 @@ local variants = {
   meta = {
     name = "synthpunk-neon-dark",
     variant = "neon-dark",
-    type = dark
+    type = "dark"
   },
   ui = {
     Normal = {
@@ -1741,13 +1717,13 @@ local variants = {
       bg = "#D040FF"
     },
     lCursor = {
-      link = Cursor
+      link = "Cursor"
     },
     CursorIM = {
-      link = Cursor
+      link = "Cursor"
     },
     TermCursor = {
-      link = Cursor
+      link = "Cursor"
     },
     TermCursorNC = {
       bg = "#D040FF"
@@ -2266,9 +2242,6 @@ local variants = {
     Function = {
       fg = "#A060FF"
     },
-    Normal = {
-      fg = "#A060FF"
-    },
     Identifier = {
       fg = "#E8E0F0"
     },
@@ -2284,17 +2257,8 @@ local variants = {
     PreProc = {
       fg = "#FF5CA8"
     },
-    Underlined = {
-      fg = "#A060FF"
-    },
     Title = {
       fg = "#FFE040"
-    },
-    Bold = {
-      fg = "#FFE040"
-    },
-    Italic = {
-      fg = "#A060FF"
     },
     Error = {
       fg = "#FF3A50"
@@ -2347,7 +2311,7 @@ local variants = {
   meta = {
     name = "synthpunk-neon-light",
     variant = "neon-light",
-    type = light
+    type = "light"
   },
   ui = {
     Normal = {
@@ -2521,13 +2485,13 @@ local variants = {
       bg = "#B050D0"
     },
     lCursor = {
-      link = Cursor
+      link = "Cursor"
     },
     CursorIM = {
-      link = Cursor
+      link = "Cursor"
     },
     TermCursor = {
-      link = Cursor
+      link = "Cursor"
     },
     TermCursorNC = {
       bg = "#B050D0"
@@ -3046,9 +3010,6 @@ local variants = {
     Function = {
       fg = "#8050C8"
     },
-    Normal = {
-      fg = "#8050C8"
-    },
     Identifier = {
       fg = "#2A1A30"
     },
@@ -3064,17 +3025,8 @@ local variants = {
     PreProc = {
       fg = "#E06098"
     },
-    Underlined = {
-      fg = "#8050C8"
-    },
     Title = {
       fg = "#D8B030"
-    },
-    Bold = {
-      fg = "#D8B030"
-    },
-    Italic = {
-      fg = "#8050C8"
     },
     Error = {
       fg = "#E04058"
