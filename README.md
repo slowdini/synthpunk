@@ -12,17 +12,52 @@ High-energy synthwave-inspired color themes in two families — **Pastel** and *
 
 ## Preview
 
-Syntax highlighting in the **Neon Dark** variant (click any image for full size):
+Syntax highlighting across all four variants (click any image for full size):
 
-| React / TSX | Python | Rust |
-| ----------- | ------ | ---- |
-| <a href="assets/sample-react.png"><img src="assets/sample-react.png" alt="Synthpunk Neon Dark — React/TSX" width="260" /></a> | <a href="assets/sample-python.png"><img src="assets/sample-python.png" alt="Synthpunk Neon Dark — Python" width="260" /></a> | <a href="assets/sample-rust.png"><img src="assets/sample-rust.png" alt="Synthpunk Neon Dark — Rust" width="260" /></a> |
+### Pastel Dark
 
-| C# | Markdown | |
-| -- | -------- | - |
-| <a href="assets/sample-csharp.png"><img src="assets/sample-csharp.png" alt="Synthpunk Neon Dark — C#" width="260" /></a> | <a href="assets/sample-markdown.png"><img src="assets/sample-markdown.png" alt="Synthpunk Neon Dark — Markdown" width="260" /></a> | |
+| React / TSX | Python | Rust | C# |
+| ----------- | ------ | ---- | -- |
+| <a href="assets/sample-react-pastel-dark.png"><img src="assets/sample-react-pastel-dark.png" alt="Synthpunk Pastel Dark — React / TSX" width="200" /></a> | <a href="assets/sample-python-pastel-dark.png"><img src="assets/sample-python-pastel-dark.png" alt="Synthpunk Pastel Dark — Python" width="200" /></a> | <a href="assets/sample-rust-pastel-dark.png"><img src="assets/sample-rust-pastel-dark.png" alt="Synthpunk Pastel Dark — Rust" width="200" /></a> | <a href="assets/sample-csharp-pastel-dark.png"><img src="assets/sample-csharp-pastel-dark.png" alt="Synthpunk Pastel Dark — C#" width="200" /></a> |
+
+### Pastel Light
+
+| React / TSX | Python | Rust | C# |
+| ----------- | ------ | ---- | -- |
+| <a href="assets/sample-react-pastel-light.png"><img src="assets/sample-react-pastel-light.png" alt="Synthpunk Pastel Light — React / TSX" width="200" /></a> | <a href="assets/sample-python-pastel-light.png"><img src="assets/sample-python-pastel-light.png" alt="Synthpunk Pastel Light — Python" width="200" /></a> | <a href="assets/sample-rust-pastel-light.png"><img src="assets/sample-rust-pastel-light.png" alt="Synthpunk Pastel Light — Rust" width="200" /></a> | <a href="assets/sample-csharp-pastel-light.png"><img src="assets/sample-csharp-pastel-light.png" alt="Synthpunk Pastel Light — C#" width="200" /></a> |
+
+### Neon Dark
+
+| React / TSX | Python | Rust | C# |
+| ----------- | ------ | ---- | -- |
+| <a href="assets/sample-react-neon-dark.png"><img src="assets/sample-react-neon-dark.png" alt="Synthpunk Neon Dark — React / TSX" width="200" /></a> | <a href="assets/sample-python-neon-dark.png"><img src="assets/sample-python-neon-dark.png" alt="Synthpunk Neon Dark — Python" width="200" /></a> | <a href="assets/sample-rust-neon-dark.png"><img src="assets/sample-rust-neon-dark.png" alt="Synthpunk Neon Dark — Rust" width="200" /></a> | <a href="assets/sample-csharp-neon-dark.png"><img src="assets/sample-csharp-neon-dark.png" alt="Synthpunk Neon Dark — C#" width="200" /></a> |
+
+### Neon Light
+
+| React / TSX | Python | Rust | C# |
+| ----------- | ------ | ---- | -- |
+| <a href="assets/sample-react-neon-light.png"><img src="assets/sample-react-neon-light.png" alt="Synthpunk Neon Light — React / TSX" width="200" /></a> | <a href="assets/sample-python-neon-light.png"><img src="assets/sample-python-neon-light.png" alt="Synthpunk Neon Light — Python" width="200" /></a> | <a href="assets/sample-rust-neon-light.png"><img src="assets/sample-rust-neon-light.png" alt="Synthpunk Neon Light — Rust" width="200" /></a> | <a href="assets/sample-csharp-neon-light.png"><img src="assets/sample-csharp-neon-light.png" alt="Synthpunk Neon Light — C#" width="200" /></a> |
 
 The exact colors for every variant live in [`palette/`](palette/) — the source all themes are generated from. Preview images are produced by [`assets/generate/`](assets/generate/).
+
+## In action
+
+Generated interface previews in **Neon Dark**. These illustrations use generated theme colors for each supported tool; they are not screenshots.
+
+<table>
+  <tr><th>VS Code</th><th>Zed</th></tr>
+  <tr>
+    <td><a href="assets/tool-vscode.png"><img src="assets/tool-vscode.png" alt="Synthpunk Neon Dark — generated VS Code interface preview" width="420" /></a></td>
+    <td><a href="assets/tool-zed.png"><img src="assets/tool-zed.png" alt="Synthpunk Neon Dark — generated Zed interface preview" width="420" /></a></td>
+  </tr>
+  <tr><th>Neovim</th><th>WezTerm</th></tr>
+  <tr>
+    <td><a href="assets/tool-neovim.png"><img src="assets/tool-neovim.png" alt="Synthpunk Neon Dark — generated Neovim interface preview" width="420" /></a></td>
+    <td><a href="assets/tool-wezterm.png"><img src="assets/tool-wezterm.png" alt="Synthpunk Neon Dark — generated WezTerm interface preview" width="420" /></a></td>
+  </tr>
+  <tr><th colspan="2">Starship</th></tr>
+  <tr><td colspan="2" align="center"><a href="assets/tool-starship.png"><img src="assets/tool-starship.png" alt="Synthpunk Neon Dark — generated Starship interface preview" width="840" /></a></td></tr>
+</table>
 
 ## Installation
 
@@ -89,12 +124,13 @@ The default variant is `synthpunk_pastel_dark`. To switch, change the `palette =
 ```sh
 bun install          # install dependencies
 bun run build        # regenerate all theme artifacts from palette/
+bun run assets       # rebuild themes and README images (requires Chrome/Chromium)
 bun test             # run tests
 bun run check        # lint + typecheck
 bun run format       # auto-format
 ```
 
-All theme files under `themes/` are generated from `palette/` by the generator. Never edit them directly — edit `palette/` and `generator/`, then run `bun run build`. To regenerate the preview images above, see [`assets/generate/`](assets/generate/).
+All theme files under `themes/` are generated from `palette/` by the generator. Never edit them directly — edit `palette/` and `generator/`, then run `bun run build`. To rebuild the themes and README images in one step, run `bun run assets`. See [`assets/generate/`](assets/generate/) for browser requirements and rendering details.
 
 ## License
 
