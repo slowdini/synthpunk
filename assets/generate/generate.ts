@@ -2,11 +2,11 @@
  * Generates README marketing images from the generated Synthpunk themes:
  *   - assets/icon.png          angular-synthwave neon icon (opt in with --icon)
  *   - assets/sample-*.png      Four-language syntax previews in all four variants
- *   - assets/tool-*.png        Synthetic previews for all five supported tools
  *   - assets/hero.png          2x2 grid of one snippet across all four variants
  *
- * Highlighting uses Shiki with colors derived from each generated target theme.
- * Rendering is done by screenshotting HTML with Chrome via puppeteer-core.
+ * Highlighting uses Shiki loaded with the repo's generated VS Code theme JSON, so
+ * the colors are exactly what the editor renders. Rendering is done by
+ * screenshotting HTML with Chrome via puppeteer-core.
  *
  * Run:  bun install && bun run generate.ts   (set CHROME_PATH to override the browser)
  */
@@ -15,24 +15,12 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import puppeteer from "puppeteer-core";
 import { createHighlighter, type ThemeRegistrationRaw } from "shiki";
-import { loadPalette } from "../../generator/palette";
-import { loadFontStyles, loadScopes, loadSyntaxMapping } from "../../generator/syntaxMapping";
-import { generateNeovimPalette } from "../../generator/targets/neovim";
-import { loadUIMapping } from "../../generator/uiMapping";
 import { shouldGenerateIcon } from "./generation-options";
-import { neovimPreviewHtml, neovimThemeRegistration } from "./neovim-preview";
-import { parseStarshipPalette, starshipPreviewHtml } from "./starship-preview";
-import { parseZedTheme, zedPreviewHtml, zedThemeRegistration } from "./zed-preview";
 import { PREVIEW_JOBS, VARIANTS, type VariantKey } from "./preview-manifest";
-import { parseWezTermTheme, vsCodePreviewHtml, wezTermPreviewHtml } from "./tool-previews";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO = resolve(HERE, "..", "..");
 const THEMES_DIR = resolve(REPO, "themes/vscode/themes");
-const PALETTE_DIR = resolve(REPO, "palette");
-const ZED_THEME_FILE = resolve(REPO, "themes/zed/themes/synthpunk-neon.json");
-const WEZTERM_THEMES_DIR = resolve(REPO, "themes/wezterm");
-const STARSHIP_THEME_FILE = resolve(REPO, "themes/starship/starship.toml");
 const SNIPPETS = resolve(HERE, "snippets");
 const OUT = resolve(REPO, "assets");
 
@@ -58,22 +46,6 @@ const themes = Object.fromEntries(
 		JSON.parse(readFileSync(resolve(THEMES_DIR, VARIANT_FILES[key]), "utf8")) as Theme,
 	]),
 ) as Record<VariantKey, Theme>;
-
-const zedStyle = parseZedTheme(readFileSync(ZED_THEME_FILE, "utf8"), "Synthpunk Neon Dark");
-const zedTheme = zedThemeRegistration(zedStyle);
-const neovimPalette = generateNeovimPalette(
-	"neon-dark",
-	loadPalette(PALETTE_DIR, "neon-dark"),
-	loadUIMapping(PALETTE_DIR),
-	loadSyntaxMapping(PALETTE_DIR),
-	loadScopes(PALETTE_DIR),
-	loadFontStyles(PALETTE_DIR),
-);
-const neovimTheme = neovimThemeRegistration(neovimPalette);
-const starshipPalette = parseStarshipPalette(
-	readFileSync(STARSHIP_THEME_FILE, "utf8"),
-	"synthpunk_neon_dark",
-);
 
 // --- browser / chrome ------------------------------------------------------
 
@@ -166,11 +138,7 @@ const ICON_HTML = `<!doctype html><html><head><meta charset="utf-8"><style>
 
 async function main() {
 	const highlighter = await createHighlighter({
-		themes: [
-			...(Object.values(themes) as ThemeRegistrationRaw[]),
-			zedTheme,
-			neovimTheme,
-		],
+		themes: Object.values(themes) as ThemeRegistrationRaw[],
 		langs: ["tsx", "python", "rust", "csharp", "typescript"],
 	});
 
@@ -206,36 +174,6 @@ async function main() {
 		});
 		await shoot(page(windowHtml(codeHtml, theme, language.file)), resolve(OUT, out));
 	}
-
-	// Synthetic application previews in Neon Dark. These are deliberately
-	// rendered as illustrative interfaces rather than represented as screenshots.
-	const toolTheme = themes["neon-dark"];
-	const toolCode = highlighter.codeToHtml(read("App.tsx"), {
-		lang: "tsx",
-		theme: toolTheme.name,
-	});
-	await shoot(
-		page(vsCodePreviewHtml(toolTheme, toolCode)),
-		resolve(OUT, "tool-vscode.png"),
-	);
-	const zedCode = highlighter.codeToHtml(read("lib.rs"), {
-		lang: "rust",
-		theme: zedTheme.name,
-	});
-	await shoot(page(zedPreviewHtml(zedStyle, zedCode)), resolve(OUT, "tool-zed.png"));
-	const neovimCode = highlighter.codeToHtml(read("lib.rs"), {
-		lang: "rust",
-		theme: neovimTheme.name,
-	});
-	await shoot(
-		page(neovimPreviewHtml(neovimPalette, neovimCode)),
-		resolve(OUT, "tool-neovim.png"),
-	);
-	const wezTermTheme = parseWezTermTheme(
-		readFileSync(resolve(WEZTERM_THEMES_DIR, "synthpunk-neon-dark.toml"), "utf8"),
-	);
-	await shoot(page(wezTermPreviewHtml(wezTermTheme)), resolve(OUT, "tool-wezterm.png"));
-	await shoot(page(starshipPreviewHtml(starshipPalette)), resolve(OUT, "tool-starship.png"));
 
 	// Four-variant hero from one shared snippet.
 	const heroCode = read("hero.ts");

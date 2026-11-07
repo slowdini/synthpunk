@@ -11,7 +11,6 @@
 		"@types/node": "^25.8.0",
 		"husky": "^9.1.7",
 		"lint-staged": "^17.0.5",
-		"shiki": "4.2.0",
 		"typescript": "^6.0.3"
 	},
 	"scripts": {

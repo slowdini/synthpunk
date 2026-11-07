@@ -46,21 +46,19 @@ The exact colors for every variant live in [`palette/`](palette/) — the source
 <details>
 <summary><h2>In action</h2></summary>
 
-Generated interface previews in **Neon Dark**. These illustrations use generated theme colors for each supported tool; they are not screenshots.
+Screenshots of the Neon variants in VS Code and the Pastel variants in Zed (click any image for full size):
 
 <table>
-  <tr><th>VS Code</th><th>Zed</th></tr>
+  <tr><th>VS Code — Neon Dark</th><th>VS Code — Neon Light</th></tr>
   <tr>
-    <td><a href="assets/tool-vscode.png"><img src="assets/tool-vscode.png" alt="Synthpunk Neon Dark — generated VS Code interface preview" width="420" /></a></td>
-    <td><a href="assets/tool-zed.png"><img src="assets/tool-zed.png" alt="Synthpunk Neon Dark — generated Zed interface preview" width="420" /></a></td>
+    <td><a href="assets/vscode-neon-dark.png"><img src="assets/vscode-neon-dark.png" alt="Synthpunk Neon Dark in VS Code" width="420" /></a></td>
+    <td><a href="assets/vscode-neon-light.png"><img src="assets/vscode-neon-light.png" alt="Synthpunk Neon Light in VS Code" width="420" /></a></td>
   </tr>
-  <tr><th>Neovim</th><th>WezTerm</th></tr>
+  <tr><th>Zed — Pastel Dark</th><th>Zed — Pastel Light</th></tr>
   <tr>
-    <td><a href="assets/tool-neovim.png"><img src="assets/tool-neovim.png" alt="Synthpunk Neon Dark — generated Neovim interface preview" width="420" /></a></td>
-    <td><a href="assets/tool-wezterm.png"><img src="assets/tool-wezterm.png" alt="Synthpunk Neon Dark — generated WezTerm interface preview" width="420" /></a></td>
+    <td><a href="assets/zed-pastel-dark.png"><img src="assets/zed-pastel-dark.png" alt="Synthpunk Pastel Dark in Zed" width="420" /></a></td>
+    <td><a href="assets/zed-pastel-light.png"><img src="assets/zed-pastel-light.png" alt="Synthpunk Pastel Light in Zed" width="420" /></a></td>
   </tr>
-  <tr><th colspan="2">Starship</th></tr>
-  <tr><td colspan="2" align="center"><a href="assets/tool-starship.png"><img src="assets/tool-starship.png" alt="Synthpunk Neon Dark — generated Starship interface preview" width="840" /></a></td></tr>
 </table>
 
 </details>

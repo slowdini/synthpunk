@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { PREVIEW_JOBS } from "../assets/generate/preview-manifest";
 
@@ -41,15 +41,29 @@ describe("README image generation", () => {
 		expect(readme).not.toContain("<details open");
 	});
 
-	test("labels all five synthetic tool previews as generated interfaces", () => {
-		expect(readme).toContain("Generated interface previews in **Neon Dark**");
-		for (const tool of ["VS Code", "Zed", "Neovim", "WezTerm", "Starship"]) {
-			const key = tool.toLowerCase().replace(" ", "");
-			expect(readme).toContain(`src="assets/tool-${key}.png"`);
-			expect(readme).toContain(
-				`alt="Synthpunk Neon Dark — generated ${tool} interface preview"`,
+	test("shows real VS Code and Zed screenshots in the In action section", () => {
+		const screenshots = [
+			{ file: "vscode-neon-dark.png", alt: "Synthpunk Neon Dark in VS Code" },
+			{ file: "vscode-neon-light.png", alt: "Synthpunk Neon Light in VS Code" },
+			{ file: "zed-pastel-dark.png", alt: "Synthpunk Pastel Dark in Zed" },
+			{ file: "zed-pastel-light.png", alt: "Synthpunk Pastel Light in Zed" },
+		];
+		for (const { file, alt } of screenshots) {
+			const asset = `assets/${file}`;
+			expect(existsSync(path.join(ROOT, asset))).toBe(true);
+			expect(readme).toContain(`href="${asset}"`);
+			expect(readme).toContain(`src="${asset}"`);
+			expect(readme).toContain(`alt="${alt}"`);
+		}
+	});
+
+	test("drops the generated tool previews", () => {
+		expect(readme).not.toContain("assets/tool-");
+		expect(readme).not.toContain("Generated interface previews");
+		for (const tool of ["vscode", "zed", "neovim", "wezterm", "starship"]) {
+			expect(existsSync(path.join(ROOT, `assets/tool-${tool}.png`))).toBe(
+				false,
 			);
 		}
-		expect(readme).toContain("generated theme colors for each supported tool");
 	});
 });
