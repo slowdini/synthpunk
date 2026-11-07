@@ -31,6 +31,16 @@ describe("README image generation", () => {
 		);
 	});
 
+	test("collapses the Preview and In action sections by default", () => {
+		for (const heading of ["Preview", "In action"]) {
+			expect(readme).toContain(
+				`<details>\n<summary><h2>${heading}</h2></summary>\n\n`,
+			);
+			expect(readme).not.toMatch(new RegExp(`^## ${heading}$`, "m"));
+		}
+		expect(readme).not.toContain("<details open");
+	});
+
 	test("labels all five synthetic tool previews as generated interfaces", () => {
 		expect(readme).toContain("Generated interface previews in **Neon Dark**");
 		for (const tool of ["VS Code", "Zed", "Neovim", "WezTerm", "Starship"]) {

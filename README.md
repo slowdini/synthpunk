@@ -10,7 +10,8 @@ High-energy synthwave-inspired color themes in two families — **Pastel** and *
 
 ![Synthpunk — the same code across all four variants](assets/hero.png)
 
-## Preview
+<details>
+<summary><h2>Preview</h2></summary>
 
 Syntax highlighting across all four variants (click any image for full size):
 
@@ -40,7 +41,10 @@ Syntax highlighting across all four variants (click any image for full size):
 
 The exact colors for every variant live in [`palette/`](palette/) — the source all themes are generated from. Preview images are produced by [`assets/generate/`](assets/generate/).
 
-## In action
+</details>
+
+<details>
+<summary><h2>In action</h2></summary>
 
 Generated interface previews in **Neon Dark**. These illustrations use generated theme colors for each supported tool; they are not screenshots.
 
@@ -58,6 +62,8 @@ Generated interface previews in **Neon Dark**. These illustrations use generated
   <tr><th colspan="2">Starship</th></tr>
   <tr><td colspan="2" align="center"><a href="assets/tool-starship.png"><img src="assets/tool-starship.png" alt="Synthpunk Neon Dark — generated Starship interface preview" width="840" /></a></td></tr>
 </table>
+
+</details>
 
 ## Installation
 
