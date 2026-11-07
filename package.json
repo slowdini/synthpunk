@@ -15,6 +15,7 @@
 	},
 	"scripts": {
 		"build": "bun run generator/index.ts && biome format --write themes/vscode/themes/*.json themes/zed/themes/*.json",
+		"assets": "bun run build && bun install --cwd assets/generate --frozen-lockfile && bun run assets/generate/generate.ts",
 		"test": "bun test",
 		"format": "biome check --write",
 		"check": "biome check && tsc --noEmit",
