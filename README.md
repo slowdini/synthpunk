@@ -6,23 +6,62 @@
 
 # Synthpunk
 
-High-energy synthwave-inspired color themes in two families — **Pastel** and **Neon** — each with dark and light variants. Every theme is generated from a single [palette source](palette/) for VS Code, Zed, Neovim, WezTerm, and Starship.
+High-energy synthwave-inspired color themes with two families — **Pastel** and **Neon** — each with dark and light variants. For VS Code, Zed, Neovim, WezTerm, and Starship.
+
+Find all the colors for every variant in [`palette/`](palette/).
 
 ![Synthpunk — the same code across all four variants](assets/hero.png)
 
-## Preview
+<details>
+<summary><h2>Preview</h2></summary>
 
-Syntax highlighting in the **Neon Dark** variant (click any image for full size):
+Syntax highlighting across all four variants (click any image for full size):
 
-| React / TSX | Python | Rust |
-| ----------- | ------ | ---- |
-| <a href="assets/sample-react.png"><img src="assets/sample-react.png" alt="Synthpunk Neon Dark — React/TSX" width="260" /></a> | <a href="assets/sample-python.png"><img src="assets/sample-python.png" alt="Synthpunk Neon Dark — Python" width="260" /></a> | <a href="assets/sample-rust.png"><img src="assets/sample-rust.png" alt="Synthpunk Neon Dark — Rust" width="260" /></a> |
+### Pastel Dark
 
-| C# | Markdown | |
-| -- | -------- | - |
-| <a href="assets/sample-csharp.png"><img src="assets/sample-csharp.png" alt="Synthpunk Neon Dark — C#" width="260" /></a> | <a href="assets/sample-markdown.png"><img src="assets/sample-markdown.png" alt="Synthpunk Neon Dark — Markdown" width="260" /></a> | |
+| React / TSX | Python | Rust | C# |
+| ----------- | ------ | ---- | -- |
+| <a href="assets/sample-react-pastel-dark.png"><img src="assets/sample-react-pastel-dark.png" alt="Synthpunk Pastel Dark — React / TSX" width="200" /></a> | <a href="assets/sample-python-pastel-dark.png"><img src="assets/sample-python-pastel-dark.png" alt="Synthpunk Pastel Dark — Python" width="200" /></a> | <a href="assets/sample-rust-pastel-dark.png"><img src="assets/sample-rust-pastel-dark.png" alt="Synthpunk Pastel Dark — Rust" width="200" /></a> | <a href="assets/sample-csharp-pastel-dark.png"><img src="assets/sample-csharp-pastel-dark.png" alt="Synthpunk Pastel Dark — C#" width="200" /></a> |
 
-The exact colors for every variant live in [`palette/`](palette/) — the source all themes are generated from. Preview images are produced by [`assets/generate/`](assets/generate/).
+### Pastel Light
+
+| React / TSX | Python | Rust | C# |
+| ----------- | ------ | ---- | -- |
+| <a href="assets/sample-react-pastel-light.png"><img src="assets/sample-react-pastel-light.png" alt="Synthpunk Pastel Light — React / TSX" width="200" /></a> | <a href="assets/sample-python-pastel-light.png"><img src="assets/sample-python-pastel-light.png" alt="Synthpunk Pastel Light — Python" width="200" /></a> | <a href="assets/sample-rust-pastel-light.png"><img src="assets/sample-rust-pastel-light.png" alt="Synthpunk Pastel Light — Rust" width="200" /></a> | <a href="assets/sample-csharp-pastel-light.png"><img src="assets/sample-csharp-pastel-light.png" alt="Synthpunk Pastel Light — C#" width="200" /></a> |
+
+### Neon Dark
+
+| React / TSX | Python | Rust | C# |
+| ----------- | ------ | ---- | -- |
+| <a href="assets/sample-react-neon-dark.png"><img src="assets/sample-react-neon-dark.png" alt="Synthpunk Neon Dark — React / TSX" width="200" /></a> | <a href="assets/sample-python-neon-dark.png"><img src="assets/sample-python-neon-dark.png" alt="Synthpunk Neon Dark — Python" width="200" /></a> | <a href="assets/sample-rust-neon-dark.png"><img src="assets/sample-rust-neon-dark.png" alt="Synthpunk Neon Dark — Rust" width="200" /></a> | <a href="assets/sample-csharp-neon-dark.png"><img src="assets/sample-csharp-neon-dark.png" alt="Synthpunk Neon Dark — C#" width="200" /></a> |
+
+### Neon Light
+
+| React / TSX | Python | Rust | C# |
+| ----------- | ------ | ---- | -- |
+| <a href="assets/sample-react-neon-light.png"><img src="assets/sample-react-neon-light.png" alt="Synthpunk Neon Light — React / TSX" width="200" /></a> | <a href="assets/sample-python-neon-light.png"><img src="assets/sample-python-neon-light.png" alt="Synthpunk Neon Light — Python" width="200" /></a> | <a href="assets/sample-rust-neon-light.png"><img src="assets/sample-rust-neon-light.png" alt="Synthpunk Neon Light — Rust" width="200" /></a> | <a href="assets/sample-csharp-neon-light.png"><img src="assets/sample-csharp-neon-light.png" alt="Synthpunk Neon Light — C#" width="200" /></a> |
+
+</details>
+
+<details>
+<summary><h2>In action</h2></summary>
+
+Screenshots of the Neon variants in VS Code and the Pastel variants in Zed (click any image for full size):
+
+<table>
+  <tr><th>VS Code — Neon Dark</th><th>VS Code — Neon Light</th></tr>
+  <tr>
+    <td><a href="assets/vscode-neon-dark.png"><img src="assets/vscode-neon-dark.png" alt="Synthpunk Neon Dark in VS Code" width="420" /></a></td>
+    <td><a href="assets/vscode-neon-light.png"><img src="assets/vscode-neon-light.png" alt="Synthpunk Neon Light in VS Code" width="420" /></a></td>
+  </tr>
+  <tr><th>Zed — Pastel Dark</th><th>Zed — Pastel Light</th></tr>
+  <tr>
+    <td><a href="assets/zed-pastel-dark.png"><img src="assets/zed-pastel-dark.png" alt="Synthpunk Pastel Dark in Zed" width="420" /></a></td>
+    <td><a href="assets/zed-pastel-light.png"><img src="assets/zed-pastel-light.png" alt="Synthpunk Pastel Light in Zed" width="420" /></a></td>
+  </tr>
+</table>
+
+</details>
 
 ## Installation
 
@@ -89,12 +128,13 @@ The default variant is `synthpunk_pastel_dark`. To switch, change the `palette =
 ```sh
 bun install          # install dependencies
 bun run build        # regenerate all theme artifacts from palette/
+bun run assets       # rebuild themes and README images (requires Chrome/Chromium)
 bun test             # run tests
 bun run check        # lint + typecheck
 bun run format       # auto-format
 ```
 
-All theme files under `themes/` are generated from `palette/` by the generator. Never edit them directly — edit `palette/` and `generator/`, then run `bun run build`. To regenerate the preview images above, see [`assets/generate/`](assets/generate/).
+All theme files under `themes/` are generated from `palette/` by the generator. Never edit them directly — edit `palette/` and `generator/`, then run `bun run build`. To rebuild the themes and README images in one step, run `bun run assets`. See [`assets/generate/`](assets/generate/) for browser requirements and rendering details.
 
 ## License
 

@@ -1,12 +1,12 @@
 /**
- * Generates the README marketing images from the Synthpunk VS Code themes:
- *   - assets/icon.png          angular-synthwave neon icon
- *   - assets/sample-*.png      Neon Dark syntax-highlight previews (react/python/rust/csharp/markdown)
+ * Generates README marketing images from the generated Synthpunk themes:
+ *   - assets/icon.png          angular-synthwave neon icon (opt in with --icon)
+ *   - assets/sample-*.png      Four-language syntax previews in all four variants
  *   - assets/hero.png          2x2 grid of one snippet across all four variants
  *
- * Highlighting uses shiki loaded with the repo's own VS Code theme JSON, so the
- * colors are exactly what the editor renders. Rendering is done by screenshotting
- * HTML with the system Chrome via puppeteer-core.
+ * Highlighting uses Shiki loaded with the repo's generated VS Code theme JSON, so
+ * the colors are exactly what the editor renders. Rendering is done by
+ * screenshotting HTML with Chrome via puppeteer-core.
  *
  * Run:  bun install && bun run generate.ts   (set CHROME_PATH to override the browser)
  */
@@ -15,6 +15,8 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import puppeteer from "puppeteer-core";
 import { createHighlighter, type ThemeRegistrationRaw } from "shiki";
+import { shouldGenerateIcon } from "./generation-options";
+import { PREVIEW_JOBS, VARIANTS, type VariantKey } from "./preview-manifest";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO = resolve(HERE, "..", "..");
@@ -29,8 +31,7 @@ const VARIANT_FILES = {
 	"pastel-light": "synthpunk-pastel-light-color-theme.json",
 	"neon-dark": "synthpunk-neon-dark-color-theme.json",
 	"neon-light": "synthpunk-neon-light-color-theme.json",
-} as const;
-type VariantKey = keyof typeof VARIANT_FILES;
+} as const satisfies Record<VariantKey, string>;
 
 type Theme = {
 	name: string;
@@ -138,7 +139,7 @@ const ICON_HTML = `<!doctype html><html><head><meta charset="utf-8"><style>
 async function main() {
 	const highlighter = await createHighlighter({
 		themes: Object.values(themes) as ThemeRegistrationRaw[],
-		langs: ["tsx", "python", "rust", "csharp", "markdown", "typescript"],
+		langs: ["tsx", "python", "rust", "csharp", "typescript"],
 	});
 
 	const browser = await puppeteer.launch({
@@ -165,38 +166,28 @@ async function main() {
 		return readFileSync(resolve(SNIPPETS, name), "utf8").replace(/\n+$/, "");
 	}
 
-	// Per-language samples in Neon Dark.
-	const neon = themes["neon-dark"];
-	const samples = [
-		{ out: "sample-react.png", file: "App.tsx", lang: "tsx", snippet: "App.tsx" },
-		{ out: "sample-python.png", file: "pipeline.py", lang: "python", snippet: "pipeline.py" },
-		{ out: "sample-rust.png", file: "lib.rs", lang: "rust", snippet: "lib.rs" },
-		{ out: "sample-csharp.png", file: "Service.cs", lang: "csharp", snippet: "Service.cs" },
-		{ out: "sample-markdown.png", file: "README.md", lang: "markdown", snippet: "sample.md" },
-	];
-	for (const s of samples) {
-		const codeHtml = highlighter.codeToHtml(read(s.snippet), { lang: s.lang, theme: neon.name });
-		await shoot(page(windowHtml(codeHtml, neon, s.file)), resolve(OUT, s.out));
+	for (const { variant, language, out } of PREVIEW_JOBS) {
+		const theme = themes[variant.key];
+		const codeHtml = highlighter.codeToHtml(read(language.snippet), {
+			lang: language.lang,
+			theme: theme.name,
+		});
+		await shoot(page(windowHtml(codeHtml, theme, language.file)), resolve(OUT, out));
 	}
 
 	// Four-variant hero from one shared snippet.
 	const heroCode = read("hero.ts");
-	const order: Array<[VariantKey, string]> = [
-		["pastel-dark", "Pastel Dark"],
-		["pastel-light", "Pastel Light"],
-		["neon-dark", "Neon Dark"],
-		["neon-light", "Neon Light"],
-	];
-	const cells = order
-		.map(([key, label]) => {
+	const cells = VARIANTS
+		.map(({ key, label }) => {
 			const codeHtml = highlighter.codeToHtml(heroCode, { lang: "typescript", theme: themes[key].name });
 			return `<div class="cell"><div class="label">${label}</div>${windowHtml(codeHtml, themes[key], "theme.ts")}</div>`;
 		})
 		.join("");
 	await shoot(page(`<div class="grid">${cells}</div>`, 56), resolve(OUT, "hero.png"));
 
-	// Icon.
-	await shoot(ICON_HTML, resolve(OUT, "icon.png"), ".icon");
+	if (shouldGenerateIcon(process.argv.slice(2))) {
+		await shoot(ICON_HTML, resolve(OUT, "icon.png"), ".icon");
+	}
 
 	await browser.close();
 	console.log("done.");

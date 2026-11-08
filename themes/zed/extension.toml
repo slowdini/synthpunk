@@ -1,6 +1,6 @@
 id = "synthpunk-theme"
 name = "Synthpunk"
-version = "0.1.5"
+version = "0.1.6"
 schema_version = 1
 authors = ["Synthpunk <samiamorwas@gmail.com>"]
 description = "Synthwave-inspired color themes in two families — Pastel and Neon — each with a dark and a light variant."

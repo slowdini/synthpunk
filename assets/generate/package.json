@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"private": true,
 	"type": "module",
-	"description": "Generates README marketing images (icon + syntax-highlight previews) from the Synthpunk VS Code themes.",
+	"description": "Generates README marketing images (hero, syntax previews, and icon) from the Synthpunk VS Code themes.",
 	"scripts": {
 		"generate": "bun run generate.ts"
 	},

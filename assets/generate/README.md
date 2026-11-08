@@ -2,39 +2,55 @@
 
 Generates the marketing images used by the top-level [`README.md`](../../README.md):
 
-| Output (`assets/`)   | What it is                                                        |
-| -------------------- | ----------------------------------------------------------------- |
-| `icon.png`           | Angular-synthwave neon icon (1024×1024)                           |
-| `hero.png`           | The same snippet rendered across all four variants (2×2 grid)     |
-| `sample-react.png`   | React/TSX preview, Neon Dark                                       |
-| `sample-python.png`  | Python preview, Neon Dark                                          |
-| `sample-rust.png`    | Rust preview, Neon Dark                                            |
-| `sample-csharp.png`  | C# preview, Neon Dark                                              |
-| `sample-markdown.png`| Markdown preview, Neon Dark                                        |
+| Output (`assets/`) | What it is |
+| ------------------ | ---------- |
+| `icon.png` | Optional angular-synthwave neon icon render (720×720) |
+| `hero.png` | The same snippet rendered across all four variants (2×2 grid) |
+| `sample-{language}-{variant}.png` | Sixteen previews: React/TSX, Python, Rust, and C# in each variant |
 
-Highlighting is done with [shiki](https://shiki.style) loaded with the repo's own
-generated VS Code themes (`themes/vscode/themes/*.json`), so the colors match the
-editor exactly. The highlighted HTML is screenshotted with the system Chrome via
-`puppeteer-core`.
+The language keys are `react`, `python`, `rust`, and `csharp`. Variant keys are
+`pastel-dark`, `pastel-light`, `neon-dark`, and `neon-light`. For example,
+`sample-react-pastel-dark.png` is the React/TSX sample in Pastel Dark.
+
+Highlighting uses [Shiki](https://shiki.style) with the generated
+`themes/vscode/themes/*.json` themes, so the colors match what VS Code renders. HTML
+is rendered by a Chromium-based browser through `puppeteer-core`.
+
+The `vscode-*.png` and `zed-*.png` images in the README's "In action" section are
+real screenshots and are not produced by this script.
 
 ## Regenerate
 
-Run after changing palette colors (and rebuilding the VS Code themes with
-`bun run build` from the repo root):
+From the repository root, run:
 
 ```sh
-cd assets/generate
-bun install
-bun run generate          # or: bun run generate.ts
+bun install --frozen-lockfile
+bun run assets
 ```
 
-Requires a Chromium-based browser. The script auto-detects Google Chrome, Chromium,
-and Edge in the usual macOS/Linux locations; set `CHROME_PATH` to override:
+The `assets` command rebuilds all theme targets, installs this directory's locked
+dependencies, and regenerates the hero and language previews. Branding is unchanged
+by default; pass `--icon` to explicitly regenerate the icon as well. The command is
+separate from `bun run build` so normal theme builds do not require a browser.
 
 ```sh
-CHROME_PATH="/path/to/chrome" bun run generate
+bun run assets -- --icon
 ```
 
-The code shown in each image lives in [`snippets/`](snippets/) — edit those files to
-change the sample code. This directory is excluded from the repo's `tsc`/biome checks
-(see `tsconfig.json` and `biome.json`); its `node_modules/` is git-ignored.
+The script auto-detects Google Chrome, Chromium, and Edge in the usual macOS/Linux
+locations. Set `CHROME_PATH` when the browser is elsewhere or when using Chrome for
+Testing / `chrome-headless-shell`:
+
+```sh
+CHROME_PATH="/path/to/chrome" bun run assets
+```
+
+Rendering uses a fixed viewport and 2× device scale. Typography uses Cascadia Code
+when installed, with system monospace fallbacks; use the same browser and fonts when
+reproducing the committed images. The code shown in each image lives in
+[`snippets/`](snippets/). Preview inventory and naming live in
+[`preview-manifest.ts`](preview-manifest.ts).
+
+This directory has its own dependency lockfile and is excluded from the root
+TypeScript/biome checks. Its manifest and option tests run with the root `bun test`
+command.
