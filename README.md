@@ -6,7 +6,9 @@
 
 # Synthpunk
 
-High-energy synthwave-inspired color themes in two families — **Pastel** and **Neon** — each with dark and light variants. Every theme is generated from a single [palette source](palette/) for VS Code, Zed, Neovim, WezTerm, and Starship.
+High-energy synthwave-inspired color themes with two families — **Pastel** and **Neon** — each with dark and light variants. For VS Code, Zed, Neovim, WezTerm, and Starship.
+
+Find all the colors for every variant in [`palette/`](palette/).
 
 ![Synthpunk — the same code across all four variants](assets/hero.png)
 
@@ -38,8 +40,6 @@ Syntax highlighting across all four variants (click any image for full size):
 | React / TSX | Python | Rust | C# |
 | ----------- | ------ | ---- | -- |
 | <a href="assets/sample-react-neon-light.png"><img src="assets/sample-react-neon-light.png" alt="Synthpunk Neon Light — React / TSX" width="200" /></a> | <a href="assets/sample-python-neon-light.png"><img src="assets/sample-python-neon-light.png" alt="Synthpunk Neon Light — Python" width="200" /></a> | <a href="assets/sample-rust-neon-light.png"><img src="assets/sample-rust-neon-light.png" alt="Synthpunk Neon Light — Rust" width="200" /></a> | <a href="assets/sample-csharp-neon-light.png"><img src="assets/sample-csharp-neon-light.png" alt="Synthpunk Neon Light — C#" width="200" /></a> |
-
-The exact colors for every variant live in [`palette/`](palette/) — the source all themes are generated from. Preview images are produced by [`assets/generate/`](assets/generate/).
 
 </details>
 
