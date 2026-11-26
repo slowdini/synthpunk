@@ -1,0 +1,32 @@
+{
+	"name": "Synthpunk Neon Light",
+	"base": "light",
+	"overrides": {
+		"claude": "#D04080",
+		"text": "#2A1A30",
+		"inverseText": "#FAF6FA",
+		"inactive": "#9884A1",
+		"subtle": "#A37FAE",
+		"suggestion": "#8050C8",
+		"remember": "#B050D0",
+		"permission": "#B050D0",
+		"planMode": "#00868C",
+		"autoAccept": "#B050D0",
+		"ide": "#8050C8",
+		"promptBorder": "#A37FAE",
+		"bashBorder": "#D04080",
+		"success": "#01844F",
+		"error": "#E04058",
+		"warning": "#907206",
+		"merged": "#B050D0",
+		"diffAdded": "#BCDACF",
+		"diffRemoved": "#F4C9D2",
+		"diffAddedDimmed": "#DCE8E5",
+		"diffRemovedDimmed": "#F7E0E7",
+		"diffAddedWord": "#96C8B6",
+		"diffRemovedWord": "#F0ADB9",
+		"userMessageBackground": "#F0E8F5",
+		"selectionBg": "#E0C8E8",
+		"composerSidebarBackground": "#F5F0F5"
+	}
+}

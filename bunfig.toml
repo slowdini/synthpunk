@@ -1,0 +1,5 @@
+[test]
+# themes/claude holds the Claude Code plugin's own test, which imports the
+# engine-only `claude-code/testing` module. Run it with
+# `claude plugin test themes/claude`, not bun.
+pathIgnorePatterns = ["themes/claude/**"]

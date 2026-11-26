@@ -32,8 +32,8 @@ jobs:
       - name: Generator sync check
         run: |
           bun run build
-          if ! git diff --exit-code -- themes/; then
+          if ! git diff --exit-code -- themes/ .claude-plugin/; then
             echo "::error::Generated theme artifacts are out of sync with palette/. Run 'bun run build' and commit the results."
-            git diff -- themes/
+            git diff -- themes/ .claude-plugin/
             exit 1
           fi

@@ -6,4 +6,5 @@ export const VERSION_LOCKED_MANIFESTS = [
 	"package.json",
 	"themes/vscode/package.json",
 	"themes/zed/extension.toml",
+	"themes/claude/.claude-plugin/plugin.json",
 ] as const;

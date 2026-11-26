@@ -1,0 +1,73 @@
+{
+	"$schema": "../schemas/claude-mapping.json",
+	"info": {
+		"name": "synthpunk-claude",
+		"description": "Claude Code role to palette color mappings: the Desktop app's look and the CLI's /theme tokens",
+		"version": "0.1.0"
+	},
+	"desktop": {
+		"anchors": {
+			"dark": {
+				"surface-0": "base",
+				"surface-1": "surface0",
+				"surface-2": "surface0",
+				"surface-3": "surface1",
+				"text-primary": "text",
+				"text-secondary": "subtext1",
+				"text-muted": "subtext1"
+			},
+			"light": {
+				"surface-0": "crust",
+				"surface-1": "mantle",
+				"surface-2": "base",
+				"text-primary": "text",
+				"text-secondary": "subtext1",
+				"text-muted": "subtext1"
+			}
+		},
+		"roles": {
+			"accent": "teal",
+			"danger": "red",
+			"success": "green",
+			"warning": "yellow",
+			"pro": "lavender"
+		},
+		"git": {
+			"added": "green",
+			"removed": "red",
+			"modified": "yellow",
+			"merged": "lavender",
+			"closed": "red",
+			"conflicting": "peach",
+			"draft": "overlay"
+		}
+	},
+	"cli": {
+		"claude": "pink",
+		"text": "text",
+		"inverseText": "base",
+		"inactive": "subtext0",
+		"subtle": "overlay",
+		"suggestion": "blue",
+		"remember": "lavender",
+		"permission": "lavender",
+		"planMode": "teal",
+		"autoAccept": "lavender",
+		"ide": "blue",
+		"promptBorder": "overlay",
+		"bashBorder": "pink",
+		"success": "green",
+		"error": "red",
+		"warning": "yellow",
+		"merged": "lavender",
+		"diffAdded": { "color": "green", "alpha": 0.25 },
+		"diffRemoved": { "color": "red", "alpha": 0.25 },
+		"diffAddedDimmed": { "color": "green", "alpha": 0.12 },
+		"diffRemovedDimmed": { "color": "red", "alpha": 0.12 },
+		"diffAddedWord": { "color": "green", "alpha": 0.4 },
+		"diffRemovedWord": { "color": "red", "alpha": 0.4 },
+		"userMessageBackground": "surface0",
+		"selectionBg": "surface2",
+		"composerSidebarBackground": "mantle"
+	}
+}

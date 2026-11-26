@@ -1,0 +1,91 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Claude Mapping",
+	"description": "Schema for Claude Code role to palette color mappings: the Desktop app's look (makeColors anchors, roles and git colors) and the CLI's /theme tokens",
+	"type": "object",
+	"required": ["info", "desktop", "cli"],
+	"definitions": {
+		"anchors": {
+			"type": "object",
+			"required": ["surface-0", "text-primary"],
+			"additionalProperties": false,
+			"properties": {
+				"surface-0": { "type": "string" },
+				"surface-1": { "type": "string" },
+				"surface-2": { "type": "string" },
+				"surface-3": { "type": "string" },
+				"text-primary": { "type": "string" },
+				"text-secondary": { "type": "string" },
+				"text-muted": { "type": "string" }
+			}
+		},
+		"cliColor": {
+			"oneOf": [
+				{ "type": "string" },
+				{
+					"type": "object",
+					"required": ["color", "alpha"],
+					"additionalProperties": false,
+					"properties": {
+						"color": { "type": "string" },
+						"alpha": { "type": "number", "minimum": 0, "maximum": 1 }
+					}
+				}
+			]
+		}
+	},
+	"properties": {
+		"info": {
+			"type": "object",
+			"required": ["name", "description", "version"],
+			"properties": {
+				"name": { "type": "string" },
+				"description": { "type": "string" },
+				"version": { "type": "string" }
+			}
+		},
+		"desktop": {
+			"type": "object",
+			"required": ["anchors", "roles", "git"],
+			"properties": {
+				"anchors": {
+					"type": "object",
+					"required": ["dark", "light"],
+					"properties": {
+						"dark": { "$ref": "#/definitions/anchors" },
+						"light": { "$ref": "#/definitions/anchors" }
+					}
+				},
+				"roles": {
+					"type": "object",
+					"required": ["accent", "danger", "success", "warning", "pro"],
+					"additionalProperties": false,
+					"properties": {
+						"accent": { "type": "string" },
+						"danger": { "type": "string" },
+						"success": { "type": "string" },
+						"warning": { "type": "string" },
+						"pro": { "type": "string" }
+					}
+				},
+				"git": {
+					"type": "object",
+					"additionalProperties": false,
+					"properties": {
+						"added": { "type": "string" },
+						"removed": { "type": "string" },
+						"modified": { "type": "string" },
+						"merged": { "type": "string" },
+						"closed": { "type": "string" },
+						"conflicting": { "type": "string" },
+						"draft": { "type": "string" }
+					}
+				}
+			}
+		},
+		"cli": {
+			"type": "object",
+			"additionalProperties": { "$ref": "#/definitions/cliColor" }
+		}
+	}
+}

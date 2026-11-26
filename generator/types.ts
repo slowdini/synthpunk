@@ -116,3 +116,47 @@ export interface FontStyleMapping {
 	fontStyle?: "italic" | "normal";
 	fontWeight?: "bold" | "normal";
 }
+
+/** The makeColors anchors a Claude Desktop look names, per mode. */
+export type ClaudeAnchorName =
+	| "surface-0"
+	| "surface-1"
+	| "surface-2"
+	| "surface-3"
+	| "text-primary"
+	| "text-secondary"
+	| "text-muted";
+
+export type ClaudeRoleName =
+	| "accent"
+	| "danger"
+	| "success"
+	| "warning"
+	| "pro";
+
+export type ClaudeGitName =
+	| "added"
+	| "removed"
+	| "modified"
+	| "merged"
+	| "closed"
+	| "conflicting"
+	| "draft";
+
+/** A CLI theme token's color: a palette name, or one blended over `base`. */
+export type ClaudeCliColor = string | { color: string; alpha: number };
+
+export interface ClaudeMapping {
+	info: PaletteInfo;
+	desktop: {
+		anchors: Record<
+			"dark" | "light",
+			{ "surface-0": string; "text-primary": string } & Partial<
+				Record<ClaudeAnchorName, string>
+			>
+		>;
+		roles: Record<ClaudeRoleName, string>;
+		git: Partial<Record<ClaudeGitName, string>>;
+	};
+	cli: Record<string, ClaudeCliColor>;
+}
