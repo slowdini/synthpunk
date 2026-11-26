@@ -23,17 +23,19 @@ In the Claude desktop app, click **+** next to the prompt box, then **Plugins**.
 
 A plugin installed at the user scope from a terminal also loads in the desktop app's local sessions.
 
+> **Note:** The plugin installs from this repository's default branch, `dev`, so it can include changes that aren't in a release yet.
+
 ## The Desktop look
 
 The look applies when a session starts. It follows the app's own light or dark setting.
 
 To choose between Pastel and Neon, set the plugin's **Look** option, which defaults to `pastel`. You set it when you install the plugin, and can change it later in the `synthpunk.variant` row of `/config` in a terminal session.
 
-The look uses the app's design-system colors: surfaces, text, borders, and the accent, status and git colors. Claude Code keeps these parts in its own colors:
+The look paints the conversation and the app around it with the design system's colors: surfaces, text, borders, and the accent, status and git colors. The app keeps its own colors for:
 
+- The side panes, such as the file browser and the integrated terminal.
 - Permission prompts.
-- The integrated terminal's 16 ANSI colors. Set those with your shell's or terminal's own theme.
-- Syntax highlighting in code blocks and in the file and diff panes. It uses one of the app's built-in highlighting themes.
+- Syntax highlighting in code blocks. It uses one of the app's built-in highlighting themes.
 
 ## The CLI themes
 
