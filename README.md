@@ -123,6 +123,18 @@ curl -fsSL https://github.com/slowdini/synthpunk/releases/latest/download/starsh
 
 The default variant is `synthpunk_pastel_dark`. To switch, change the `palette =` line to `synthpunk_pastel_light`, `synthpunk_neon_dark`, or `synthpunk_neon_light`. Icons require a [Nerd Font](https://www.nerdfonts.com/). See [`themes/starship/README.md`](themes/starship/README.md) for details.
 
+### Claude Code
+
+One plugin paints the Claude desktop app in Synthpunk Pastel or Neon, and adds the four variants to `/theme` in the terminal. At the prompt of a Claude Code terminal session:
+
+```text
+/plugin install synthpunk --marketplace slowdini/synthpunk
+```
+
+In the desktop app, click **+** next to the prompt box, then **Plugins**. Choose **Add marketplace**, enter `slowdini/synthpunk`, then choose **Add plugin**.
+
+The plugin's **Look** option chooses Pastel or Neon for the desktop app. In the terminal, run `/theme` and pick a Synthpunk entry, then pair it with the matching terminal theme. See [`themes/claude/README.md`](themes/claude/README.md) for details.
+
 ## Development
 
 ```sh

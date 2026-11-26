@@ -7,7 +7,7 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"includes": ["**", "!assets/generate"]
+		"includes": ["**", "!assets/generate", "!generator/vendor/make-colors.*"]
 	},
 	"formatter": {
 		"enabled": true,

@@ -1,0 +1,15 @@
+{
+	"name": "synthpunk",
+	"description": "Synthpunk, a synthwave-inspired color scheme, as a Claude Code plugin.",
+	"owner": {
+		"name": "slowdini",
+		"url": "https://github.com/slowdini"
+	},
+	"plugins": [
+		{
+			"name": "synthpunk",
+			"source": "./themes/claude",
+			"description": "Synthpunk, a synthwave color scheme, for Claude Code: the Desktop app in Pastel or Neon, light and dark, and four CLI themes for /theme."
+		}
+	]
+}

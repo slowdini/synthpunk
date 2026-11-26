@@ -12,5 +12,5 @@
 		"types": ["bun"]
 	},
 	"include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx"],
-	"exclude": ["node_modules", "assets/generate"]
+	"exclude": ["node_modules", "assets/generate", "themes/claude"]
 }

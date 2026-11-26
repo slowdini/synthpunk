@@ -12,6 +12,8 @@ Synthpunk is a synthwave-inspired color scheme that ships as themes for multiple
   - `neovim/` — Neovim colorscheme (Lua)
   - `wezterm/` — WezTerm color scheme files (TOML)
   - `starship/` — Starship prompt config (TOML)
+  - `claude/` — Claude Code plugin: the desktop app's look (a mod's hooks module) and CLI `/theme` files. The repository's `.claude-plugin/marketplace.json`, also generated, lists it. Run its own test with `claude plugin test themes/claude`; `bun test` skips it (see `bunfig.toml`)
+- `generator/vendor/` — `makeColors` from Claude Code's plugin-authoring skill, copied unchanged; see its README to update it
 - `scripts/` — release and review tooling (version bumping, legibility review sheet)
 - `tests/` — cross-target tests: version lockstep, and `tests/artifacts/`, which load each generated theme file the way its tool does and check its structure and legibility (the Neovim tests need `nvim`; set `NVIM_BIN` to pick a binary)
 - `assets/` — preview images for the README
@@ -32,5 +34,5 @@ bun run legibility:sheet  # write review/legibility.html for visual review
 ## Key rules
 
 - **Never edit `themes/**` directly.** These files are generated. Edit `palette/` and `generator/`, then run `bun run build`. CI enforces that committed artifacts match generator output.
-- **Version lockstep.** The version in `package.json`, `themes/vscode/package.json`, and `themes/zed/extension.toml` must always match. Use `bun scripts/bump-version.ts <version>` to bump all at once. The lockstep is enforced by `tests/lockstep.test.ts`.
+- **Version lockstep.** The version in `package.json`, `themes/vscode/package.json`, `themes/zed/extension.toml`, and `themes/claude/.claude-plugin/plugin.json` must always match. Use `bun scripts/bump-version.ts <version>` to bump all at once. The lockstep is enforced by `tests/lockstep.test.ts`.
 - **Legibility.** `palette/legibility.json` sets the minimum WCAG contrast for each kind of text (tiers), which tier each palette color is held to, and which backgrounds must support each tier in every variant. `bun test` fails when a palette breaks these rules or when any generated theme draws text below its tier (including on selection and highlight backgrounds); `bun run legibility` lists palette violations with suggested fixes. Fix violations in `palette/` or in the generator mapping, not with per-target contrast adjustments. When palette colors change, regenerate the review sheet with `bun run legibility:sheet` and get a human review of it before merging.

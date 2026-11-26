@@ -1,0 +1,22 @@
+{
+	"name": "synthpunk",
+	"version": "0.1.6",
+	"description": "Synthpunk, a synthwave color scheme, for Claude Code: the Desktop app in Pastel or Neon, light and dark, and four CLI themes for /theme.",
+	"author": {
+		"name": "slowdini",
+		"url": "https://github.com/slowdini"
+	},
+	"homepage": "https://github.com/slowdini/synthpunk",
+	"repository": "https://github.com/slowdini/synthpunk",
+	"license": "MIT",
+	"keywords": ["theme", "synthwave", "vaporwave", "pastel", "neon"],
+	"userConfig": {
+		"variant": {
+			"type": "string",
+			"title": "Look",
+			"description": "Which Synthpunk look the Desktop app shows. Light or dark follows the app's own setting.",
+			"options": ["pastel", "neon"],
+			"default": "pastel"
+		}
+	}
+}

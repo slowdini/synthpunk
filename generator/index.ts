@@ -1,7 +1,18 @@
 import fs from "node:fs";
 import path from "node:path";
+import { loadClaudeMapping } from "./claudeMapping";
 import { loadPalette } from "./palette";
 import { loadFontStyles, loadScopes, loadSyntaxMapping } from "./syntaxMapping";
+import {
+	CLAUDE_LOOKS,
+	claudeMarketplaceManifest,
+	claudePluginManifest,
+	generateCliTheme,
+	generateDesktopLook,
+	REGISTER_MODULE,
+	REGISTER_TEST_MODULE,
+	stringifyLooksModule,
+} from "./targets/claude";
 import {
 	generateNeovimPalette,
 	stringifyNeovimColorsFile,
@@ -25,6 +36,8 @@ const STARSHIP_DIR = path.join(PROJECT_DIR, "themes", "starship");
 const NEOVIM_DIR = path.join(PROJECT_DIR, "themes", "neovim");
 const NEOVIM_COLORS_DIR = path.join(NEOVIM_DIR, "colors");
 const NEOVIM_LUA_DIR = path.join(NEOVIM_DIR, "lua", "synthpunk");
+const CLAUDE_PLUGIN_DIR = path.join(PROJECT_DIR, "themes", "claude");
+const CLAUDE_MARKETPLACE_DIR = path.join(PROJECT_DIR, ".claude-plugin");
 
 const VARIANT_VSCODE_FILE: Record<VariantName, string> = {
 	"pastel-dark": "synthpunk-pastel-dark-color-theme.json",
@@ -197,6 +210,71 @@ function generateAll() {
 		fs.writeFileSync(filePath, lua);
 		console.log(`Generated ${filePath}`);
 	}
+
+	generateClaudePlugin();
+}
+
+function writeGenerated(filePath: string, content: string) {
+	ensureDir(path.dirname(filePath));
+	fs.writeFileSync(filePath, content);
+	console.log(`Generated ${filePath}`);
+}
+
+function writeJson(filePath: string, value: unknown) {
+	writeGenerated(filePath, `${JSON.stringify(value, null, "\t")}\n`);
+}
+
+// One Claude Code plugin: the Desktop app's look (a mod's hooks module) and
+// the CLI's /theme entries (theme files), plus the marketplace that lists it.
+function generateClaudePlugin() {
+	const mapping = loadClaudeMapping(PALETTE_DIR);
+	const { version } = JSON.parse(
+		fs.readFileSync(path.join(PROJECT_DIR, "package.json"), "utf-8"),
+	) as { version: string };
+
+	writeJson(
+		path.join(CLAUDE_PLUGIN_DIR, ".claude-plugin", "plugin.json"),
+		claudePluginManifest(version),
+	);
+	writeJson(path.join(CLAUDE_PLUGIN_DIR, "hooks", "hooks.json"), {
+		modules: ["./register.ts"],
+	});
+
+	const looks = Object.fromEntries(
+		CLAUDE_LOOKS.map((look) => [
+			look.key,
+			generateDesktopLook(
+				look.label,
+				loadPalette(PALETTE_DIR, look.variants.dark),
+				loadPalette(PALETTE_DIR, look.variants.light),
+				mapping,
+			),
+		]),
+	);
+	writeGenerated(
+		path.join(CLAUDE_PLUGIN_DIR, "hooks", "looks.ts"),
+		stringifyLooksModule(looks),
+	);
+	writeGenerated(
+		path.join(CLAUDE_PLUGIN_DIR, "hooks", "register.ts"),
+		REGISTER_MODULE,
+	);
+	writeGenerated(
+		path.join(CLAUDE_PLUGIN_DIR, "hooks", "register.test.ts"),
+		REGISTER_TEST_MODULE,
+	);
+
+	for (const variant of VARIANTS) {
+		writeJson(
+			path.join(CLAUDE_PLUGIN_DIR, "themes", `synthpunk-${variant}.json`),
+			generateCliTheme(variant, loadPalette(PALETTE_DIR, variant), mapping),
+		);
+	}
+
+	writeJson(
+		path.join(CLAUDE_MARKETPLACE_DIR, "marketplace.json"),
+		claudeMarketplaceManifest("./themes/claude"),
+	);
 }
 
 generateAll();

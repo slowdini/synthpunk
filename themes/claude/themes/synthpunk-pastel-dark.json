@@ -1,0 +1,32 @@
+{
+	"name": "Synthpunk Pastel Dark",
+	"base": "dark",
+	"overrides": {
+		"claude": "#FF7DB0",
+		"text": "#F0E0F0",
+		"inverseText": "#1E1028",
+		"inactive": "#A090B8",
+		"subtle": "#7D628E",
+		"suggestion": "#8BA4FF",
+		"remember": "#C49BFF",
+		"permission": "#C49BFF",
+		"planMode": "#5ED4E0",
+		"autoAccept": "#C49BFF",
+		"ide": "#8BA4FF",
+		"promptBorder": "#7D628E",
+		"bashBorder": "#FF7DB0",
+		"success": "#7FD7B5",
+		"error": "#FF5470",
+		"warning": "#FFE4B5",
+		"merged": "#C49BFF",
+		"diffAdded": "#36424B",
+		"diffRemoved": "#56213A",
+		"diffAddedDimmed": "#2A2839",
+		"diffRemovedDimmed": "#391831",
+		"diffAddedWord": "#456060",
+		"diffRemovedWord": "#782B45",
+		"userMessageBackground": "#2E1E40",
+		"selectionBg": "#4A3860",
+		"composerSidebarBackground": "#160A20"
+	}
+}

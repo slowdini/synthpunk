@@ -1,0 +1,32 @@
+{
+	"name": "Synthpunk Pastel Light",
+	"base": "light",
+	"overrides": {
+		"claude": "#BB218A",
+		"text": "#2E1A24",
+		"inverseText": "#FFF8F5",
+		"inactive": "#997A8A",
+		"subtle": "#A27690",
+		"suggestion": "#4556D2",
+		"remember": "#8A51C8",
+		"permission": "#8A51C8",
+		"planMode": "#03808E",
+		"autoAccept": "#8A51C8",
+		"ide": "#4556D2",
+		"promptBorder": "#A27690",
+		"bashBorder": "#BB218A",
+		"success": "#037E55",
+		"error": "#DB1836",
+		"warning": "#8F6C02",
+		"merged": "#8A51C8",
+		"diffAdded": "#C0DACD",
+		"diffRemoved": "#F6C0C5",
+		"diffAddedDimmed": "#E1E9E2",
+		"diffRemovedDimmed": "#FBDDDE",
+		"diffAddedWord": "#9AC7B5",
+		"diffRemovedWord": "#F19EA9",
+		"userMessageBackground": "#F0DEE8",
+		"selectionBg": "#D4B8C8",
+		"composerSidebarBackground": "#FFF0EB"
+	}
+}
